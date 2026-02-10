@@ -54,8 +54,8 @@ The Figma MCP server is configured in this project. When a PM provides a Figma l
 1. Use the Figma MCP `get_design_context` tool to pull the design structure
 2. Check `get_code_connect_map` for existing component mappings before creating anything new
 3. Use `get_variables` to pull design tokens — cross-reference with the tokens already in `tailwind.config.ts`
-4. If a Figma component maps to an existing component in `/src/core/components/`, use the existing component
-5. If no mapping exists, build the component following the patterns in `/src/core/components/` and note in your response: *"I created a new component [name] — the dev team should map this in Code Connect."*
+4. If a Figma component maps to an existing component in `/src/components/`, use the existing component
+5. If no mapping exists, build the component following the patterns in `/src/components/` and note in your response: *"I created a new component [name] — the dev team should map this in Code Connect."*
 
 If no Figma link is provided, work from the PM's description and use the design system tokens and existing component patterns.
 
@@ -74,7 +74,7 @@ The prototype supports multiple gym brands. Branding works through:
 - Never hard-code colors. Always use Tailwind theme tokens (`text-primary`, `bg-surface`, `border-accent`, etc.)
 - Never hard-code brand names, logos, or brand-specific copy into feature screens
 - Always test that new screens look reasonable with at least two different brand themes before committing
-- The brand switcher in the nav is part of the locked core layout — do not modify it
+- The brand switcher in the nav is part of the locked shared layout — do not modify it
 
 ---
 
@@ -93,8 +93,8 @@ The prototype includes a role switcher (in the top nav alongside the brand switc
 When building a feature, always consider which roles should see it. Use the role context to conditionally render UI:
 
 ```tsx
-// Example pattern — import from core
-import { useAuth } from '@/core/auth';
+// Example pattern — import from lib
+import { useAuth } from '@/lib/auth';
 
 const { role } = useAuth();
 
@@ -109,9 +109,10 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 ## Directory Structure
 
 ```
-/gym-prototype
+/gym-saas-prototype
 │
 ├── CLAUDE.md                    ← 🔒 LOCKED — this file
+├── .mcp.json                    ← Figma MCP config (shared, checked in)
 ├── CHANGELOG.md                 ← Maintained by AI (append only)
 ├── locked-features.json         ← List of approved/locked features
 ├── package.json                 ← 🔒 LOCKED
@@ -123,15 +124,11 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 │   └── check-locked-files.ts    ← 🔒 LOCKED — pre-commit validator
 │
 ├── /src
-│   ├── /core                    ← 🔒 LOCKED — entire directory
-│   │   ├── /components          # Base UI: Button, Card, Table, Modal, etc.
-│   │   ├── /layout              # App shell, nav, sidebar, brand switcher
-│   │   ├── /theme               # CSS variables, brand token definitions
-│   │   ├── /auth                # Role switcher, permission context, useAuth
-│   │   ├── /data                # Sample JSON fixtures + TypeScript interfaces
-│   │   ├── /hooks               # Shared hooks (useBrand, useRole, etc.)
-│   │   ├── /lib                 # Utilities, helpers, constants
-│   │   └── /mocks               # MSW handlers for core data endpoints
+│   ├── /components              ← 🔒 LOCKED — shared UI (Button, Card, Table, Modal, etc.)
+│   ├── /lib                     ← 🔒 LOCKED — utilities, auth, hooks, multi-tenant context
+│   ├── /data                    ← 🔒 LOCKED — sample JSON fixtures + TypeScript interfaces
+│   ├── /mocks                   ← 🔒 LOCKED — MSW handlers for core data endpoints
+│   ├── /themes                  ← 🔒 LOCKED — CSS variables, brand token definitions
 │   │
 │   ├── /features                ← ✅ OPEN — build freely here
 │   │   ├── /check-in
@@ -156,13 +153,18 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 ### Locked Files and Directories (NEVER modify):
 
 ```
-/src/core/**                    — All core components, layout, theme, data, hooks, lib, mocks
+/src/components/**              — Shared UI components
+/src/lib/**                     — Utilities, auth, hooks, multi-tenant context
+/src/data/**                    — Sample data fixtures
+/src/mocks/**                   — MSW handlers
+/src/themes/**                  — Brand theme configs
 /tailwind.config.ts             — Design tokens configuration
 /vite.config.ts                 — Build configuration
 /package.json                   — Dependencies
 /package-lock.json              — Dependency lock
 /tsconfig.json                  — TypeScript configuration
 /CLAUDE.md                      — This file
+/.mcp.json                      — MCP server configuration
 /scripts/**                     — Build and validation scripts
 ```
 
@@ -179,12 +181,12 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 
 | PM Request | Why It's Locked | Alternative |
 |---|---|---|
-| "Make all buttons look different" | Core component library | "I can create a custom button variant for this specific screen" |
-| "Change the navigation order" | Core layout | "I can add quick-links or shortcuts within your feature screen" |
+| "Make all buttons look different" | Shared component library | "I can create a custom button variant for this specific screen" |
+| "Change the navigation order" | Shared layout | "I can add quick-links or shortcuts within your feature screen" |
 | "Use a different chart library" | Package dependencies | "I can build this visualization with Recharts, which is already available" |
 | "Change the color scheme" | Theme tokens | "I can suggest theme changes for the dev team, and show you a mockup using custom styles on this screen" |
-| "Change how the brand switcher works" | Core layout/auth | "I can note this as a UX improvement request for the dev team" |
-| "Modify the sample data structure" | Core data models | "I can create feature-specific data transformations in your feature directory" |
+| "Change how the brand switcher works" | Shared layout/auth | "I can note this as a UX improvement request for the dev team" |
+| "Modify the sample data structure" | Shared data models | "I can create feature-specific data transformations in your feature directory" |
 
 ### Open Zone — Build Freely:
 
@@ -196,10 +198,10 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 
 ### Rules for the open zone:
 
-- Always import components from `@/core/components` — never duplicate or recreate core components
+- Always import components from `@/components` — never duplicate or recreate shared components
 - Create feature-specific components inside the feature's own directory
 - Use ONLY design tokens from the theme — never hard-code colors, spacing, or font sizes
-- Feature-specific types go in the feature directory, extending core types where applicable
+- Feature-specific types go in the feature directory, extending shared types where applicable
 - Feature-specific MSW handlers go in the feature directory (e.g., `/src/features/check-in/mocks/`)
 - Each feature should be self-contained: removing the feature directory should not break the rest of the app
 
@@ -362,8 +364,8 @@ If the PM hasn't provided all of this, make reasonable assumptions and state the
 ```
 
 ### 4. Implement
-- Use core components from `@/core/components`
-- Wire up sample data from `/src/core/data` or create feature-specific mock handlers
+- Use shared components from `@/components`
+- Wire up sample data from `/src/data` or create feature-specific mock handlers
 - Apply role-based visibility using `useAuth()`
 - Apply brand theming using CSS variables (never hard-code)
 - Make the screen interactive — forms should have state, lists should filter/sort, modals should open/close
@@ -392,7 +394,7 @@ If the PM hasn't provided all of this, make reasonable assumptions and state the
 
 ## Sample Data
 
-Sample data lives in `/src/core/data/` and represents realistic gym franchise scenarios.
+Sample data lives in `/src/data/` and represents realistic gym franchise scenarios.
 
 ### Core Entities
 
@@ -424,19 +426,19 @@ Pre-built data states for testing edge cases:
 - All data includes `brandId` and `locationId` fields for filtering
 - Always filter by the active brand context — never show data from other brands
 - Use realistic names, dates, and values — the PM may demo this to stakeholders
-- When creating feature-specific mock data, extend the core types and keep the same field conventions
-- Never modify the core data files — create feature-specific transformations or additional mock handlers
+- When creating feature-specific mock data, extend the shared types and keep the same field conventions
+- Never modify the shared data files — create feature-specific transformations or additional mock handlers
 
 ---
 
 ## Component Usage Patterns
 
-When building feature screens, always use the core components. Here are the standard patterns:
+When building feature screens, always use the shared components. Here are the standard patterns:
 
 ### Page Layout
 ```tsx
-import { PageHeader } from '@/core/components/PageHeader';
-import { PageContent } from '@/core/components/PageContent';
+import { PageHeader } from '@/components/PageHeader';
+import { PageContent } from '@/components/PageContent';
 
 export function FeatureScreen() {
   return (
@@ -456,33 +458,33 @@ export function FeatureScreen() {
 
 ### Data Tables
 ```tsx
-import { DataTable } from '@/core/components/DataTable';
+import { DataTable } from '@/components/DataTable';
 
-// Use the core DataTable with feature-specific column definitions
+// Use the shared DataTable with feature-specific column definitions
 const columns = [/* define columns */];
 <DataTable data={filteredData} columns={columns} />
 ```
 
 ### Forms
 ```tsx
-import { Form, FormField, FormLabel, FormInput } from '@/core/components/Form';
-import { Button } from '@/core/components/Button';
+import { Form, FormField, FormLabel, FormInput } from '@/components/Form';
+import { Button } from '@/components/Button';
 
 // Always use controlled forms with Zustand or local state
 ```
 
 ### Modals / Dialogs
 ```tsx
-import { Dialog, DialogContent, DialogHeader } from '@/core/components/Dialog';
+import { Dialog, DialogContent, DialogHeader } from '@/components/Dialog';
 ```
 
 ### Cards / Stats
 ```tsx
-import { Card, CardHeader, CardContent } from '@/core/components/Card';
-import { StatCard } from '@/core/components/StatCard';
+import { Card, CardHeader, CardContent } from '@/components/Card';
+import { StatCard } from '@/components/StatCard';
 ```
 
-**If a component doesn't exist in core for what you need:** build it in the feature directory following the same patterns (Tailwind, TypeScript props, design tokens). Note in your response that a new component was created so the dev team can consider promoting it to core.
+**If a component doesn't exist in `/src/components` for what you need:** build it in the feature directory following the same patterns (Tailwind, TypeScript props, design tokens). Note in your response that a new component was created so the dev team can consider promoting it to the shared components.
 
 ---
 
@@ -538,7 +540,7 @@ Want to adjust anything, or should we move on to [suggested next feature]?
 
 ### If you're unsure about something:
 - Design decisions → make a reasonable choice, state your reasoning
-- Technical architecture → follow the patterns in `/src/core`
+- Technical architecture → follow the patterns in `/src/components` and `/src/lib`
 - Data modeling → extend existing types, don't create conflicting structures
 - Scope → when in doubt, build the simpler version first; it's easier to add than to remove
 
