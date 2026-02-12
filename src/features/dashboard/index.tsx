@@ -23,7 +23,7 @@ export default function Dashboard() {
           icon={CalendarDays}
         />
         <StatCard
-          title="Revenue"
+          title="Revenue This Month"
           value="$45,231"
           description="This month"
           icon={DollarSign}
