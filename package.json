@@ -10,7 +10,10 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "type-check": "tsc --noEmit",
-    "pre-commit": "tsx scripts/check-locked-files.ts"
+    "pre-commit": "tsx scripts/check-locked-files.ts",
+    "deploy": "sst deploy --stage production",
+    "deploy:dev": "sst deploy --stage dev",
+    "sst:remove": "sst remove --stage production"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",
@@ -43,6 +46,8 @@
     "@typescript-eslint/parser": "^8.48.0",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.21",
+    "aws-cdk-lib": "^2.238.0",
+    "constructs": "^10.4.5",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.0.3",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -50,6 +55,7 @@
     "msw": "^2.8.4",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "sst": "^3.17.38",
     "tailwindcss": "^3.4.18",
     "tsx": "^4.20.0",
     "typescript": "~5.9.3",

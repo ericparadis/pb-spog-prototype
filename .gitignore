@@ -48,3 +48,10 @@ public/mockServiceWorker.js
 # Temp files
 temp-gym-app/
 .gitignore-vite
+
+# SST
+.sst/
+sst-env.d.ts
+
+# Additional environment files
+.env.*.local

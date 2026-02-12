@@ -11,7 +11,11 @@
       "Bash(npm run build:*)",
       "Bash(npx shadcn@latest add button card input label select table dialog dropdown-menu badge avatar separator tabs -y --overwrite)",
       "Bash(npx shadcn@latest add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: scaffold React/Vite project with multi-tenant theming and role-based auth\n\nComplete infrastructure setup including:\n- React 18 + TypeScript with Vite build tool\n- Tailwind CSS + shadcn/ui component library\n- Multi-tenant theming \\(3 brands: FitZone, PowerLift, ZenGym\\)\n- Role-based auth \\(5 roles: Franchise Owner, Regional Manager, Gym Manager, Front Desk, Trainer\\)\n- Sample data layer with TypeScript types and JSON fixtures\n- MSW mock API for realistic API simulation\n- Shared component library \\(PageHeader, PageContent, StatCard, DataTable, etc.\\)\n- React Router v6 with lazy-loaded features\n- Initial feature screens \\(Dashboard with stat cards, Member Management, Class Schedule, Check-In\\)\n\nBuild verified and passing.\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "WebFetch(domain:sst.dev)",
+      "Bash(npm install:*)"
     ]
   }
 }

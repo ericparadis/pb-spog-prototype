@@ -4,6 +4,27 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 12, 2026 — 12:25 PM
+**What changed:** Implemented SST v3 deployment infrastructure
+**Screens affected:** None (infrastructure only)
+**Status:** Built
+
+Added complete AWS deployment infrastructure:
+- SST v3 framework with StaticSite construct for S3 + CloudFront deployment
+- GitHub Actions workflow for auto-deployment on push to main
+- AWS IAM user setup guide (docs/AWS_SETUP.md)
+- CloudFront + S3 deployment configuration
+
+**Next steps for deployment:**
+1. Follow docs/AWS_SETUP.md to create AWS IAM user and get credentials
+2. Add AWS credentials to GitHub Secrets (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+3. Run initial manual deploy: `npm run deploy`
+4. After initial deploy, all future pushes to main auto-deploy via GitHub Actions
+
+To deploy manually: `npm run deploy`
+
+---
+
 ### February 12, 2026 — 11:50 AM
 **What changed:** Scaffolded complete React/Vite project infrastructure
 **Screens affected:** Dashboard, Members, Schedule, Check-In (all routes now functional)
