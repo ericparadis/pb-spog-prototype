@@ -8,11 +8,6 @@ import {
   Users,
   CreditCard,
   Package,
-  Calendar,
-  UserCircle,
-  Megaphone,
-  BarChart3,
-  BookOpen,
 } from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
@@ -53,11 +48,6 @@ export function AppLayout({ children }: AppLayoutProps) {
         { path: '/staff', label: 'Staff Management', icon: Users },
         { path: '/memberships', label: 'Memberships & Packages', icon: CreditCard },
         { path: '/catalog', label: 'Catalog Administration', icon: Package },
-        { path: '/schedule', label: 'Schedule', icon: Calendar },
-        { path: '/customers', label: 'Customers', icon: UserCircle },
-        { path: '/marketing', label: 'Marketing', icon: Megaphone },
-        { path: '/reporting', label: 'Reporting', icon: BarChart3 },
-        { path: '/resources', label: 'Resources', icon: BookOpen },
       ],
     },
   ]
