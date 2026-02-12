@@ -1,0 +1,93 @@
+[
+  {
+    "id": "mbr-fz-basic",
+    "brandId": "fitzone",
+    "name": "Basic",
+    "description": "Access to gym equipment and basic amenities",
+    "price": 49.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "Gym equipment access",
+      "Locker room access",
+      "5 group classes per month"
+    ],
+    "classCredits": 5
+  },
+  {
+    "id": "mbr-fz-premium",
+    "brandId": "fitzone",
+    "name": "Premium",
+    "description": "Unlimited access with personal training sessions",
+    "price": 99.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "24/7 gym access",
+      "Unlimited group classes",
+      "2 personal training sessions/month",
+      "Towel service",
+      "Guest privileges"
+    ],
+    "classCredits": "unlimited"
+  },
+  {
+    "id": "mbr-pl-basic",
+    "brandId": "powerlift",
+    "name": "Strength Basic",
+    "description": "Essential strength training membership",
+    "price": 59.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "Strength equipment access",
+      "Locker room access",
+      "3 group classes per month"
+    ],
+    "classCredits": 3
+  },
+  {
+    "id": "mbr-pl-elite",
+    "brandId": "powerlift",
+    "name": "Elite Lifter",
+    "description": "Premium powerlifting membership",
+    "price": 129.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "24/7 facility access",
+      "Unlimited group classes",
+      "4 personal training sessions/month",
+      "Competition prep coaching",
+      "Supplement discounts"
+    ],
+    "classCredits": "unlimited"
+  },
+  {
+    "id": "mbr-zg-wellness",
+    "brandId": "zengym",
+    "name": "Wellness",
+    "description": "Holistic wellness and fitness membership",
+    "price": 79.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "Gym and studio access",
+      "Unlimited yoga and meditation classes",
+      "Nutrition consultation",
+      "Sauna access"
+    ],
+    "classCredits": "unlimited"
+  },
+  {
+    "id": "mbr-zg-premium",
+    "brandId": "zengym",
+    "name": "Premium Zen",
+    "description": "Complete mind-body wellness package",
+    "price": 119.99,
+    "billingPeriod": "monthly",
+    "features": [
+      "24/7 facility access",
+      "Unlimited all classes",
+      "Monthly massage therapy",
+      "Personal wellness coaching",
+      "Spa amenities"
+    ],
+    "classCredits": "unlimited"
+  }
+]

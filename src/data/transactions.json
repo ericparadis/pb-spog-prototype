@@ -1,0 +1,35 @@
+[
+  {
+    "id": "txn-1",
+    "brandId": "fitzone",
+    "locationId": "loc-fz-1",
+    "memberId": "mem-1",
+    "amount": 99.99,
+    "type": "membership",
+    "status": "completed",
+    "date": "2026-02-01",
+    "description": "Monthly Premium Membership"
+  },
+  {
+    "id": "txn-2",
+    "brandId": "powerlift",
+    "locationId": "loc-pl-1",
+    "memberId": "mem-4",
+    "amount": 129.99,
+    "type": "membership",
+    "status": "completed",
+    "date": "2026-02-01",
+    "description": "Monthly Elite Lifter Membership"
+  },
+  {
+    "id": "txn-3",
+    "brandId": "zengym",
+    "locationId": "loc-zg-1",
+    "memberId": "mem-6",
+    "amount": 79.99,
+    "type": "membership",
+    "status": "completed",
+    "date": "2026-02-01",
+    "description": "Monthly Wellness Membership"
+  }
+]

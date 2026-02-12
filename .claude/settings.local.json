@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npx shadcn@latest add button card input label select -y)",
+      "Bash(npx shadcn:*)",
+      "Bash(npx msw:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx shadcn@latest add button card input label select table dialog dropdown-menu badge avatar separator tabs -y --overwrite)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

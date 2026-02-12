@@ -1,0 +1,128 @@
+[
+  {
+    "id": "mem-1",
+    "brandId": "fitzone",
+    "locationId": "loc-fz-1",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "(415) 555-1001",
+    "dateOfBirth": "1990-05-15",
+    "joinDate": "2024-01-10",
+    "membershipId": "mbr-fz-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Jane Doe",
+      "phone": "(415) 555-1002",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-2",
+    "brandId": "fitzone",
+    "locationId": "loc-fz-1",
+    "firstName": "Emily",
+    "lastName": "Smith",
+    "email": "emily.smith@example.com",
+    "phone": "(415) 555-1003",
+    "dateOfBirth": "1988-08-22",
+    "joinDate": "2023-11-05",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Tom Smith",
+      "phone": "(415) 555-1004",
+      "relationship": "Brother"
+    }
+  },
+  {
+    "id": "mem-3",
+    "brandId": "fitzone",
+    "locationId": "loc-fz-2",
+    "firstName": "Michael",
+    "lastName": "Brown",
+    "email": "michael.brown@example.com",
+    "phone": "(415) 555-1005",
+    "dateOfBirth": "1995-03-10",
+    "joinDate": "2025-01-15",
+    "membershipId": "mbr-fz-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Sarah Brown",
+      "phone": "(415) 555-1006",
+      "relationship": "Mother"
+    }
+  },
+  {
+    "id": "mem-4",
+    "brandId": "powerlift",
+    "locationId": "loc-pl-1",
+    "firstName": "David",
+    "lastName": "Wilson",
+    "email": "david.wilson@example.com",
+    "phone": "(510) 555-2001",
+    "dateOfBirth": "1992-11-30",
+    "joinDate": "2024-06-01",
+    "membershipId": "mbr-pl-elite",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Lisa Wilson",
+      "phone": "(510) 555-2002",
+      "relationship": "Sister"
+    }
+  },
+  {
+    "id": "mem-5",
+    "brandId": "powerlift",
+    "locationId": "loc-pl-1",
+    "firstName": "Amanda",
+    "lastName": "Garcia",
+    "email": "amanda.garcia@example.com",
+    "phone": "(510) 555-2003",
+    "dateOfBirth": "1987-07-18",
+    "joinDate": "2023-08-20",
+    "membershipId": "mbr-pl-basic",
+    "membershipStatus": "expired",
+    "emergencyContact": {
+      "name": "Carlos Garcia",
+      "phone": "(510) 555-2004",
+      "relationship": "Father"
+    }
+  },
+  {
+    "id": "mem-6",
+    "brandId": "zengym",
+    "locationId": "loc-zg-1",
+    "firstName": "Rachel",
+    "lastName": "Taylor",
+    "email": "rachel.taylor@example.com",
+    "phone": "(415) 555-3001",
+    "dateOfBirth": "1993-12-05",
+    "joinDate": "2024-09-10",
+    "membershipId": "mbr-zg-wellness",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Mark Taylor",
+      "phone": "(415) 555-3002",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-7",
+    "brandId": "zengym",
+    "locationId": "loc-zg-2",
+    "firstName": "Chris",
+    "lastName": "Anderson",
+    "email": "chris.anderson@example.com",
+    "phone": "(415) 555-3003",
+    "dateOfBirth": "1991-04-25",
+    "joinDate": "2024-11-01",
+    "membershipId": "mbr-zg-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Kelly Anderson",
+      "phone": "(415) 555-3004",
+      "relationship": "Mother"
+    }
+  }
+]
