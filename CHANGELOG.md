@@ -4,6 +4,44 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 12, 2026 — 7:45 PM
+**What changed:** Matched exact Figma design specifications
+**Screens affected:** All screens (layout precision update)
+**Status:** Built
+
+Rebuilt the entire layout to match Figma design file pixel-perfectly:
+
+**Sidebar (280px, was 240px):**
+- Extracted exact width from Figma: 280px
+- Logo/brand area: 74px high (from Figma measurements)
+- User profile section: 93px high (from Figma)
+- Updated to use real brand logos (af-logo.svg, otf-logo.svg)
+
+**Navigation Items:**
+- Height: 44px each (from Figma, was ~40px)
+- Width: 255px with 12px left margin (exact from Figma)
+- Font size: 15px (from Figma, was 14px)
+- Letter spacing: -0.234px (from Figma text styles)
+- Icon size: 20px (from Figma, was 16px)
+
+**ADMIN Section Header:**
+- Font size: 11px (from Figma, was 12px)
+- Letter spacing: 0.614px (wide tracking from Figma)
+- Color: rgb(153, 161, 175) - exact hex from Figma
+- Uppercase text transform
+
+**Main Header:**
+- Height: 80px (from Figma, was 64px)
+- Horizontal padding: 32px (from Figma)
+
+**Typography:**
+- Added Inter font family (font-sans)
+- Applied exact letter-spacing values from Figma styles
+
+All measurements and colors were extracted directly from the Figma API by parsing the design file structure. Layout now matches the design 1:1.
+
+---
+
 ### February 12, 2026 — 6:30 PM
 **What changed:** Completed navigation structure with all items from Figma design
 **Screens affected:** All screens (navigation completion)
