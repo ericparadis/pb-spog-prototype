@@ -1,6 +1,19 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Users, Calendar, CheckSquare } from 'lucide-react'
+import {
+  LayoutDashboard,
+  CheckSquare,
+  MessageSquare,
+  MapPin,
+  Users,
+  CreditCard,
+  Package,
+  Calendar,
+  UserCircle,
+  Megaphone,
+  BarChart3,
+  BookOpen,
+} from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
 
@@ -8,16 +21,45 @@ interface AppLayoutProps {
   children: ReactNode
 }
 
+interface NavItem {
+  path: string
+  label: string
+  icon: typeof LayoutDashboard
+  badge?: string
+}
+
+interface NavSection {
+  title?: string
+  items: NavItem[]
+}
+
 export function AppLayout({ children }: AppLayoutProps) {
   const { currentBrand } = useBrand()
   const { user } = useAuth()
   const location = useLocation()
 
-  const navItems = [
-    { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/members', label: 'Members', icon: Users },
-    { path: '/schedule', label: 'Schedule', icon: Calendar },
-    { path: '/check-in', label: 'Check-In', icon: CheckSquare },
+  const navSections: NavSection[] = [
+    {
+      items: [
+        { path: '/', label: 'Overview', icon: LayoutDashboard },
+        { path: '/tasks', label: 'Tasks', icon: CheckSquare, badge: '10' },
+        { path: '/conversations', label: 'Conversations', icon: MessageSquare, badge: '8' },
+      ],
+    },
+    {
+      title: 'ADMIN',
+      items: [
+        { path: '/locations', label: 'Location Management', icon: MapPin },
+        { path: '/staff', label: 'Staff Management', icon: Users },
+        { path: '/memberships', label: 'Memberships & Packages', icon: CreditCard },
+        { path: '/catalog', label: 'Catalog Administration', icon: Package },
+        { path: '/schedule', label: 'Schedule', icon: Calendar },
+        { path: '/customers', label: 'Customers', icon: UserCircle },
+        { path: '/marketing', label: 'Marketing', icon: Megaphone },
+        { path: '/reporting', label: 'Reporting', icon: BarChart3 },
+        { path: '/resources', label: 'Resources', icon: BookOpen },
+      ],
+    },
   ]
 
   return (
@@ -41,25 +83,39 @@ export function AppLayout({ children }: AppLayoutProps) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1">
-          {navItems.map((item) => {
-            const Icon = item.icon
-            const isActive = location.pathname === item.path
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'bg-primary text-primary-foreground'
-                    : 'text-foreground hover:bg-muted'
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-                {item.label}
-              </Link>
-            )
-          })}
+        <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+          {navSections.map((section, sectionIndex) => (
+            <div key={sectionIndex} className="space-y-1">
+              {section.title && (
+                <div className="px-4 py-2 text-xs font-semibold text-muted-foreground">
+                  {section.title}
+                </div>
+              )}
+              {section.items.map((item) => {
+                const Icon = item.icon
+                const isActive = location.pathname === item.path
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-foreground hover:bg-muted'
+                    }`}
+                  >
+                    <Icon className="h-4 w-4 flex-shrink-0" />
+                    <span className="flex-1">{item.label}</span>
+                    {item.badge && (
+                      <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
+          ))}
         </nav>
 
         {/* User Info */}
