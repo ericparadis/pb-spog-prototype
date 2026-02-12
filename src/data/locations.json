@@ -1,7 +1,7 @@
 [
   {
     "id": "loc-fz-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "name": "FitZone Downtown",
     "address": "123 Main St",
     "city": "San Francisco",
@@ -23,7 +23,7 @@
   },
   {
     "id": "loc-fz-2",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "name": "FitZone Mission Bay",
     "address": "456 Berry St",
     "city": "San Francisco",
@@ -45,7 +45,7 @@
   },
   {
     "id": "loc-pl-1",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "name": "PowerLift Central",
     "address": "789 Market St",
     "city": "Oakland",
@@ -67,7 +67,7 @@
   },
   {
     "id": "loc-pl-2",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "name": "PowerLift North",
     "address": "321 Telegraph Ave",
     "city": "Berkeley",
@@ -89,7 +89,7 @@
   },
   {
     "id": "loc-zg-1",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "name": "ZenGym Marina",
     "address": "555 Chestnut St",
     "city": "San Francisco",
@@ -111,7 +111,7 @@
   },
   {
     "id": "loc-zg-2",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "name": "ZenGym Sunset",
     "address": "888 Irving St",
     "city": "San Francisco",

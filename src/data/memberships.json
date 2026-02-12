@@ -1,7 +1,7 @@
 [
   {
     "id": "mbr-fz-basic",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "name": "Basic",
     "description": "Access to gym equipment and basic amenities",
     "price": 49.99,
@@ -15,7 +15,7 @@
   },
   {
     "id": "mbr-fz-premium",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "name": "Premium",
     "description": "Unlimited access with personal training sessions",
     "price": 99.99,
@@ -31,7 +31,7 @@
   },
   {
     "id": "mbr-pl-basic",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "name": "Strength Basic",
     "description": "Essential strength training membership",
     "price": 59.99,
@@ -45,7 +45,7 @@
   },
   {
     "id": "mbr-pl-elite",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "name": "Elite Lifter",
     "description": "Premium powerlifting membership",
     "price": 129.99,
@@ -61,7 +61,7 @@
   },
   {
     "id": "mbr-zg-wellness",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "name": "Wellness",
     "description": "Holistic wellness and fitness membership",
     "price": 79.99,
@@ -76,7 +76,7 @@
   },
   {
     "id": "mbr-zg-premium",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "name": "Premium Zen",
     "description": "Complete mind-body wellness package",
     "price": 119.99,

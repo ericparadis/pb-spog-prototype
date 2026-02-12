@@ -1,7 +1,7 @@
 [
   {
     "id": "tr-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationIds": ["loc-fz-1", "loc-fz-2"],
     "firstName": "Alex",
     "lastName": "Turner",
@@ -14,7 +14,7 @@
   },
   {
     "id": "tr-2",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationIds": ["loc-pl-1"],
     "firstName": "Marcus",
     "lastName": "Stone",
@@ -27,7 +27,7 @@
   },
   {
     "id": "tr-3",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationIds": ["loc-zg-1", "loc-zg-2"],
     "firstName": "Maya",
     "lastName": "Patel",

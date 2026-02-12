@@ -17,22 +17,16 @@ const BrandContext = createContext<BrandContextType | undefined>(undefined)
 
 const defaultBrands: Brand[] = [
   {
-    id: 'fitzone',
-    name: 'fitzone',
-    displayName: 'FitZone',
-    logo: '/brands/fitzone/logo.svg',
+    id: 'anytime-fitness',
+    name: 'anytime-fitness',
+    displayName: 'Anytime Fitness',
+    logo: '/brands/anytime-fitness/logo.svg',
   },
   {
-    id: 'powerlift',
-    name: 'powerlift',
-    displayName: 'PowerLift',
-    logo: '/brands/powerlift/logo.svg',
-  },
-  {
-    id: 'zengym',
-    name: 'zengym',
-    displayName: 'ZenGym',
-    logo: '/brands/zengym/logo.svg',
+    id: 'orangetheory',
+    name: 'orangetheory',
+    displayName: 'Orange Theory Fitness',
+    logo: '/brands/orangetheory/logo.svg',
   },
 ]
 

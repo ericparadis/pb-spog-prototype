@@ -36,27 +36,19 @@
     --radius: 0.5rem;
   }
 
-  /* Brand: FitZone (energetic orange/red theme) */
-  [data-brand="fitzone"] {
-    --primary: 18 85% 55%;
+  /* Brand: Anytime Fitness (purple theme from Figma #440099) */
+  [data-brand="anytime-fitness"] {
+    --primary: 270 100% 30%;  /* #440099 */
     --primary-foreground: 0 0% 100%;
-    --accent: 18 85% 45%;
+    --accent: 270 100% 23%;  /* #360073 - darker purple */
     --accent-foreground: 0 0% 100%;
   }
 
-  /* Brand: PowerLift (strong blue/steel theme) */
-  [data-brand="powerlift"] {
-    --primary: 214 85% 45%;
+  /* Brand: Orange Theory Fitness (orange theme #F26922) */
+  [data-brand="orangetheory"] {
+    --primary: 18 89% 54%;  /* #F26922 */
     --primary-foreground: 0 0% 100%;
-    --accent: 214 85% 55%;
-    --accent-foreground: 0 0% 100%;
-  }
-
-  /* Brand: ZenGym (calming green theme) */
-  [data-brand="zengym"] {
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 142 70% 35%;
+    --accent: 14 100% 45%;  /* #E65100 - darker orange */
     --accent-foreground: 0 0% 100%;
   }
 

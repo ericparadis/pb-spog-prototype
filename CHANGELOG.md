@@ -4,6 +4,28 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 12, 2026 — 4:08 PM
+**What changed:** Updated brands with real design tokens from Figma
+**Screens affected:** All screens (branding change)
+**Status:** Built
+
+Replaced placeholder brands with real gym franchise brands using design tokens extracted from Figma:
+- **Anytime Fitness** (purple theme - #440099 from Figma design file)
+- **Orange Theory Fitness** (orange theme - #F26922 from website)
+
+Updated:
+- Brand definitions in brands.json with real names and colors
+- Theme CSS with accurate brand color tokens extracted from Figma
+- Brand context with new brand configurations
+- Created placeholder brand logos (AF and OT initials)
+- Updated all sample data to reference new brand IDs
+
+Successfully tested Figma MCP integration - configured authentication and extracted design tokens from the AF-SPOG-Design file.
+
+Next: Build feature screens based on Figma designs.
+
+---
+
 ### February 12, 2026 — 1:55 PM
 **What changed:** Added collapsible prototype control panel
 **Screens affected:** All screens (global UI change)

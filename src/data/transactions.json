@@ -1,7 +1,7 @@
 [
   {
     "id": "txn-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-1",
     "memberId": "mem-1",
     "amount": 99.99,
@@ -12,7 +12,7 @@
   },
   {
     "id": "txn-2",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationId": "loc-pl-1",
     "memberId": "mem-4",
     "amount": 129.99,
@@ -23,7 +23,7 @@
   },
   {
     "id": "txn-3",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationId": "loc-zg-1",
     "memberId": "mem-6",
     "amount": 79.99,

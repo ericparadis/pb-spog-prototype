@@ -1,7 +1,7 @@
 [
   {
     "id": "mem-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-1",
     "firstName": "John",
     "lastName": "Doe",
@@ -19,7 +19,7 @@
   },
   {
     "id": "mem-2",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-1",
     "firstName": "Emily",
     "lastName": "Smith",
@@ -37,7 +37,7 @@
   },
   {
     "id": "mem-3",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-2",
     "firstName": "Michael",
     "lastName": "Brown",
@@ -55,7 +55,7 @@
   },
   {
     "id": "mem-4",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationId": "loc-pl-1",
     "firstName": "David",
     "lastName": "Wilson",
@@ -73,7 +73,7 @@
   },
   {
     "id": "mem-5",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationId": "loc-pl-1",
     "firstName": "Amanda",
     "lastName": "Garcia",
@@ -91,7 +91,7 @@
   },
   {
     "id": "mem-6",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationId": "loc-zg-1",
     "firstName": "Rachel",
     "lastName": "Taylor",
@@ -109,7 +109,7 @@
   },
   {
     "id": "mem-7",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationId": "loc-zg-2",
     "firstName": "Chris",
     "lastName": "Anderson",

@@ -1,7 +1,7 @@
 [
   {
     "id": "cls-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-1",
     "name": "Morning HIIT",
     "description": "High-intensity interval training to start your day",
@@ -15,7 +15,7 @@
   },
   {
     "id": "cls-2",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationId": "loc-pl-1",
     "name": "PowerLifting Fundamentals",
     "description": "Learn proper powerlifting technique",
@@ -29,7 +29,7 @@
   },
   {
     "id": "cls-3",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationId": "loc-zg-1",
     "name": "Sunrise Yoga",
     "description": "Gentle yoga flow to energize your morning",

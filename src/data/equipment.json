@@ -1,7 +1,7 @@
 [
   {
     "id": "eq-1",
-    "brandId": "fitzone",
+    "brandId": "anytime-fitness",
     "locationId": "loc-fz-1",
     "name": "Treadmill #1",
     "category": "Cardio",
@@ -13,7 +13,7 @@
   },
   {
     "id": "eq-2",
-    "brandId": "powerlift",
+    "brandId": "orangetheory",
     "locationId": "loc-pl-1",
     "name": "Squat Rack #1",
     "category": "Strength",
@@ -25,7 +25,7 @@
   },
   {
     "id": "eq-3",
-    "brandId": "zengym",
+    "brandId": "anytime-fitness",
     "locationId": "loc-zg-1",
     "name": "Yoga Mat Set",
     "category": "Studio",
