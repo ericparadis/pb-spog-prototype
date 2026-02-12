@@ -16,7 +16,8 @@
       "Bash(git push:*)",
       "WebFetch(domain:sst.dev)",
       "Bash(npm install:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm run type-check:*)"
     ]
   }
 }

@@ -4,6 +4,23 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 12, 2026 — 1:55 PM
+**What changed:** Added collapsible prototype control panel
+**Screens affected:** All screens (global UI change)
+**Status:** Built
+
+Created a collapsible control panel that sits above the application UI:
+- Moved brand and role switchers from AppLayout header to dedicated control panel
+- Added toggle button to collapse/expand panel
+- Added placeholder metadata sections (version, build date, deployment status)
+- Clear visual separation between prototype controls and actual app UI
+
+The control panel makes it easy for stakeholders to switch contexts (brand/role) while clearly distinguishing prototype tooling from the actual product interface.
+
+To toggle: Click the expand/collapse button in the top-right of the control panel.
+
+---
+
 ### February 12, 2026 — 12:25 PM
 **What changed:** Implemented SST v3 deployment infrastructure
 **Screens affected:** None (infrastructure only)

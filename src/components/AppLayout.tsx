@@ -1,7 +1,5 @@
 import { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { BrandSwitcher } from './BrandSwitcher'
-import { RoleSwitcher } from './RoleSwitcher'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
 
@@ -54,8 +52,6 @@ export function AppLayout({ children }: AppLayoutProps) {
           </div>
 
           <div className="flex items-center gap-4">
-            <BrandSwitcher />
-            <RoleSwitcher />
             <div className="text-sm text-muted-foreground">{user?.name}</div>
           </div>
         </div>
