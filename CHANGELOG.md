@@ -4,6 +4,36 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 12, 2026 — 5:15 PM
+**What changed:** Redesigned layout with left sidebar navigation and modal prototype controls
+**Screens affected:** All screens (layout restructure)
+**Status:** Built
+
+Complete layout redesign for better space utilization and cleaner UI:
+
+**Left Sidebar Navigation:**
+- Moved navigation from top horizontal bar to left vertical sidebar (240px wide)
+- Added navigation icons (Dashboard, Members, Schedule, Check-In) for better visual recognition
+- Positioned brand logo and name at top of sidebar
+- Added user profile section at bottom of sidebar showing avatar, name, and role
+- Active page highlighting with primary color background
+
+**Header & Content Area:**
+- Clean header bar with "Staff Management" title
+- Full-height main content area for detail views
+- Better vertical space for data tables and content
+
+**Prototype Controls:**
+- Converted from collapsible top panel to modal overlay
+- Added floating settings button (bottom-right corner) to open controls
+- Modal displays brand switcher, role switcher, and build metadata
+- Click backdrop or close button to dismiss
+- Controls no longer take up vertical space in the main UI
+
+The new layout provides more screen real estate for content while keeping prototype controls easily accessible without cluttering the interface.
+
+---
+
 ### February 12, 2026 — 4:08 PM
 **What changed:** Updated brands with real design tokens from Figma
 **Screens affected:** All screens (branding change)
