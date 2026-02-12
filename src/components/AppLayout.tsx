@@ -63,66 +63,70 @@ export function AppLayout({ children }: AppLayoutProps) {
   ]
 
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Left Sidebar */}
-      <aside className="w-64 border-r border-border bg-card flex flex-col">
-        {/* Logo & Brand */}
-        <div className="p-6 border-b border-border">
+    <div className="flex min-h-screen bg-background font-sans">
+      {/* Left Sidebar - 280px wide from Figma */}
+      <aside className="w-[280px] border-r border-border bg-card flex flex-col">
+        {/* Logo & Brand - 74.23px high from Figma */}
+        <div className="h-[74px] px-6 flex items-center border-b border-border">
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-              <img
-                src={currentBrand.logo}
-                alt={currentBrand.displayName}
-                className="w-8 h-8"
-              />
-            </div>
+            <img
+              src={currentBrand.logo}
+              alt={currentBrand.displayName}
+              className="w-10 h-10"
+            />
             <span className="text-lg font-bold text-foreground">
               {currentBrand.displayName}
             </span>
           </Link>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+        {/* Navigation - exact Figma specs */}
+        <nav className="flex-1 overflow-y-auto py-6">
           {navSections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="space-y-1">
+            <div key={sectionIndex} className={sectionIndex > 0 ? 'mt-6' : ''}>
               {section.title && (
-                <div className="px-4 py-2 text-xs font-semibold text-muted-foreground">
+                <div
+                  className="px-6 mb-3 text-[11px] font-medium uppercase tracking-[0.614px]"
+                  style={{ color: 'rgb(153, 161, 175)' }}
+                >
                   {section.title}
                 </div>
               )}
-              {section.items.map((item) => {
-                const Icon = item.icon
-                const isActive = location.pathname === item.path
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-foreground hover:bg-muted'
-                    }`}
-                  >
-                    <Icon className="h-4 w-4 flex-shrink-0" />
-                    <span className="flex-1">{item.label}</span>
-                    {item.badge && (
-                      <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                )
-              })}
+              <div className="space-y-1">
+                {section.items.map((item) => {
+                  const Icon = item.icon
+                  const isActive = location.pathname === item.path
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[15px] font-medium transition-colors ${
+                        isActive
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-foreground hover:bg-muted'
+                      }`}
+                      style={{ letterSpacing: '-0.234px' }}
+                    >
+                      <Icon className="h-5 w-5 flex-shrink-0" />
+                      <span className="flex-1">{item.label}</span>
+                      {item.badge && (
+                        <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           ))}
         </nav>
 
-        {/* User Info */}
-        <div className="p-4 border-t border-border">
-          <div className="flex items-center gap-3 px-4 py-3">
-            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
-              <span className="text-xs font-medium">
+        {/* User Info - 93px high from Figma */}
+        <div className="h-[93px] border-t border-border px-6 flex items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+              <span className="text-sm font-medium">
                 {user?.name?.charAt(0) || 'U'}
               </span>
             </div>
@@ -140,17 +144,17 @@ export function AppLayout({ children }: AppLayoutProps) {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <header className="h-16 border-b border-border bg-card flex items-center px-6">
+        {/* Header - 80px high from Figma */}
+        <header className="h-[80px] border-b border-border bg-card flex items-center px-8">
           <div className="flex-1">
-            <h1 className="text-lg font-semibold text-foreground">
+            <h1 className="text-xl font-semibold text-foreground">
               Staff Management
             </h1>
           </div>
         </header>
 
         {/* Detail Body Area */}
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto bg-white">
           {children}
         </main>
       </div>

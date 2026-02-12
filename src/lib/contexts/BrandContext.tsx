@@ -20,13 +20,13 @@ const defaultBrands: Brand[] = [
     id: 'anytime-fitness',
     name: 'anytime-fitness',
     displayName: 'Anytime Fitness',
-    logo: '/brands/anytime-fitness/logo.svg',
+    logo: '/brands/anytime-fitness/af-logo.svg',
   },
   {
     id: 'orangetheory',
     name: 'orangetheory',
     displayName: 'Orange Theory Fitness',
-    logo: '/brands/orangetheory/logo.svg',
+    logo: '/brands/orangetheory/otf-logo.svg',
   },
 ]
 
