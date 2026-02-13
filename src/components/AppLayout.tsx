@@ -67,9 +67,9 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="flex min-h-screen bg-background font-sans">
       {/* Left Sidebar - 280px wide from Figma */}
-      <aside className="w-[280px] border-r border-border bg-card flex flex-col">
+      <aside className="w-[280px] border-r border-border flex flex-col" style={{ backgroundColor: 'hsl(var(--sidebar-bg))' }}>
         {/* Logo & Brand - 74.23px high from Figma */}
-        <div className="h-[74px] px-6 flex items-center border-b border-border">
+        <div className="h-[74px] px-6 flex items-center justify-center border-b border-border">
           <Link to="/" className="flex items-center">
             <img
               src={currentBrand.logo}
@@ -102,12 +102,15 @@ export function AppLayout({ children }: AppLayoutProps) {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[15px] font-medium transition-colors ${
+                      className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[13px] font-medium transition-colors ${
                         isActive
                           ? 'bg-primary text-primary-foreground'
-                          : 'text-foreground hover:bg-muted'
+                          : 'hover:bg-muted'
                       }`}
-                      style={{ letterSpacing: '-0.234px' }}
+                      style={{
+                        letterSpacing: '-0.234px',
+                        ...(!isActive ? { color: 'hsl(var(--sidebar-text))' } : {}),
+                      }}
                     >
                       <Icon className="h-5 w-5 flex-shrink-0" />
                       <span className="flex-1">{item.label}</span>
