@@ -1,6 +1,6 @@
 # Product Manager Guide
 
-How to use Claude Code Desktop to build and iterate on the gym franchise prototype.
+How to use Claude Code to build and iterate on the gym franchise prototype.
 
 ---
 
@@ -9,29 +9,16 @@ How to use Claude Code Desktop to build and iterate on the gym franchise prototy
 This prototype is a working web application for gym franchise management. You interact with it by describing what you want in plain English — Claude Code reads your Figma designs, builds the screens, and saves everything automatically.
 
 **What you need:**
-- Claude Code Desktop app (required — the browser version cannot connect to Figma)
-- A Figma account with access to the design files
+- Claude Code (Desktop app or CLI)
+- Your Figma design files (screenshots or links)
 - Access to this project's GitHub repository
 - A clear idea of what screen or feature you want to build
 
 **What happens when you make a request:**
-1. You describe what you want (with or without a Figma link)
+1. You describe what you want (with a Figma screenshot, link, or description)
 2. Claude builds it using the existing design system and components
 3. Claude saves a checkpoint and tells you what route to visit
 4. You review and request changes, or approve
-
----
-
-## First-Time Setup
-
-1. Install the Claude Code Desktop app
-2. Open this project in Claude Code Desktop
-3. Type `/mcp` to see the MCP server list
-4. Select **figma** and click **Authenticate**
-5. Sign in with your Figma account when prompted
-6. You should see: "Authentication successful. Connected to figma."
-
-This is a one-time step. After authenticating, Figma access works automatically in future sessions.
 
 ---
 
@@ -96,28 +83,25 @@ I need {description of change} — can you flag it for the dev team?
 
 ## Working with Figma
 
-Each time you request a feature, you can include a Figma link to guide the design. Here's how:
+Each time you request a feature, you can share a Figma design to guide the implementation. There are two ways:
 
-### How to copy a Figma link
-1. Open your Figma file
-2. Select the frame or component you want to reference
-3. Right-click and choose **Copy link to selection** (or use the Share button)
-4. Paste the link into your prompt
-
-### What to include with your Figma link
-- **Which frame or component** you're referencing (name it: "the Table Container", "the Navigation frame", etc.)
-- **What screen or feature** it should be applied to
-- **Which user roles** should see this screen
-
-### Example prompt with Figma
+### Option 1: Paste a Figma link
+If you have Figma MCP configured locally, paste the link directly and the AI will read the design:
 ```
 Use this Figma https://www.figma.com/design/abc123/My-Design?node-id=42-100
 to build the Staff Schedule view. Use the "Weekly Calendar" frame as the layout.
 It should be visible to Gym Managers and Regional Managers.
 ```
 
-### What the AI does with your Figma link
-- Connects to Figma via MCP to read the design directly
+### Option 2: Share a screenshot (always works)
+Take a screenshot of the Figma frame and paste it into the chat. The AI can read images and extract layout details, spacing, columns, and styling.
+
+### What to include with your Figma reference
+- **Which frame or component** you're referencing (name it: "the Table Container", "the Navigation frame", etc.)
+- **What screen or feature** it should be applied to
+- **Which user roles** should see this screen
+
+### What the AI does with your design
 - Reads the design structure (layout, spacing, colors)
 - Matches Figma components to existing prototype components
 - Applies brand-appropriate colors (never hard-codes them)

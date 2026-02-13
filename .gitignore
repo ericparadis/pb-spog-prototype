@@ -56,5 +56,5 @@ sst-env.d.ts
 # Additional environment files
 .env.*.local
 
-# MCP Configuration
-# .mcp.json is tracked — it contains shared MCP server config (no secrets)
+# MCP Configuration (local per user)
+.mcp.json

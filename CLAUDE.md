@@ -64,19 +64,18 @@ You are the builder. When the PM describes a feature, you:
 
 ---
 
-## Figma MCP Integration
+## Figma Design Integration
 
-**Important:** Figma MCP requires Claude Code Desktop. The browser version of Claude Code cannot connect to external MCP servers. PMs authenticate via OAuth — they type `/mcp` in Claude Code, select the figma server, and sign in with their Figma account (one-time setup). If a PM reports that Figma tools are unavailable, confirm they are using Claude Code Desktop and have completed the `/mcp` authentication step.
+PMs may configure Figma MCP on their local machines. Figma MCP is **not** bundled with this repo — each PM sets it up independently.
 
-The Figma MCP server is configured in this project (`.mcp.json`). When a PM provides a Figma link:
+When a PM provides a Figma link:
 
-1. Use the Figma MCP `get_design_context` tool to pull the design structure
-2. Check `get_code_connect_map` for existing component mappings before creating anything new
-3. Use `get_variables` to pull design tokens — cross-reference with the tokens already in `tailwind.config.ts`
-4. If a Figma component maps to an existing component in `/src/components/`, use the existing component
-5. If no mapping exists, build the component following the patterns in `/src/components/` and note in your response: *"I created a new component [name] — the dev team should map this in Code Connect."*
+1. If Figma MCP tools are available in the session, use them to pull design context directly
+2. If Figma MCP tools are not available, ask the PM to share screenshots of the relevant Figma frames — you can read images and extract layout details, spacing, columns, and styling from them
+3. If a Figma component maps to an existing component in `/src/components/`, use the existing component
+4. If no mapping exists, build the component following the patterns in `/src/components/` and note in your response: *"I created a new component [name] — the dev team should map this in Code Connect."*
 
-If no Figma link is provided, work from the PM's description and use the design system tokens and existing component patterns.
+If no Figma link or screenshot is provided, work from the PM's description and use the design system tokens and existing component patterns.
 
 ---
 
