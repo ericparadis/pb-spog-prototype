@@ -10,6 +10,28 @@ import {
 
 export const memberColumns: ColumnDef<MemberTableRow>[] = [
   {
+    id: 'select',
+    header: ({ table }) => (
+      <input
+        type="checkbox"
+        checked={table.getIsAllPageRowsSelected()}
+        onChange={table.getToggleAllPageRowsSelectedHandler()}
+        className="h-4 w-4 rounded border-gray-300"
+        aria-label="Select all rows"
+      />
+    ),
+    cell: ({ row }) => (
+      <input
+        type="checkbox"
+        checked={row.getIsSelected()}
+        onChange={row.getToggleSelectedHandler()}
+        className="h-4 w-4 rounded border-gray-300"
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+  },
+  {
     accessorKey: 'name',
     header: ({ column }) => (
       <SortableHeader column={column} label="Member" />
@@ -95,14 +117,28 @@ export const memberColumns: ColumnDef<MemberTableRow>[] = [
     ),
   },
   {
-    id: 'alert',
+    id: 'alerts',
     header: 'Alerts',
     cell: ({ row }) =>
-      row.original.alert ? (
-        <AlertPill
-          type={row.original.alert.type}
-          label={row.original.alert.label}
-        />
-      ) : null,
+      row.original.alerts.length > 0 ? (
+        <div className="flex flex-wrap gap-1">
+          {row.original.alerts.map((alert, i) => (
+            <AlertPill key={i} type={alert.type} label={alert.label} />
+          ))}
+        </div>
+      ) : (
+        <span className="text-sm text-muted-foreground">-</span>
+      ),
+  },
+  {
+    accessorKey: 'coach',
+    header: ({ column }) => (
+      <SortableHeader column={column} label="Coach" />
+    ),
+    cell: ({ row }) => (
+      <span className="text-sm text-foreground">
+        {row.original.coach || '\u2014'}
+      </span>
+    ),
   },
 ]

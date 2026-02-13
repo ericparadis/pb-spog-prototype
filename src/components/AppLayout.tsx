@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard,
@@ -14,6 +14,7 @@ import {
   BookOpen,
   BarChart3,
   ChevronRight,
+  ChevronDown,
 } from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
@@ -22,17 +23,42 @@ interface AppLayoutProps {
   children: ReactNode
 }
 
+interface NavChild {
+  path: string
+  label: string
+}
+
 interface NavItem {
   path: string
   label: string
   icon: typeof LayoutDashboard
   badge?: string
   hasSubmenu?: boolean
+  children?: NavChild[]
 }
 
 interface NavSection {
   title?: string
   items: NavItem[]
+}
+
+// Map route paths to page titles for the header
+const routeTitles: Record<string, string> = {
+  '/': 'Overview',
+  '/tasks': 'Tasks',
+  '/conversations': 'Conversations',
+  '/schedule': 'Schedule',
+  '/customers': 'Customers',
+  '/customers/leads': 'Leads',
+  '/customers/members': 'Members',
+  '/members': 'Members',
+  '/marketing': 'Marketing',
+  '/resources': 'Resources',
+  '/reporting': 'Reporting',
+  '/locations': 'Location Management',
+  '/staff': 'Staff Management',
+  '/memberships': 'Memberships & Packages',
+  '/catalog': 'Catalog Administration',
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
@@ -47,7 +73,17 @@ export function AppLayout({ children }: AppLayoutProps) {
         { path: '/tasks', label: 'Tasks', icon: CheckSquare, badge: '10' },
         { path: '/conversations', label: 'Conversations', icon: MessageSquare, badge: '8' },
         { path: '/schedule', label: 'Schedule', icon: Calendar, hasSubmenu: true },
-        { path: '/customers', label: 'Customers', icon: UserCircle, badge: '2', hasSubmenu: true },
+        {
+          path: '/customers',
+          label: 'Customers',
+          icon: UserCircle,
+          badge: '2',
+          hasSubmenu: true,
+          children: [
+            { path: '/customers/leads', label: 'Leads' },
+            { path: '/customers/members', label: 'Members' },
+          ],
+        },
         { path: '/marketing', label: 'Marketing', icon: Megaphone, hasSubmenu: true },
         { path: '/resources', label: 'Resources', icon: BookOpen, hasSubmenu: true },
         { path: '/reporting', label: 'Reporting', icon: BarChart3, hasSubmenu: true },
@@ -63,6 +99,37 @@ export function AppLayout({ children }: AppLayoutProps) {
       ],
     },
   ]
+
+  // Check if a child route of this item is currently active
+  const isChildActive = (item: NavItem) =>
+    item.children?.some((child) => location.pathname === child.path) ?? false
+
+  // Auto-expand items whose children match the current path
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
+    const initial = new Set<string>()
+    for (const section of navSections) {
+      for (const item of section.items) {
+        if (item.children?.some((child) => location.pathname === child.path)) {
+          initial.add(item.path)
+        }
+      }
+    }
+    return initial
+  })
+
+  const toggleExpand = (path: string) => {
+    setExpandedItems((prev) => {
+      const next = new Set(prev)
+      if (next.has(path)) {
+        next.delete(path)
+      } else {
+        next.add(path)
+      }
+      return next
+    })
+  }
+
+  const pageTitle = routeTitles[location.pathname] || 'Overview'
 
   return (
     <div className="flex min-h-screen bg-background font-sans">
@@ -97,32 +164,93 @@ export function AppLayout({ children }: AppLayoutProps) {
               <div className="space-y-1">
                 {section.items.map((item) => {
                   const Icon = item.icon
+                  const hasChildren = item.children && item.children.length > 0
+                  const isExpanded = expandedItems.has(item.path) || isChildActive(item)
                   const isActive = location.pathname === item.path
+                  const childActive = isChildActive(item)
+
                   return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[13px] font-medium transition-colors ${
-                        isActive
-                          ? 'bg-primary text-primary-foreground'
-                          : 'hover:bg-muted'
-                      }`}
-                      style={{
-                        letterSpacing: '-0.234px',
-                        ...(!isActive ? { color: 'hsl(var(--sidebar-text))' } : {}),
-                      }}
-                    >
-                      <Icon className="h-5 w-5 flex-shrink-0" />
-                      <span className="flex-1">{item.label}</span>
-                      {item.badge && (
-                        <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
-                          {item.badge}
-                        </span>
+                    <div key={item.path}>
+                      {hasChildren ? (
+                        // Parent with children: button that toggles expand
+                        <button
+                          onClick={() => toggleExpand(item.path)}
+                          className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[13px] font-medium transition-colors w-[calc(100%-24px)] text-left ${
+                            childActive
+                              ? 'bg-primary/10'
+                              : 'hover:bg-muted'
+                          }`}
+                          style={{
+                            letterSpacing: '-0.234px',
+                            color: 'hsl(var(--sidebar-text))',
+                          }}
+                        >
+                          <Icon className="h-5 w-5 flex-shrink-0" />
+                          <span className="flex-1">{item.label}</span>
+                          {item.badge && (
+                            <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
+                              {item.badge}
+                            </span>
+                          )}
+                          {isExpanded ? (
+                            <ChevronDown className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform" />
+                          ) : (
+                            <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform" />
+                          )}
+                        </button>
+                      ) : (
+                        // Leaf item: Link (existing behavior)
+                        <Link
+                          to={item.path}
+                          className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[13px] font-medium transition-colors ${
+                            isActive
+                              ? 'bg-primary text-primary-foreground'
+                              : 'hover:bg-muted'
+                          }`}
+                          style={{
+                            letterSpacing: '-0.234px',
+                            ...(!isActive ? { color: 'hsl(var(--sidebar-text))' } : {}),
+                          }}
+                        >
+                          <Icon className="h-5 w-5 flex-shrink-0" />
+                          <span className="flex-1">{item.label}</span>
+                          {item.badge && (
+                            <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
+                              {item.badge}
+                            </span>
+                          )}
+                          {item.hasSubmenu && (
+                            <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                          )}
+                        </Link>
                       )}
-                      {item.hasSubmenu && (
-                        <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
+
+                      {/* Render child subnav items when expanded */}
+                      {hasChildren && isExpanded && (
+                        <div className="mt-0.5 space-y-0.5">
+                          {item.children!.map((child) => {
+                            const isChildRouteActive = location.pathname === child.path
+                            return (
+                              <Link
+                                key={child.path}
+                                to={child.path}
+                                className={`flex items-center mx-3 pl-11 pr-3 h-[36px] rounded-lg text-[13px] font-medium transition-colors ${
+                                  isChildRouteActive
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'hover:bg-muted'
+                                }`}
+                                style={{
+                                  letterSpacing: '-0.234px',
+                                  ...(!isChildRouteActive ? { color: 'hsl(var(--sidebar-text))' } : {}),
+                                }}
+                              >
+                                {child.label}
+                              </Link>
+                            )
+                          })}
+                        </div>
                       )}
-                    </Link>
+                    </div>
                   )
                 })}
               </div>
@@ -138,7 +266,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         <header className="h-[80px] border-b border-border bg-card flex items-center justify-between px-8">
           <div className="flex-1">
             <h1 className="text-xl font-semibold text-foreground">
-              Staff Management
+              {pageTitle}
             </h1>
           </div>
           <div className="flex items-center gap-3">
