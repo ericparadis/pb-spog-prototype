@@ -162,55 +162,48 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 
 ---
 
-## 🔒 File Protection Rules — CRITICAL
+## File Protection — Dynamic Lock System
 
-### Locked Files and Directories (NEVER modify):
+File protection is managed through `locked-features.json` at the project root. **At launch, nothing is locked** — PMs have full freedom to shape the prototype. Locks are added over time as the project matures.
 
-```
-/src/components/**              — Shared UI components
-/src/lib/**                     — Utilities, auth, hooks, multi-tenant context
-/src/data/**                    — Sample data fixtures
-/src/mocks/**                   — MSW handlers
-/src/themes/**                  — Brand theme configs
-/tailwind.config.ts             — Design tokens configuration
-/vite.config.ts                 — Build configuration
-/package.json                   — Dependencies
-/package-lock.json              — Dependency lock
-/tsconfig.json                  — TypeScript configuration
-/CLAUDE.md                      — This file
-/.mcp.json                      — MCP server configuration
-/scripts/**                     — Build and validation scripts
-```
+### How protection works
 
-### If a PM request requires modifying a locked file:
+Before modifying any file, check `locked-features.json`:
 
-**Do not comply.** Instead:
+1. Check if the file matches any path in `core_protected_paths` (glob patterns)
+2. Check if the file is inside a `locked` feature's path
+3. If neither matches → **the file is open, proceed freely**
+4. If it matches → **the file is protected, follow the unlock flow below**
 
-1. Explain in plain language why the change touches a protected area
-2. Suggest an alternative that works within the open zone
-3. If no alternative exists, tell the PM: *"This change affects the core design system/app structure. I've noted it as a request for the dev team."*
-4. Add the request to `CHANGELOG.md` with a `[DEV-REQUEST]` tag
+### When a file IS protected
 
-### Common redirect patterns:
+1. Tell the PM: *"That file is in a protected area ([reason]). I can unlock it, make the change, and re-lock it automatically. Should I go ahead?"*
+2. If PM confirms:
+   - Add an entry to the `unlock_log` array in `locked-features.json`:
+     ```json
+     {
+       "path": "/src/components/AppLayout.tsx",
+       "type": "temporary",
+       "reason": "Update navigation to match Figma design",
+       "unlocked_by": "PM Name",
+       "unlocked_date": "2026-02-13",
+       "relocked_date": "2026-02-13",
+       "changes_made": "Restructured nav sections, added chevrons"
+     }
+     ```
+   - Make the change
+   - Fill in `relocked_date` and `changes_made`
+   - Log in CHANGELOG.md
+3. If PM declines:
+   - Suggest an alternative approach
+   - Or log as `[DEV-REQUEST]` in CHANGELOG.md
 
-| PM Request | Why It's Locked | Alternative |
-|---|---|---|
-| "Make all buttons look different" | Shared component library | "I can create a custom button variant for this specific screen" |
-| "Change the navigation order" | Shared layout | "I can add quick-links or shortcuts within your feature screen" |
-| "Use a different chart library" | Package dependencies | "I can build this visualization with Recharts, which is already available" |
-| "Change the color scheme" | Theme tokens | "I can suggest theme changes for the dev team, and show you a mockup using custom styles on this screen" |
-| "Change how the brand switcher works" | Shared layout/auth | "I can note this as a UX improvement request for the dev team" |
-| "Modify the sample data structure" | Shared data models | "I can create feature-specific data transformations in your feature directory" |
+### Who can add locks
 
-### Open Zone — Build Freely:
+- **Core paths** (`core_protected_paths`): Added by the dev team when shared infrastructure stabilizes. PMs should not add these.
+- **Feature locks** (`locked`): Added when a PM approves a feature (see Feature Approval below).
 
-```
-/src/features/**                — Create new directories and files
-/src/routes.ts                  — Add new routes (never remove existing ones)
-/docs/specs/**                  — Feature specs
-```
-
-### Rules for the open zone:
+### Best practices (even when files are unlocked)
 
 - Always import components from `@/components` — never duplicate or recreate shared components
 - Create feature-specific components inside the feature's own directory
@@ -223,27 +216,46 @@ If the PM doesn't specify roles, make a reasonable assumption based on the featu
 
 ## Feature Approval & Locking
 
+### Approving a feature (locking it)
+
 When a PM indicates a feature is approved, done, or finalized (phrases like "this is good," "approved," "lock this in," "we're happy with this"):
 
-1. Confirm with the PM: *"I'll mark [feature name] as approved. This means it will be protected from accidental changes. You can unlock it later if needed. Should I go ahead?"*
+1. Confirm with the PM: *"I'll mark [feature name] as approved. This creates a checkpoint and protects it from accidental changes. You can unlock it later if needed. Should I go ahead?"*
 2. If confirmed, add the feature to `locked-features.json`:
    ```json
    {
-     "locked": [
-       {
-         "feature": "check-in",
-         "path": "/src/features/check-in",
-         "approved_date": "2026-02-10",
-         "approved_by": "PM Name",
-         "description": "Member check-in with badge scanning and alerts",
-         "tag": "approved-check-in-v1"
-       }
-     ]
+     "feature": "check-in",
+     "path": "/src/features/check-in",
+     "approved_date": "2026-02-10",
+     "approved_by": "PM Name",
+     "description": "Member check-in with badge scanning and alerts",
+     "tag": "approved-check-in-v1"
    }
    ```
 3. Create a git tag: `git tag -a "approved-[feature-name]-v1" -m "[description]"`
-4. From this point, treat that feature directory as locked
-5. If a PM later asks to modify an approved feature, confirm first: *"The [feature] screen was approved on [date]. Should I unlock it for edits? I'll create a new version tag when you re-approve."*
+4. Log in CHANGELOG.md
+
+### Revising an approved feature (unlocking it)
+
+When a PM asks to change an approved feature:
+
+1. Tell the PM: *"The [feature] screen was approved on [date]. I can unlock it for changes — when you're happy again, just say 'approved' and I'll re-lock it with a new version. Want me to unlock it?"*
+2. If confirmed:
+   - Remove the feature from the `locked` array
+   - Add an entry to `unlock_log` with `type: "feature-revision"`
+   - Make the requested changes
+   - **Do not auto-relock** — the PM may want multiple iterations
+   - When the PM re-approves, add it back to `locked` with an incremented version tag
+
+### Permanently unlocking a core path
+
+If a PM says "unlock [path] permanently":
+
+1. Warn: *"Permanently unlocking [path] means any PM can change it without confirmation. Are you sure? I can also do a one-time unlock instead."*
+2. If confirmed:
+   - Remove the path from `core_protected_paths`
+   - Add to `unlock_log` with `type: "permanent"`
+   - Log in CHANGELOG.md
 
 ---
 
