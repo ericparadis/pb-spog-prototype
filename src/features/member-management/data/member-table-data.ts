@@ -1,0 +1,91 @@
+import membersJson from '@/data/members.json'
+import membershipsJson from '@/data/memberships.json'
+import type { MemberTableRow, WeekData, MemberAlert } from '../types'
+
+// Simple deterministic hash from member ID for stable mock data
+function hashCode(str: string): number {
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i)
+    hash |= 0
+  }
+  return Math.abs(hash)
+}
+
+function generateWeekData(seed: number, weekOffset: number): WeekData {
+  const value = ((seed + weekOffset * 7) % 5) + 1
+  const trendSeed = (seed + weekOffset) % 3
+  const trend: WeekData['trend'] =
+    trendSeed === 0 ? 'up' : trendSeed === 1 ? 'down' : undefined
+  return { value, trend }
+}
+
+function generateAlert(seed: number, joinDate: string): MemberAlert | undefined {
+  const alertTypes: { type: string; label: string }[] = [
+    { type: 'new-join', label: 'New Join' },
+    { type: 'no-hrm', label: 'No HRM' },
+    { type: 'low-utilization', label: 'Low Utilization' },
+    { type: 'milestone', label: 'Milestone: 100' },
+    { type: 'anniversary', label: 'Anniversary' },
+    { type: 'freeze', label: 'Freeze Scheduled' },
+  ]
+
+  // Recent join dates get "New Join"
+  const joinYear = new Date(joinDate).getFullYear()
+  if (joinYear >= 2026) {
+    return alertTypes[0]
+  }
+
+  const index = seed % alertTypes.length
+  // Not every member has an alert
+  if (seed % 3 === 0) return undefined
+  return alertTypes[index]
+}
+
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
+function generateLastVisit(seed: number): string {
+  const daysAgo = seed % 30
+  const date = new Date()
+  date.setDate(date.getDate() - daysAgo)
+  return formatDate(date.toISOString())
+}
+
+const membershipMap = new Map(
+  membershipsJson.map((m) => [m.id, m.name])
+)
+
+export function getMemberTableData(brandId: string): MemberTableRow[] {
+  return membersJson
+    .filter((m) => m.brandId === brandId)
+    .map((member) => {
+      const seed = hashCode(member.id)
+      const membershipName = membershipMap.get(member.membershipId) || 'Basic'
+      // Extract the tier keyword (e.g., "Premium Zen" -> "Premium", "Elite Lifter" -> "Elite")
+      const tier =
+        membershipName.split(' ')[0].charAt(0).toUpperCase() +
+        membershipName.split(' ')[0].slice(1)
+
+      return {
+        id: member.id,
+        name: `${member.firstName} ${member.lastName}`,
+        memberId: member.id.toUpperCase().replace('MEM-', 'M0'),
+        membershipTier: tier,
+        joinDate: formatDate(member.joinDate),
+        week1: generateWeekData(seed, 1),
+        week2: generateWeekData(seed, 2),
+        week3: generateWeekData(seed, 3),
+        week4: generateWeekData(seed, 4),
+        classes: ((seed % 200) + 5),
+        lastVisit: generateLastVisit(seed),
+        alert: generateAlert(seed, member.joinDate),
+      }
+    })
+}

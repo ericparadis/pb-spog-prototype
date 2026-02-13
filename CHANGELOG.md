@@ -4,6 +4,33 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 13, 2026
+**What changed:** Updated three core UI elements to match Figma design
+**Screens affected:** All screens (navigation/logo), `/customers` (new table)
+**Status:** Built
+
+**Navigation (left nav):**
+- Moved Schedule, Customers, Marketing, Resources, Reporting to the main section (out of ADMIN)
+- Added chevron arrows to items with submenus (Schedule, Customers, Marketing, Resources, Reporting)
+- Added horizontal divider between main nav and ADMIN section
+- ADMIN section now has exactly 4 items: Location Management, Staff Management, Memberships & Packages, Catalog Administration
+
+**Logo Container:**
+- Updated to display full brand wordmark SVG (icon + text as one image)
+- Removed separate text display next to icon
+- Logo now fills container width naturally
+
+**Table (Figma Data Table):**
+- Created new `FigmaDataTable` component matching Figma table styling
+- Gray header background, uppercase column labels, sort indicators
+- Taller rows (68px) to accommodate member avatars
+- Created cell renderers: MemberCell (avatar + name + ID), MembershipBadge (colored tier pills), TrendCell (numbers with trend arrows), AlertPill (colored status pills), SortableHeader (with sort icons)
+- Wired into Member Management page at `/customers` route with enriched mock data
+
+**To revert:** "Undo the core UI elements change"
+
+---
+
 ### February 12, 2026 — 7:45 PM
 **What changed:** Matched exact Figma design specifications
 **Screens affected:** All screens (layout precision update)

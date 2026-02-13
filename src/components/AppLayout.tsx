@@ -13,6 +13,7 @@ import {
   Megaphone,
   BookOpen,
   BarChart3,
+  ChevronRight,
 } from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
@@ -26,6 +27,7 @@ interface NavItem {
   label: string
   icon: typeof LayoutDashboard
   badge?: string
+  hasSubmenu?: boolean
 }
 
 interface NavSection {
@@ -44,6 +46,11 @@ export function AppLayout({ children }: AppLayoutProps) {
         { path: '/', label: 'Overview', icon: LayoutDashboard },
         { path: '/tasks', label: 'Tasks', icon: CheckSquare, badge: '10' },
         { path: '/conversations', label: 'Conversations', icon: MessageSquare, badge: '8' },
+        { path: '/schedule', label: 'Schedule', icon: Calendar, hasSubmenu: true },
+        { path: '/customers', label: 'Customers', icon: UserCircle, badge: '2', hasSubmenu: true },
+        { path: '/marketing', label: 'Marketing', icon: Megaphone, hasSubmenu: true },
+        { path: '/resources', label: 'Resources', icon: BookOpen, hasSubmenu: true },
+        { path: '/reporting', label: 'Reporting', icon: BarChart3, hasSubmenu: true },
       ],
     },
     {
@@ -53,11 +60,6 @@ export function AppLayout({ children }: AppLayoutProps) {
         { path: '/staff', label: 'Staff Management', icon: Users },
         { path: '/memberships', label: 'Memberships & Packages', icon: CreditCard },
         { path: '/catalog', label: 'Catalog Administration', icon: Package },
-        { path: '/schedule', label: 'Schedule', icon: Calendar },
-        { path: '/customers', label: 'Customers', icon: UserCircle, badge: '2' },
-        { path: '/marketing', label: 'Marketing', icon: Megaphone },
-        { path: '/resources', label: 'Resources', icon: BookOpen },
-        { path: '/reporting', label: 'Reporting', icon: BarChart3 },
       ],
     },
   ]
@@ -68,22 +70,22 @@ export function AppLayout({ children }: AppLayoutProps) {
       <aside className="w-[280px] border-r border-border bg-card flex flex-col">
         {/* Logo & Brand - 74.23px high from Figma */}
         <div className="h-[74px] px-6 flex items-center border-b border-border">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center">
             <img
               src={currentBrand.logo}
               alt={currentBrand.displayName}
-              className="w-10 h-10"
+              className="h-9 max-w-[200px] object-contain"
             />
-            <span className="text-lg font-bold text-foreground">
-              {currentBrand.displayName}
-            </span>
           </Link>
         </div>
 
         {/* Navigation - exact Figma specs */}
         <nav className="flex-1 overflow-y-auto py-6">
           {navSections.map((section, sectionIndex) => (
-            <div key={sectionIndex} className={sectionIndex > 0 ? 'mt-6' : ''}>
+            <div key={sectionIndex}>
+              {sectionIndex > 0 && (
+                <div className="mx-6 my-4 border-t border-border" />
+              )}
               {section.title && (
                 <div
                   className="px-6 mb-3 text-[11px] font-medium uppercase tracking-[0.614px]"
@@ -113,6 +115,9 @@ export function AppLayout({ children }: AppLayoutProps) {
                         <span className="bg-primary text-primary-foreground text-xs font-semibold px-2 py-0.5 rounded-full">
                           {item.badge}
                         </span>
+                      )}
+                      {item.hasSubmenu && (
+                        <ChevronRight className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
                       )}
                     </Link>
                   )

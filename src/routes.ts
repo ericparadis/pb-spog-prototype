@@ -25,6 +25,11 @@ export const routes: Route[] = [
     allowedRoles: ['franchise-owner', 'regional-manager', 'gym-manager', 'front-desk'],
   },
   {
+    path: '/customers',
+    element: MemberManagement,
+    allowedRoles: ['franchise-owner', 'regional-manager', 'gym-manager', 'front-desk'],
+  },
+  {
     path: '/schedule',
     element: ClassSchedule,
     // All roles can access schedule

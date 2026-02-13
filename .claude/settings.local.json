@@ -25,7 +25,9 @@
       "Bash(git rm:*)",
       "Bash(curl:*)",
       "WebFetch(domain:help.figma.com)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(code:*)",
+      "Bash(npm run lint:*)"
     ]
   }
 }
