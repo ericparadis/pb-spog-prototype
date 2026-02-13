@@ -11,6 +11,9 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
+    --sidebar-bg: 0 0% 100%;
+    --sidebar-text: 222.2 84% 4.9%;
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
@@ -42,6 +45,8 @@
     --primary-foreground: 0 0% 100%;
     --accent: 270 100% 23%;  /* #360073 - darker purple */
     --accent-foreground: 0 0% 100%;
+    --sidebar-bg: 228 55.6% 96.5%;  /* #F1F3FB */
+    --sidebar-text: 217.2 21.2% 26.9%;  /* #364153 */
   }
 
   /* Brand: Orange Theory Fitness (orange theme #F26922) */
@@ -50,6 +55,8 @@
     --primary-foreground: 0 0% 100%;
     --accent: 14 100% 45%;  /* #E65100 - darker orange */
     --accent-foreground: 0 0% 100%;
+    --sidebar-bg: 36 55.6% 96.5%;  /* #FBF7F1 */
+    --sidebar-text: 43.4 21.2% 26.9%;  /* #534B36 */
   }
 
   .dark {
