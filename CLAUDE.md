@@ -66,7 +66,9 @@ You are the builder. When the PM describes a feature, you:
 
 ## Figma MCP Integration
 
-The Figma MCP server is configured in this project. When a PM provides a Figma link:
+**Important:** Figma MCP requires Claude Code Desktop. The browser version of Claude Code cannot connect to external MCP servers. PMs authenticate via OAuth — they type `/mcp` in Claude Code, select the figma server, and sign in with their Figma account (one-time setup). If a PM reports that Figma tools are unavailable, confirm they are using Claude Code Desktop and have completed the `/mcp` authentication step.
+
+The Figma MCP server is configured in this project (`.mcp.json`). When a PM provides a Figma link:
 
 1. Use the Figma MCP `get_design_context` tool to pull the design structure
 2. Check `get_code_connect_map` for existing component mappings before creating anything new

@@ -1,11 +1,7 @@
 {
   "mcpServers": {
     "figma": {
-      "type": "http",
-      "url": "https://mcp.figma.com/mcp",
-      "env": {
-        "FIGMA_ACCESS_TOKEN": "figd_lefQde1x0kPBuaLlAjmq5Unck33q2Eany8v-t-qQ"
-      }
+      "url": "https://mcp.figma.com/mcp"
     }
   }
 }

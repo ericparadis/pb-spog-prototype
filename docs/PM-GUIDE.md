@@ -1,6 +1,6 @@
 # Product Manager Guide
 
-How to use Claude Code to build and iterate on the gym franchise prototype.
+How to use Claude Code Desktop to build and iterate on the gym franchise prototype.
 
 ---
 
@@ -9,8 +9,9 @@ How to use Claude Code to build and iterate on the gym franchise prototype.
 This prototype is a working web application for gym franchise management. You interact with it by describing what you want in plain English — Claude Code reads your Figma designs, builds the screens, and saves everything automatically.
 
 **What you need:**
-- Access to Claude Code (browser or desktop)
-- Your Figma design files
+- Claude Code Desktop app (required — the browser version cannot connect to Figma)
+- A Figma account with access to the design files
+- Access to this project's GitHub repository
 - A clear idea of what screen or feature you want to build
 
 **What happens when you make a request:**
@@ -18,6 +19,19 @@ This prototype is a working web application for gym franchise management. You in
 2. Claude builds it using the existing design system and components
 3. Claude saves a checkpoint and tells you what route to visit
 4. You review and request changes, or approve
+
+---
+
+## First-Time Setup
+
+1. Install the Claude Code Desktop app
+2. Open this project in Claude Code Desktop
+3. Type `/mcp` to see the MCP server list
+4. Select **figma** and click **Authenticate**
+5. Sign in with your Figma account when prompted
+6. You should see: "Authentication successful. Connected to figma."
+
+This is a one-time step. After authenticating, Figma access works automatically in future sessions.
 
 ---
 
@@ -103,6 +117,7 @@ It should be visible to Gym Managers and Regional Managers.
 ```
 
 ### What the AI does with your Figma link
+- Connects to Figma via MCP to read the design directly
 - Reads the design structure (layout, spacing, colors)
 - Matches Figma components to existing prototype components
 - Applies brand-appropriate colors (never hard-codes them)
