@@ -13,6 +13,7 @@ This is a multi-tenant SaaS prototype for gym franchise management. Multiple gym
 
 ---
 
+
 ## Session Startup
 
 At the start of every session, read these docs to understand the current state of the prototype:
