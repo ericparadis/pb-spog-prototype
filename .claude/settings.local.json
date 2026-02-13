@@ -27,7 +27,8 @@
       "WebFetch(domain:help.figma.com)",
       "Bash(python3:*)",
       "Bash(code:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(git fetch:*)"
     ]
   }
 }
