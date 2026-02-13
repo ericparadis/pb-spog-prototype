@@ -130,34 +130,31 @@ export function AppLayout({ children }: AppLayoutProps) {
           ))}
         </nav>
 
-        {/* User Info - 93px high from Figma */}
-        <div className="h-[93px] border-t border-border px-6 flex items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium">
-                {user?.name?.charAt(0) || 'U'}
-              </span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-foreground truncate">
-                {user?.name}
-              </div>
-              <div className="text-xs text-muted-foreground truncate">
-                {user?.role}
-              </div>
-            </div>
-          </div>
-        </div>
       </aside>
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         {/* Header - 80px high from Figma */}
-        <header className="h-[80px] border-b border-border bg-card flex items-center px-8">
+        <header className="h-[80px] border-b border-border bg-card flex items-center justify-between px-8">
           <div className="flex-1">
             <h1 className="text-xl font-semibold text-foreground">
               Staff Management
             </h1>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="text-right">
+              <div className="text-sm font-medium text-foreground">
+                {user?.name}
+              </div>
+              <div className="text-xs text-muted-foreground">
+                {user?.role}
+              </div>
+            </div>
+            <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+              <span className="text-sm font-medium">
+                {user?.name?.charAt(0) || 'U'}
+              </span>
+            </div>
           </div>
         </header>
 
