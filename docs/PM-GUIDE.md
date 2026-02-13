@@ -121,9 +121,31 @@ When you're satisfied with a feature, you can "approve" it. This creates a saved
 - The feature is marked as protected
 - You'll be asked to confirm before any future changes to that feature
 
-**To make changes to an approved feature:** Just ask — you'll be prompted to confirm that you want to unlock it.
+**To make changes to an approved feature:** Just ask — you'll be prompted to confirm that you want to unlock it. Make as many changes as you need, then say "approved" again to re-lock it with a new checkpoint.
 
 **To go back to the approved version:** Say "Go back to the approved version of {feature name}."
+
+---
+
+## How File Protection Works
+
+Some areas of the prototype may be protected to keep things stable. At launch, **nothing is locked** — you have full freedom to build and change anything.
+
+Over time, protection gets added in two ways:
+1. **You approve a feature** — it gets locked so no one accidentally changes your finalized work
+2. **The dev team locks shared infrastructure** — things like the core components and theme system get protected once they're stable
+
+### If you hit a protected file
+
+The AI will tell you and offer to temporarily unlock it:
+
+*"That file is in a protected area. I can unlock it, make the change, and re-lock it automatically. Should I go ahead?"*
+
+Just say yes if you want the change, or no to try a different approach.
+
+### Everything is tracked
+
+Every unlock is logged — who did it, when, and why. This keeps everyone on the same page across sessions.
 
 ---
 
@@ -140,21 +162,26 @@ When you're satisfied with a feature, you can "approve" it. This creates a saved
 
 ## What You Can Change vs. What Needs the Dev Team
 
-### You can freely request:
+At launch, you can change anything! As the project matures and some areas get locked, here's the general guide:
+
+### You can always freely request:
 - New feature screens and views
 - Changes to how data is displayed (tables, cards, charts)
 - Adding filters, sorting, search to existing screens
 - Changing text, labels, and descriptions
 - Adding or removing columns from tables
 - New data visualizations using the existing chart library
+- Changes to the navigation structure, layout, or branding
 
-### These need the dev team (just ask and it'll be flagged):
-- Changes to the core navigation structure
-- New color schemes or theme changes
-- Different icon styles or a new icon library
-- Changes to how the brand switcher or role switcher works
-- Adding new data fields to the shared database models
-- Installing new software libraries
+### These always need the dev team:
+- Installing new software libraries or packages
+- Changes to the build system or deployment configuration
+
+### These may need confirmation once locked:
+- Changes to shared components (buttons, cards, tables)
+- Theme and color system changes
+- Shared data model changes
+- Navigation and brand switcher changes
 
 When something needs the dev team, just say: "I need {change} — can you flag it for the dev team?" It will be logged for them.
 
