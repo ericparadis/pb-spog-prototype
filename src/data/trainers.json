@@ -1,0 +1,41 @@
+[
+  {
+    "id": "tr-1",
+    "brandId": "anytime-fitness",
+    "locationIds": ["loc-fz-1", "loc-fz-2"],
+    "firstName": "Alex",
+    "lastName": "Turner",
+    "email": "alex.turner@fitzone.example.com",
+    "phone": "(415) 555-4001",
+    "certifications": ["NASM-CPT", "HIIT Specialist"],
+    "specialties": ["HIIT", "Weight Loss", "Athletic Performance"],
+    "bio": "10+ years of experience helping clients achieve their fitness goals",
+    "rating": 4.8
+  },
+  {
+    "id": "tr-2",
+    "brandId": "orangetheory",
+    "locationIds": ["loc-pl-1"],
+    "firstName": "Marcus",
+    "lastName": "Stone",
+    "email": "marcus.stone@powerlift.example.com",
+    "phone": "(510) 555-4002",
+    "certifications": ["USAPL Coach", "NSCA-CSCS"],
+    "specialties": ["Powerlifting", "Strength Training", "Competition Prep"],
+    "bio": "Former competitive powerlifter with national records",
+    "rating": 4.9
+  },
+  {
+    "id": "tr-3",
+    "brandId": "anytime-fitness",
+    "locationIds": ["loc-zg-1", "loc-zg-2"],
+    "firstName": "Maya",
+    "lastName": "Patel",
+    "email": "maya.patel@zengym.example.com",
+    "phone": "(415) 555-4003",
+    "certifications": ["RYT-500", "Meditation Instructor"],
+    "specialties": ["Yoga", "Meditation", "Mindfulness"],
+    "bio": "Certified yoga instructor passionate about holistic wellness",
+    "rating": 5.0
+  }
+]

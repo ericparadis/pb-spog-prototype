@@ -1,0 +1,38 @@
+[
+  {
+    "id": "eq-1",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "name": "Treadmill #1",
+    "category": "Cardio",
+    "manufacturer": "Life Fitness",
+    "purchaseDate": "2023-05-15",
+    "lastMaintenance": "2026-01-10",
+    "nextMaintenance": "2026-04-10",
+    "status": "operational"
+  },
+  {
+    "id": "eq-2",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-1",
+    "name": "Squat Rack #1",
+    "category": "Strength",
+    "manufacturer": "Rogue Fitness",
+    "purchaseDate": "2024-03-20",
+    "lastMaintenance": "2026-02-01",
+    "nextMaintenance": "2026-05-01",
+    "status": "operational"
+  },
+  {
+    "id": "eq-3",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-1",
+    "name": "Yoga Mat Set",
+    "category": "Studio",
+    "manufacturer": "Manduka",
+    "purchaseDate": "2025-01-10",
+    "lastMaintenance": "2026-02-05",
+    "nextMaintenance": "2026-03-05",
+    "status": "operational"
+  }
+]

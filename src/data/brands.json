@@ -1,0 +1,22 @@
+[
+  {
+    "id": "anytime-fitness",
+    "name": "anytime-fitness",
+    "displayName": "Anytime Fitness",
+    "logo": "/brands/anytime-fitness/af-logo.svg",
+    "primaryColor": "#440099",
+    "accentColor": "#360073",
+    "website": "https://www.anytimefitness.com",
+    "supportEmail": "support@anytimefitness.com"
+  },
+  {
+    "id": "orangetheory",
+    "name": "orangetheory",
+    "displayName": "Orange Theory Fitness",
+    "logo": "/brands/orangetheory/otf-logo.svg",
+    "primaryColor": "#F26922",
+    "accentColor": "#E65100",
+    "website": "https://www.orangetheory.com",
+    "supportEmail": "support@orangetheory.com"
+  }
+]

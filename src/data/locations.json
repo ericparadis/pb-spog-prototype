@@ -1,0 +1,134 @@
+[
+  {
+    "id": "loc-fz-1",
+    "brandId": "anytime-fitness",
+    "name": "FitZone Downtown",
+    "address": "123 Main St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94102",
+    "phone": "(415) 555-0100",
+    "email": "downtown@fitzone.example.com",
+    "managerName": "Sarah Johnson",
+    "capacity": 250,
+    "openingHours": {
+      "monday": { "open": "05:00", "close": "23:00" },
+      "tuesday": { "open": "05:00", "close": "23:00" },
+      "wednesday": { "open": "05:00", "close": "23:00" },
+      "thursday": { "open": "05:00", "close": "23:00" },
+      "friday": { "open": "05:00", "close": "22:00" },
+      "saturday": { "open": "07:00", "close": "20:00" },
+      "sunday": { "open": "08:00", "close": "18:00" }
+    }
+  },
+  {
+    "id": "loc-fz-2",
+    "brandId": "anytime-fitness",
+    "name": "FitZone Mission Bay",
+    "address": "456 Berry St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94158",
+    "phone": "(415) 555-0101",
+    "email": "missionbay@fitzone.example.com",
+    "managerName": "Mike Chen",
+    "capacity": 200,
+    "openingHours": {
+      "monday": { "open": "06:00", "close": "22:00" },
+      "tuesday": { "open": "06:00", "close": "22:00" },
+      "wednesday": { "open": "06:00", "close": "22:00" },
+      "thursday": { "open": "06:00", "close": "22:00" },
+      "friday": { "open": "06:00", "close": "21:00" },
+      "saturday": { "open": "08:00", "close": "18:00" },
+      "sunday": { "open": "08:00", "close": "17:00" }
+    }
+  },
+  {
+    "id": "loc-pl-1",
+    "brandId": "orangetheory",
+    "name": "PowerLift Central",
+    "address": "789 Market St",
+    "city": "Oakland",
+    "state": "CA",
+    "zip": "94607",
+    "phone": "(510) 555-0200",
+    "email": "central@powerlift.example.com",
+    "managerName": "David Martinez",
+    "capacity": 180,
+    "openingHours": {
+      "monday": { "open": "05:00", "close": "23:00" },
+      "tuesday": { "open": "05:00", "close": "23:00" },
+      "wednesday": { "open": "05:00", "close": "23:00" },
+      "thursday": { "open": "05:00", "close": "23:00" },
+      "friday": { "open": "05:00", "close": "22:00" },
+      "saturday": { "open": "07:00", "close": "20:00" },
+      "sunday": { "open": "08:00", "close": "19:00" }
+    }
+  },
+  {
+    "id": "loc-pl-2",
+    "brandId": "orangetheory",
+    "name": "PowerLift North",
+    "address": "321 Telegraph Ave",
+    "city": "Berkeley",
+    "state": "CA",
+    "zip": "94704",
+    "phone": "(510) 555-0201",
+    "email": "north@powerlift.example.com",
+    "managerName": "Jessica Lee",
+    "capacity": 150,
+    "openingHours": {
+      "monday": { "open": "06:00", "close": "22:00" },
+      "tuesday": { "open": "06:00", "close": "22:00" },
+      "wednesday": { "open": "06:00", "close": "22:00" },
+      "thursday": { "open": "06:00", "close": "22:00" },
+      "friday": { "open": "06:00", "close": "21:00" },
+      "saturday": { "open": "08:00", "close": "19:00" },
+      "sunday": { "open": "09:00", "close": "17:00" }
+    }
+  },
+  {
+    "id": "loc-zg-1",
+    "brandId": "anytime-fitness",
+    "name": "ZenGym Marina",
+    "address": "555 Chestnut St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94123",
+    "phone": "(415) 555-0300",
+    "email": "marina@zengym.example.com",
+    "managerName": "Emma Wilson",
+    "capacity": 160,
+    "openingHours": {
+      "monday": { "open": "06:00", "close": "21:00" },
+      "tuesday": { "open": "06:00", "close": "21:00" },
+      "wednesday": { "open": "06:00", "close": "21:00" },
+      "thursday": { "open": "06:00", "close": "21:00" },
+      "friday": { "open": "06:00", "close": "20:00" },
+      "saturday": { "open": "08:00", "close": "18:00" },
+      "sunday": { "open": "09:00", "close": "17:00" }
+    }
+  },
+  {
+    "id": "loc-zg-2",
+    "brandId": "anytime-fitness",
+    "name": "ZenGym Sunset",
+    "address": "888 Irving St",
+    "city": "San Francisco",
+    "state": "CA",
+    "zip": "94122",
+    "phone": "(415) 555-0301",
+    "email": "sunset@zengym.example.com",
+    "managerName": "Alex Rodriguez",
+    "capacity": 140,
+    "openingHours": {
+      "monday": { "open": "07:00", "close": "21:00" },
+      "tuesday": { "open": "07:00", "close": "21:00" },
+      "wednesday": { "open": "07:00", "close": "21:00" },
+      "thursday": { "open": "07:00", "close": "21:00" },
+      "friday": { "open": "07:00", "close": "20:00" },
+      "saturday": { "open": "08:00", "close": "18:00" },
+      "sunday": { "open": "09:00", "close": "16:00" }
+    }
+  }
+]

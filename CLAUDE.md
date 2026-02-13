@@ -13,6 +13,20 @@ This is a multi-tenant SaaS prototype for gym franchise management. Multiple gym
 
 ---
 
+## Session Startup
+
+At the start of every session, read these docs to understand the current state of the prototype:
+
+- `/docs/PM-GUIDE.md` — How PMs interact with this prototype (prompt templates, workflows)
+- `/docs/design-system/README.md` — Established design patterns, brand themes, and layout specs
+- `/docs/design-system/components.md` — Available component catalog with usage examples
+- `/docs/specs/` — Scan all files for existing feature specs to understand what's been built
+- `CHANGELOG.md` — Review recent entries for the latest changes
+
+After building or updating any feature, always create or update a spec in `/docs/specs/[feature-name].md` using the template at `/docs/specs/TEMPLATE.md`. This ensures continuity across sessions and PMs.
+
+---
+
 ## Your Role
 
 You are the builder. When the PM describes a feature, you:

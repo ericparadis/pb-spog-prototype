@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cls-1",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "name": "Morning HIIT",
+    "description": "High-intensity interval training to start your day",
+    "instructorId": "tr-1",
+    "startTime": "2026-02-13T06:00:00",
+    "endTime": "2026-02-13T07:00:00",
+    "capacity": 20,
+    "enrolled": 18,
+    "waitlist": 2,
+    "category": "hiit"
+  },
+  {
+    "id": "cls-2",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-1",
+    "name": "PowerLifting Fundamentals",
+    "description": "Learn proper powerlifting technique",
+    "instructorId": "tr-2",
+    "startTime": "2026-02-13T18:00:00",
+    "endTime": "2026-02-13T19:30:00",
+    "capacity": 15,
+    "enrolled": 12,
+    "waitlist": 0,
+    "category": "strength"
+  },
+  {
+    "id": "cls-3",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-1",
+    "name": "Sunrise Yoga",
+    "description": "Gentle yoga flow to energize your morning",
+    "instructorId": "tr-3",
+    "startTime": "2026-02-13T07:00:00",
+    "endTime": "2026-02-13T08:00:00",
+    "capacity": 25,
+    "enrolled": 22,
+    "waitlist": 0,
+    "category": "yoga"
+  }
+]
