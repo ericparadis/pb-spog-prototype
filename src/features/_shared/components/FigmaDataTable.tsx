@@ -1,4 +1,4 @@
-import type { ColumnDef, SortingState } from '@tanstack/react-table'
+import type { ColumnDef, SortingState, RowSelectionState } from '@tanstack/react-table'
 import {
   flexRender,
   getCoreRowModel,
@@ -20,14 +20,17 @@ interface FigmaDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   className?: string
+  enableRowSelection?: boolean
 }
 
 export function FigmaDataTable<TData, TValue>({
   columns,
   data,
   className,
+  enableRowSelection = false,
 }: FigmaDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const table = useReactTable({
     data,
@@ -35,7 +38,9 @@ export function FigmaDataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
-    state: { sorting },
+    onRowSelectionChange: setRowSelection,
+    enableRowSelection,
+    state: { sorting, rowSelection },
   })
 
   return (

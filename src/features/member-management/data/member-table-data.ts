@@ -20,26 +20,62 @@ function generateWeekData(seed: number, weekOffset: number): WeekData {
   return { value, trend }
 }
 
-function generateAlert(seed: number, joinDate: string): MemberAlert | undefined {
-  const alertTypes: { type: string; label: string }[] = [
+function generateAlerts(seed: number, joinDate: string): MemberAlert[] {
+  const allAlerts: MemberAlert[] = [
     { type: 'new-join', label: 'New Join' },
     { type: 'no-hrm', label: 'No HRM' },
     { type: 'low-utilization', label: 'Low Utilization' },
-    { type: 'milestone', label: 'Milestone: 100' },
-    { type: 'anniversary', label: 'Anniversary' },
+    { type: 'at-risk', label: 'At Risk' },
+    { type: 'milestone', label: 'Milestone: 100 Classes!' },
+    { type: 'anniversary', label: 'Anniversary Today!' },
     { type: 'freeze', label: 'Freeze Scheduled' },
   ]
+
+  const alerts: MemberAlert[] = []
 
   // Recent join dates get "New Join"
   const joinYear = new Date(joinDate).getFullYear()
   if (joinYear >= 2026) {
-    return alertTypes[0]
+    alerts.push(allAlerts[0])
   }
 
-  const index = seed % alertTypes.length
-  // Not every member has an alert
-  if (seed % 3 === 0) return undefined
-  return alertTypes[index]
+  // Deterministically assign 0-1 additional alerts based on seed
+  const primaryIndex = seed % allAlerts.length
+  if (seed % 3 !== 0) {
+    const alert = allAlerts[primaryIndex]
+    // Avoid duplicating new-join
+    if (!alerts.some((a) => a.type === alert.type)) {
+      alerts.push(alert)
+    }
+  }
+
+  // Some members get a second alert
+  if (seed % 4 === 0) {
+    const secondaryIndex = (seed + 3) % allAlerts.length
+    const alert = allAlerts[secondaryIndex]
+    if (!alerts.some((a) => a.type === alert.type)) {
+      alerts.push(alert)
+    }
+  }
+
+  return alerts
+}
+
+const coachNames = [
+  'Hannah Lee',
+  'Frank Green',
+  'Alice Johnson',
+  'Bob Brown',
+  'Eve White',
+  'Charlie Davis',
+  'Grace Black',
+  'Jane Smith',
+  'David Wilson',
+  'Sarah Miller',
+]
+
+function generateCoach(seed: number): string {
+  return coachNames[seed % coachNames.length]
 }
 
 function formatDate(dateStr: string): string {
@@ -85,7 +121,8 @@ export function getMemberTableData(brandId: string): MemberTableRow[] {
         week4: generateWeekData(seed, 4),
         classes: ((seed % 200) + 5),
         lastVisit: generateLastVisit(seed),
-        alert: generateAlert(seed, member.joinDate),
+        alerts: generateAlerts(seed, member.joinDate),
+        coach: generateCoach(seed),
       }
     })
 }

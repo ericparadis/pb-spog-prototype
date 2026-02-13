@@ -21,5 +21,6 @@ export interface MemberTableRow {
   week4: WeekData
   classes: number
   lastVisit: string
-  alert?: MemberAlert
+  alerts: MemberAlert[]
+  coach?: string
 }
