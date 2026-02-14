@@ -9,7 +9,7 @@ interface MemberToolbarProps {
 
 export function MemberToolbar({ searchValue, onSearchChange }: MemberToolbarProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 mb-4">
       <div className="relative w-[240px]">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
