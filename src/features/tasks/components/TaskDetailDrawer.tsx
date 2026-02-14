@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { X, ChevronDown, ChevronRight, Mail, Phone, MessageSquare, Bell } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -80,9 +80,29 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
   const [selectedChannel, setSelectedChannel] = useState<CommunicationType>('email')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
+  const [isAnimating, setIsAnimating] = useState(false)
+  const drawerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    requestAnimationFrame(() => setIsAnimating(true))
+    document.body.style.overflow = 'hidden'
+    function handleEscape(e: KeyboardEvent) {
+      if (e.key === 'Escape') handleClose()
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  function handleClose() {
+    setIsAnimating(false)
+    setTimeout(onClose, 300)
+  }
 
   const script = sampleScripts[selectedChannel]
-  const memberName = task.relatedMember ?? 'N/A'
+  const memberName = task.relatedMember
   const staffName = task.assignedTo
 
   function fillSampleCopy() {
@@ -98,15 +118,18 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
   return (
     <>
       <div
-        className="fixed inset-0 z-40 bg-black/40"
-        onClick={onClose}
+        className={`fixed inset-0 z-40 transition-opacity duration-300 ${isAnimating ? 'bg-black/40' : 'bg-black/0'}`}
+        onClick={handleClose}
       />
-      <div className="fixed right-0 top-0 z-50 h-full w-[800px] max-w-full bg-background border-l shadow-xl flex flex-col overflow-hidden">
+      <div
+        ref={drawerRef}
+        className={`fixed right-0 top-0 z-50 h-full w-[1000px] max-w-full bg-background border-l shadow-xl flex flex-col overflow-hidden transition-transform duration-300 ease-out ${isAnimating ? 'translate-x-0' : 'translate-x-full'}`}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <h2 className="text-lg font-semibold">Task Details</h2>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="rounded-sm opacity-70 hover:opacity-100 transition-opacity"
           >
             <X className="h-5 w-5" />
@@ -116,37 +139,33 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
           {/* Profile Card */}
-          {task.relatedMember && (
-            <div className="px-6 py-5 border-b bg-muted/30">
-              <div className="flex items-start gap-4">
-                <Avatar className="h-14 w-14">
-                  <AvatarFallback className="text-base bg-primary/10 text-primary">
-                    {getInitials(task.relatedMember)}
-                  </AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-base font-semibold text-foreground">{task.relatedMember}</h3>
-                    {task.relatedMemberType && (
-                      <Badge variant="outline" className={`text-xs capitalize ${
-                        task.relatedMemberType === 'lead'
-                          ? 'bg-amber-50 text-amber-700 border-amber-200'
-                          : 'bg-blue-50 text-blue-700 border-blue-200'
-                      }`}>
-                        {task.relatedMemberType}
-                      </Badge>
-                    )}
-                  </div>
-                  {task.relatedMemberEmail && (
-                    <p className="text-sm text-muted-foreground mt-0.5">{task.relatedMemberEmail}</p>
-                  )}
-                  {task.relatedMemberPhone && (
-                    <p className="text-sm text-muted-foreground">{task.relatedMemberPhone}</p>
-                  )}
+          <div className="px-6 py-5 border-b bg-muted/30">
+            <div className="flex items-start gap-4">
+              <Avatar className="h-14 w-14">
+                <AvatarFallback className="text-base bg-primary/10 text-primary">
+                  {getInitials(task.relatedMember)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-base font-semibold text-foreground">{task.relatedMember}</h3>
+                  <Badge variant="outline" className={`text-xs capitalize ${
+                    task.relatedMemberType === 'lead'
+                      ? 'bg-amber-50 text-amber-700 border-amber-200'
+                      : 'bg-blue-50 text-blue-700 border-blue-200'
+                  }`}>
+                    {task.relatedMemberType}
+                  </Badge>
                 </div>
+                {task.relatedMemberEmail && (
+                  <p className="text-sm text-muted-foreground mt-0.5">{task.relatedMemberEmail}</p>
+                )}
+                {task.relatedMemberPhone && (
+                  <p className="text-sm text-muted-foreground">{task.relatedMemberPhone}</p>
+                )}
               </div>
             </div>
-          )}
+          </div>
 
           {/* Task Details */}
           <div className="px-6 py-5 border-b">

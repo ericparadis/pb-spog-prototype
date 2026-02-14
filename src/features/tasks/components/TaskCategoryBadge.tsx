@@ -6,10 +6,6 @@ const categoryConfig: Record<TaskCategory, { label: string; className: string }>
     label: 'Follow-up',
     className: 'text-purple-700 bg-purple-50 border-purple-200',
   },
-  maintenance: {
-    label: 'Maintenance',
-    className: 'text-orange-700 bg-orange-50 border-orange-200',
-  },
   administrative: {
     label: 'Administrative',
     className: 'text-slate-700 bg-slate-50 border-slate-200',

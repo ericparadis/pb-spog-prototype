@@ -1,20 +1,12 @@
 import { cn } from '@/lib/utils'
-import { ChevronDown } from 'lucide-react'
 import type { LeadPriority } from '../types'
 
-const priorityConfig: Record<LeadPriority, { label: string; className: string }> = {
-  high: {
-    label: 'High',
-    className: 'text-red-600',
-  },
-  medium: {
-    label: 'Medium',
-    className: 'text-amber-600',
-  },
-  low: {
-    label: 'Low',
-    className: 'text-gray-500',
-  },
+const priorityConfig: Record<LeadPriority, { className: string }> = {
+  1: { className: 'text-red-700 bg-red-50 border-red-200' },
+  2: { className: 'text-orange-700 bg-orange-50 border-orange-200' },
+  3: { className: 'text-amber-700 bg-amber-50 border-amber-200' },
+  4: { className: 'text-blue-700 bg-blue-50 border-blue-200' },
+  5: { className: 'text-gray-600 bg-gray-100 border-gray-200' },
 }
 
 interface LeadPriorityBadgeProps {
@@ -26,12 +18,11 @@ export function LeadPriorityBadge({ priority }: LeadPriorityBadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 text-sm font-medium',
+        'inline-flex items-center justify-center h-6 w-6 rounded-full text-xs font-bold border',
         config.className
       )}
     >
-      {config.label}
-      <ChevronDown className="h-3 w-3" />
+      {priority}
     </span>
   )
 }

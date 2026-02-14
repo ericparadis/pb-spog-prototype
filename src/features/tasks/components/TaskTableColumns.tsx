@@ -46,9 +46,6 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
     ),
     cell: ({ row }) => {
       const name = row.original.relatedMember
-      if (!name) {
-        return <span className="text-sm text-muted-foreground">—</span>
-      }
       return (
         <div className="flex items-center gap-3">
           <Avatar className="h-9 w-9">
@@ -60,6 +57,15 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
         </div>
       )
     },
+  },
+  {
+    accessorKey: 'priority',
+    header: ({ column }) => (
+      <SortableHeader column={column} label="Priority" />
+    ),
+    cell: ({ row }) => (
+      <TaskPriorityBadge priority={row.original.priority} />
+    ),
   },
   {
     accessorKey: 'title',
@@ -84,15 +90,6 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
     header: 'Status',
     cell: ({ row }) => (
       <TaskStatusBadge status={row.original.status} />
-    ),
-  },
-  {
-    accessorKey: 'priority',
-    header: ({ column }) => (
-      <SortableHeader column={column} label="Priority" />
-    ),
-    cell: ({ row }) => (
-      <TaskPriorityBadge priority={row.original.priority} />
     ),
   },
   {

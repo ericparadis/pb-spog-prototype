@@ -1,8 +1,17 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { LeadTableRow } from '../types'
 import { SortableHeader } from '@/features/_shared/components/cell-renderers'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { LeadStatusBadge } from './LeadStatusBadge'
 import { LeadPriorityBadge } from './LeadPriorityBadge'
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+}
 
 export const leadColumns: ColumnDef<LeadTableRow>[] = [
   {
@@ -17,33 +26,36 @@ export const leadColumns: ColumnDef<LeadTableRow>[] = [
       />
     ),
     cell: ({ row }) => (
-      <input
-        type="checkbox"
-        checked={row.getIsSelected()}
-        onChange={row.getToggleSelectedHandler()}
-        className="h-4 w-4 rounded border-gray-300"
-        aria-label="Select row"
-      />
+      <div onClick={(e) => e.stopPropagation()}>
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={row.getToggleSelectedHandler()}
+          className="h-4 w-4 rounded border-gray-300"
+          aria-label="Select row"
+        />
+      </div>
     ),
     enableSorting: false,
   },
   {
     accessorKey: 'name',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Lead Name" />
+      <SortableHeader column={column} label="Lead" />
     ),
-    cell: ({ row }) => (
-      <span className="text-sm font-medium text-foreground">
-        {row.original.name}
-      </span>
-    ),
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => (
-      <LeadStatusBadge status={row.original.status} />
-    ),
+    cell: ({ row }) => {
+      const name = row.original.name
+      return (
+        <div className="flex items-center gap-3">
+          <Avatar className="h-9 w-9">
+            <AvatarFallback className="text-xs bg-primary/10 text-primary">
+              {getInitials(name)}
+            </AvatarFallback>
+          </Avatar>
+          <span className="text-sm font-medium text-foreground">{name}</span>
+        </div>
+      )
+    },
   },
   {
     accessorKey: 'priority',
@@ -52,6 +64,13 @@ export const leadColumns: ColumnDef<LeadTableRow>[] = [
     ),
     cell: ({ row }) => (
       <LeadPriorityBadge priority={row.original.priority} />
+    ),
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => (
+      <LeadStatusBadge status={row.original.status} />
     ),
   },
   {

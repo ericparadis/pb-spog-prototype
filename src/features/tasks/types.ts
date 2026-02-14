@@ -1,10 +1,9 @@
 export type TaskStatus = 'open' | 'in-progress' | 'completed' | 'overdue'
 
-export type TaskPriority = 'high' | 'medium' | 'low'
+export type TaskPriority = 1 | 2 | 3 | 4 | 5
 
 export type TaskCategory =
   | 'follow-up'
-  | 'maintenance'
   | 'administrative'
   | 'billing'
   | 'onboarding'
@@ -35,9 +34,9 @@ export interface TaskTableRow {
   status: TaskStatus
   priority: TaskPriority
   assignedTo: string
-  relatedMember: string | null
-  relatedMemberType: 'lead' | 'member' | null
-  relatedMemberId: string | null
+  relatedMember: string
+  relatedMemberType: 'lead' | 'member'
+  relatedMemberId: string
   relatedMemberEmail: string | null
   relatedMemberPhone: string | null
   dueDate: string
