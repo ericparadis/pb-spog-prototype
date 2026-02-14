@@ -10,9 +10,12 @@ export type TaskCategory =
   | 'onboarding'
   | 'training'
 
+export type TaskType = 'lead-followup' | 'member-followup' | 'revenue'
+
 export interface TaskTableRow {
   id: string
   title: string
+  type: TaskType
   category: TaskCategory
   status: TaskStatus
   priority: TaskPriority
