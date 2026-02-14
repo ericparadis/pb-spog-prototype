@@ -1,6 +1,6 @@
 import membersJson from '@/data/members.json'
 import membershipsJson from '@/data/memberships.json'
-import type { MemberTableRow, WeekData, MemberAlert } from '../types'
+import type { MemberTableRow } from '../types'
 
 // Simple deterministic hash from member ID for stable mock data
 function hashCode(str: string): number {
@@ -12,86 +12,24 @@ function hashCode(str: string): number {
   return Math.abs(hash)
 }
 
-function generateWeekData(seed: number, weekOffset: number): WeekData {
-  const value = ((seed + weekOffset * 7) % 5) + 1
-  const trendSeed = (seed + weekOffset) % 3
-  const trend: WeekData['trend'] =
-    trendSeed === 0 ? 'up' : trendSeed === 1 ? 'down' : undefined
-  return { value, trend }
+const memberTypes = ['Member', 'Pay Per Visit', 'Trial', 'Staff']
+
+function generateMemberType(seed: number): string {
+  return memberTypes[seed % memberTypes.length]
 }
 
-function generateAlerts(seed: number, joinDate: string): MemberAlert[] {
-  const allAlerts: MemberAlert[] = [
-    { type: 'new-join', label: 'New Join' },
-    { type: 'no-hrm', label: 'No HRM' },
-    { type: 'low-utilization', label: 'Low Utilization' },
-    { type: 'at-risk', label: 'At Risk' },
-    { type: 'milestone', label: 'Milestone: 100 Classes!' },
-    { type: 'anniversary', label: 'Anniversary Today!' },
-    { type: 'freeze', label: 'Freeze Scheduled' },
-  ]
-
-  const alerts: MemberAlert[] = []
-
-  // Recent join dates get "New Join"
-  const joinYear = new Date(joinDate).getFullYear()
-  if (joinYear >= 2026) {
-    alerts.push(allAlerts[0])
+function generateRelativeLastVisit(seed: number): string {
+  const minutesAgo = seed % 4320 // up to 3 days in minutes
+  if (minutesAgo < 60) {
+    const mins = Math.max(minutesAgo, 1)
+    return `${mins} min ago`
   }
-
-  // Deterministically assign 0-1 additional alerts based on seed
-  const primaryIndex = seed % allAlerts.length
-  if (seed % 3 !== 0) {
-    const alert = allAlerts[primaryIndex]
-    // Avoid duplicating new-join
-    if (!alerts.some((a) => a.type === alert.type)) {
-      alerts.push(alert)
-    }
+  if (minutesAgo < 1440) {
+    const hours = Math.floor(minutesAgo / 60)
+    return hours === 1 ? '1 hour ago' : `${hours} hours ago`
   }
-
-  // Some members get a second alert
-  if (seed % 4 === 0) {
-    const secondaryIndex = (seed + 3) % allAlerts.length
-    const alert = allAlerts[secondaryIndex]
-    if (!alerts.some((a) => a.type === alert.type)) {
-      alerts.push(alert)
-    }
-  }
-
-  return alerts
-}
-
-const coachNames = [
-  'Hannah Lee',
-  'Frank Green',
-  'Alice Johnson',
-  'Bob Brown',
-  'Eve White',
-  'Charlie Davis',
-  'Grace Black',
-  'Jane Smith',
-  'David Wilson',
-  'Sarah Miller',
-]
-
-function generateCoach(seed: number): string {
-  return coachNames[seed % coachNames.length]
-}
-
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
-
-function generateLastVisit(seed: number): string {
-  const daysAgo = seed % 30
-  const date = new Date()
-  date.setDate(date.getDate() - daysAgo)
-  return formatDate(date.toISOString())
+  const days = Math.floor(minutesAgo / 1440)
+  return days === 1 ? '1 day ago' : `${days} days ago`
 }
 
 const membershipMap = new Map(
@@ -103,26 +41,26 @@ export function getMemberTableData(brandId: string): MemberTableRow[] {
     .filter((m) => m.brandId === brandId)
     .map((member) => {
       const seed = hashCode(member.id)
-      const membershipName = membershipMap.get(member.membershipId) || 'Basic'
-      // Extract the tier keyword (e.g., "Premium Zen" -> "Premium", "Elite Lifter" -> "Elite")
-      const tier =
-        membershipName.split(' ')[0].charAt(0).toUpperCase() +
-        membershipName.split(' ')[0].slice(1)
+      const membershipName = membershipMap.get(member.membershipId) || 'Base'
+
+      // Determine a short membership label (e.g. "Base", "Coaching", "Premium")
+      const nameLower = membershipName.toLowerCase()
+      let shortMembership = 'Base'
+      if (nameLower.includes('premium') || nameLower.includes('elite')) {
+        shortMembership = 'Coaching'
+      } else if (nameLower.includes('wellness')) {
+        shortMembership = 'Base'
+      }
 
       return {
         id: member.id,
         name: `${member.firstName} ${member.lastName}`,
-        memberId: member.id.toUpperCase().replace('MEM-', 'M0'),
-        membershipTier: tier,
-        joinDate: formatDate(member.joinDate),
-        week1: generateWeekData(seed, 1),
-        week2: generateWeekData(seed, 2),
-        week3: generateWeekData(seed, 3),
-        week4: generateWeekData(seed, 4),
-        classes: ((seed % 200) + 5),
-        lastVisit: generateLastVisit(seed),
-        alerts: generateAlerts(seed, member.joinDate),
-        coach: generateCoach(seed),
+        email: member.email,
+        phone: member.phone,
+        memberType: generateMemberType(seed),
+        membershipName: shortMembership,
+        agreementStatus: member.membershipStatus === 'active' ? 'Active' : 'Expired',
+        lastVisit: generateRelativeLastVisit(seed),
       }
     })
 }

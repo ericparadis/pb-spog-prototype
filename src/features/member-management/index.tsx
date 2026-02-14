@@ -18,9 +18,9 @@ export default function MemberManagement() {
     return allData.filter(
       (row) =>
         row.name.toLowerCase().includes(term) ||
-        row.memberId.toLowerCase().includes(term) ||
-        row.membershipTier.toLowerCase().includes(term) ||
-        (row.coach && row.coach.toLowerCase().includes(term))
+        row.email.toLowerCase().includes(term) ||
+        row.memberType.toLowerCase().includes(term) ||
+        row.membershipName.toLowerCase().includes(term)
     )
   }, [allData, search])
 
@@ -28,9 +28,8 @@ export default function MemberManagement() {
     <PageContent>
       <PageHeader
         title="Members"
-        description="Manage gym members and memberships"
+        actions={<MemberToolbar searchValue={search} onSearchChange={setSearch} />}
       />
-      <MemberToolbar searchValue={search} onSearchChange={setSearch} />
       <FigmaDataTable
         columns={memberColumns}
         data={filteredData}
