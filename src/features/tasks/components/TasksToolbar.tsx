@@ -5,12 +5,13 @@ import { Search, SlidersHorizontal, Download } from 'lucide-react'
 interface TasksToolbarProps {
   searchValue: string
   onSearchChange: (value: string) => void
+  onFiltersClick: () => void
 }
 
-export function TasksToolbar({ searchValue, onSearchChange }: TasksToolbarProps) {
+export function TasksToolbar({ searchValue, onSearchChange, onFiltersClick }: TasksToolbarProps) {
   return (
-    <div className="flex items-center gap-3 mb-4">
-      <Button variant="outline" size="sm" className="rounded-full">
+    <div className="flex items-center gap-3">
+      <Button variant="outline" size="sm" className="rounded-full" onClick={onFiltersClick}>
         <SlidersHorizontal className="h-4 w-4 mr-1.5" />
         Filters
       </Button>
@@ -18,7 +19,7 @@ export function TasksToolbar({ searchValue, onSearchChange }: TasksToolbarProps)
         <Download className="h-4 w-4 mr-1.5" />
         Export
       </Button>
-      <div className="relative ml-auto w-[240px]">
+      <div className="relative w-[240px]">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder="Search tasks..."

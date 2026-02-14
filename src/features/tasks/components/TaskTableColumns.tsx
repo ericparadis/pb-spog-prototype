@@ -1,9 +1,18 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { TaskTableRow } from '../types'
 import { SortableHeader } from '@/features/_shared/components/cell-renderers'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { TaskStatusBadge } from './TaskStatusBadge'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
 import { TaskCategoryBadge } from './TaskCategoryBadge'
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+}
 
 export const taskColumns: ColumnDef<TaskTableRow>[] = [
   {
@@ -18,15 +27,39 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
       />
     ),
     cell: ({ row }) => (
-      <input
-        type="checkbox"
-        checked={row.getIsSelected()}
-        onChange={row.getToggleSelectedHandler()}
-        className="h-4 w-4 rounded border-gray-300"
-        aria-label="Select row"
-      />
+      <div onClick={(e) => e.stopPropagation()}>
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={row.getToggleSelectedHandler()}
+          className="h-4 w-4 rounded border-gray-300"
+          aria-label="Select row"
+        />
+      </div>
     ),
     enableSorting: false,
+  },
+  {
+    accessorKey: 'relatedMember',
+    header: ({ column }) => (
+      <SortableHeader column={column} label="Lead/Member" />
+    ),
+    cell: ({ row }) => {
+      const name = row.original.relatedMember
+      if (!name) {
+        return <span className="text-sm text-muted-foreground">—</span>
+      }
+      return (
+        <div className="flex items-center gap-3">
+          <Avatar className="h-9 w-9">
+            <AvatarFallback className="text-xs bg-primary/10 text-primary">
+              {getInitials(name)}
+            </AvatarFallback>
+          </Avatar>
+          <span className="text-sm font-medium text-foreground">{name}</span>
+        </div>
+      )
+    },
   },
   {
     accessorKey: 'title',
@@ -68,15 +101,6 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
     cell: ({ row }) => (
       <span className="text-sm text-foreground">
         {row.original.assignedTo}
-      </span>
-    ),
-  },
-  {
-    accessorKey: 'relatedMember',
-    header: 'Related Member',
-    cell: ({ row }) => (
-      <span className={`text-sm ${row.original.relatedMember ? 'text-foreground' : 'text-muted-foreground'}`}>
-        {row.original.relatedMember ?? '—'}
       </span>
     ),
   },

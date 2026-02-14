@@ -6,7 +6,10 @@ import { PillFilter } from '@/features/_shared/components/PillFilter'
 import { taskColumns } from './components/TaskTableColumns'
 import { getTaskTableData } from './data/task-table-data'
 import { TasksToolbar } from './components/TasksToolbar'
-import type { TaskType } from './types'
+import { TaskDetailDrawer } from './components/TaskDetailDrawer'
+import { TaskFilterPanel } from './components/TaskFilterPanel'
+import type { TaskFilters } from './components/TaskFilterPanel'
+import type { TaskType, TaskTableRow } from './types'
 
 type TaskFilterValue = 'all' | TaskType
 
@@ -21,12 +24,36 @@ export default function Tasks() {
   const allData = getTaskTableData()
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState<TaskFilterValue>('all')
+  const [selectedTask, setSelectedTask] = useState<TaskTableRow | null>(null)
+  const [showFilters, setShowFilters] = useState(false)
+  const [filters, setFilters] = useState<TaskFilters>({
+    status: 'all',
+    type: 'all',
+    assignedTo: 'all',
+  })
+
+  const staffNames = useMemo(() => {
+    const names = new Set(allData.map((row) => row.assignedTo))
+    return Array.from(names).sort()
+  }, [allData])
 
   const filteredData = useMemo(() => {
     let data = allData
 
     if (typeFilter !== 'all') {
       data = data.filter((row) => row.type === typeFilter)
+    }
+
+    if (filters.status !== 'all') {
+      data = data.filter((row) => row.status === filters.status)
+    }
+
+    if (filters.type !== 'all') {
+      data = data.filter((row) => row.type === filters.type)
+    }
+
+    if (filters.assignedTo !== 'all') {
+      data = data.filter((row) => row.assignedTo === filters.assignedTo)
     }
 
     if (search.trim()) {
@@ -42,26 +69,52 @@ export default function Tasks() {
     }
 
     return data
-  }, [allData, search, typeFilter])
+  }, [allData, search, typeFilter, filters])
+
+  function handleComplete(taskId: string) {
+    setSelectedTask(null)
+    // In a real app this would update the task status via API
+    console.log(`Task ${taskId} marked as complete`)
+  }
 
   return (
     <PageContent>
       <PageHeader
         title="Tasks"
       />
-      <PillFilter
-        options={taskFilterOptions}
-        value={typeFilter}
-        onChange={setTypeFilter}
-      />
-      <div className="mt-4">
-        <TasksToolbar searchValue={search} onSearchChange={setSearch} />
+      <div className="flex items-center justify-between mb-4">
+        <PillFilter
+          options={taskFilterOptions}
+          value={typeFilter}
+          onChange={setTypeFilter}
+        />
+        <TasksToolbar
+          searchValue={search}
+          onSearchChange={setSearch}
+          onFiltersClick={() => setShowFilters(!showFilters)}
+        />
       </div>
+      {showFilters && (
+        <TaskFilterPanel
+          filters={filters}
+          onChange={setFilters}
+          onClose={() => setShowFilters(false)}
+          staffNames={staffNames}
+        />
+      )}
       <FigmaDataTable
         columns={taskColumns}
         data={filteredData}
         enableRowSelection
+        onRowClick={(row) => setSelectedTask(row)}
       />
+      {selectedTask && (
+        <TaskDetailDrawer
+          task={selectedTask}
+          onClose={() => setSelectedTask(null)}
+          onComplete={handleComplete}
+        />
+      )}
     </PageContent>
   )
 }
