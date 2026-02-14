@@ -1,111 +1,45 @@
-import type { TaskTableRow, TaskStatus, TaskPriority, TaskCategory, TaskType } from '../types'
+import type { TaskTableRow } from '../types'
+import tasksJson from '@/data/tasks.json'
+import leadsJson from '@/data/leads.json'
+import membersJson from '@/data/members.json'
 
-const statuses: TaskStatus[] = ['open', 'in-progress', 'completed', 'overdue']
-const priorities: TaskPriority[] = ['high', 'medium', 'low']
-const categories: TaskCategory[] = [
-  'follow-up',
-  'maintenance',
-  'administrative',
-  'billing',
-  'onboarding',
-  'training',
-]
+function getContactInfo(relatedMemberId: string | null, relatedMemberType: string | null): { email: string | null; phone: string | null } {
+  if (!relatedMemberId || !relatedMemberType) return { email: null, phone: null }
 
-const staffNames = [
-  'Michael Torres',
-  'Sarah Mitchell',
-  'David Chen',
-  'Jessica Park',
-  'Ryan Cooper',
-  'Alex Turner',
-  'Maya Patel',
-]
-
-const memberNames = [
-  'John Doe',
-  'Emily Smith',
-  'Carlos Rivera',
-  'Amanda Foster',
-  'Brian Mitchell',
-  'Diana Chang',
-  null,
-  null,
-]
-
-const taskTemplates: { title: string; category: TaskCategory; type: TaskType }[] = [
-  { title: 'Follow up with new member signup', category: 'follow-up', type: 'lead-followup' },
-  { title: 'Process membership renewal', category: 'billing', type: 'revenue' },
-  { title: 'Schedule equipment maintenance - treadmills', category: 'maintenance', type: 'member-followup' },
-  { title: 'Complete new hire orientation', category: 'onboarding', type: 'member-followup' },
-  { title: 'Review overdue member payments', category: 'billing', type: 'revenue' },
-  { title: 'Update class schedule for next month', category: 'administrative', type: 'member-followup' },
-  { title: 'Conduct staff CPR recertification', category: 'training', type: 'member-followup' },
-  { title: 'Follow up on cancelled membership', category: 'follow-up', type: 'member-followup' },
-  { title: 'Inspect and replace gym floor mats', category: 'maintenance', type: 'member-followup' },
-  { title: 'Send welcome email to trial members', category: 'onboarding', type: 'lead-followup' },
-  { title: 'Resolve billing dispute', category: 'billing', type: 'revenue' },
-  { title: 'Prepare monthly attendance report', category: 'administrative', type: 'member-followup' },
-  { title: 'Schedule personal training intro session', category: 'follow-up', type: 'lead-followup' },
-  { title: 'Order replacement cables for cable machine', category: 'maintenance', type: 'member-followup' },
-  { title: 'Update emergency contact records', category: 'administrative', type: 'member-followup' },
-  { title: 'Conduct quarterly safety walkthrough', category: 'training', type: 'member-followup' },
-  { title: 'Follow up on guest pass visit', category: 'follow-up', type: 'lead-followup' },
-  { title: 'Process refund request', category: 'billing', type: 'revenue' },
-  { title: 'Set up new member key fob access', category: 'onboarding', type: 'lead-followup' },
-  { title: 'Review and update cleaning schedule', category: 'administrative', type: 'member-followup' },
-]
-
-function hashCode(str: string): number {
-  let hash = 0
-  for (let i = 0; i < str.length; i++) {
-    hash = (hash << 5) - hash + str.charCodeAt(i)
-    hash |= 0
+  if (relatedMemberType === 'lead') {
+    const lead = leadsJson.find((l) => l.id === relatedMemberId)
+    return { email: lead?.email ?? null, phone: lead?.phone ?? null }
   }
-  return Math.abs(hash)
-}
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  })
+  if (relatedMemberType === 'member') {
+    const member = membersJson.find((m) => m.id === relatedMemberId)
+    return { email: member?.email ?? null, phone: member?.phone ?? null }
+  }
+
+  return { email: null, phone: null }
 }
 
 export function getTaskTableData(): TaskTableRow[] {
-  return taskTemplates.map((template, index) => {
-    const seed = hashCode(`task-${index}`)
-
-    const createdDaysAgo = (seed % 30) + 1
-    const createdDate = new Date()
-    createdDate.setDate(createdDate.getDate() - createdDaysAgo)
-
-    const dueDaysFromNow = (seed % 20) - 5
-    const dueDate = new Date()
-    dueDate.setDate(dueDate.getDate() + dueDaysFromNow)
-
-    let status: TaskStatus
-    if (seed % 7 === 0) {
-      status = 'completed'
-    } else if (dueDaysFromNow < 0 && seed % 3 !== 0) {
-      status = 'overdue'
-    } else if (seed % 3 === 0) {
-      status = 'in-progress'
-    } else {
-      status = 'open'
-    }
-
+  return tasksJson.map((task) => {
+    const contact = getContactInfo(task.relatedMemberId, task.relatedMemberType)
     return {
-      id: `task-${index + 1}`,
-      title: template.title,
-      type: template.type,
-      category: template.category,
-      status,
-      priority: priorities[seed % priorities.length],
-      assignedTo: staffNames[seed % staffNames.length],
-      relatedMember: memberNames[seed % memberNames.length],
-      dueDate: formatDate(dueDate),
-      createdDate: formatDate(createdDate),
+      id: task.id,
+      title: task.title,
+      type: task.type as TaskTableRow['type'],
+      category: task.category as TaskTableRow['category'],
+      status: task.status as TaskTableRow['status'],
+      priority: task.priority as TaskTableRow['priority'],
+      assignedTo: task.assignedTo,
+      relatedMember: task.relatedMember,
+      relatedMemberType: task.relatedMemberType as TaskTableRow['relatedMemberType'],
+      relatedMemberId: task.relatedMemberId,
+      relatedMemberEmail: contact.email,
+      relatedMemberPhone: contact.phone,
+      dueDate: task.dueDate,
+      createdDate: task.createdDate,
+      description: task.description,
+      communicationHistory: task.communicationHistory as TaskTableRow['communicationHistory'],
+      notes: task.notes as TaskTableRow['notes'],
     }
   })
 }

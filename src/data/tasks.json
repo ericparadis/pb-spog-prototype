@@ -1,0 +1,444 @@
+[
+  {
+    "id": "task-1",
+    "title": "Follow up with new member signup",
+    "type": "lead-followup",
+    "category": "follow-up",
+    "status": "open",
+    "priority": "high",
+    "assignedTo": "Michael Torres",
+    "relatedMember": "Amanda Foster",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-1",
+    "dueDate": "2026-02-16",
+    "createdDate": "2026-02-10",
+    "description": "New lead from referral. Reach out to schedule an intro tour and discuss membership options.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-10", "summary": "Sent welcome email with gym brochure", "direction": "outbound" },
+      { "type": "call", "date": "2026-02-11", "summary": "Left voicemail - no answer", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-10", "author": "Michael Torres", "text": "Lead referred by John Doe. Interested in personal training packages." },
+      { "date": "2026-02-11", "author": "Michael Torres", "text": "Tried calling, went to voicemail. Will try again tomorrow." }
+    ]
+  },
+  {
+    "id": "task-2",
+    "title": "Process membership renewal",
+    "type": "revenue",
+    "category": "billing",
+    "status": "in-progress",
+    "priority": "high",
+    "assignedTo": "Sarah Mitchell",
+    "relatedMember": "Emily Smith",
+    "relatedMemberType": "member",
+    "relatedMemberId": "mem-2",
+    "dueDate": "2026-02-15",
+    "createdDate": "2026-02-05",
+    "description": "Membership renewal is coming up. Contact member to discuss renewal options and any plan upgrades.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-05", "summary": "Sent renewal reminder with plan comparison", "direction": "outbound" },
+      { "type": "email", "date": "2026-02-07", "summary": "Member replied asking about Premium plan benefits", "direction": "inbound" },
+      { "type": "email", "date": "2026-02-08", "summary": "Sent detailed Premium plan info with pricing", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-05", "author": "Sarah Mitchell", "text": "Member's Basic plan expires March 5th. Good candidate for Premium upsell." },
+      { "date": "2026-02-08", "author": "Sarah Mitchell", "text": "Emily is interested in Premium. Following up next week for decision." }
+    ]
+  },
+  {
+    "id": "task-3",
+    "title": "Schedule equipment maintenance - treadmills",
+    "type": "member-followup",
+    "category": "maintenance",
+    "status": "open",
+    "priority": "medium",
+    "assignedTo": "David Chen",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-20",
+    "createdDate": "2026-02-08",
+    "description": "Three treadmills on the main floor need quarterly maintenance. Coordinate with vendor for scheduling.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-08", "summary": "Emailed vendor for maintenance availability", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-08", "author": "David Chen", "text": "Treadmills 4, 7, and 9 showing belt wear. Vendor usually available Tue/Thu." }
+    ]
+  },
+  {
+    "id": "task-4",
+    "title": "Complete new hire orientation",
+    "type": "member-followup",
+    "category": "onboarding",
+    "status": "completed",
+    "priority": "medium",
+    "assignedTo": "Jessica Park",
+    "relatedMember": "Brian Mitchell",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-2",
+    "dueDate": "2026-02-12",
+    "createdDate": "2026-02-01",
+    "description": "New lead booked a tour. Prepare welcome packet and schedule onboarding walkthrough.",
+    "communicationHistory": [
+      { "type": "text", "date": "2026-02-01", "summary": "Sent appointment confirmation text", "direction": "outbound" },
+      { "type": "call", "date": "2026-02-05", "summary": "Confirmed tour date and time", "direction": "outbound" },
+      { "type": "text", "date": "2026-02-12", "summary": "Sent thank you text after tour", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-01", "author": "Jessica Park", "text": "Brian found us on Instagram. Very enthusiastic about group classes." },
+      { "date": "2026-02-12", "author": "Jessica Park", "text": "Tour completed. Brian signed up for a trial membership!" }
+    ]
+  },
+  {
+    "id": "task-5",
+    "title": "Review overdue member payments",
+    "type": "revenue",
+    "category": "billing",
+    "status": "overdue",
+    "priority": "high",
+    "assignedTo": "Ryan Cooper",
+    "relatedMember": "Carlos Rivera",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-3",
+    "dueDate": "2026-02-10",
+    "createdDate": "2026-01-28",
+    "description": "Lead visited on guest pass but payment for trial conversion is overdue. Follow up on payment status.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-01-28", "summary": "Sent trial offer with payment link", "direction": "outbound" },
+      { "type": "text", "date": "2026-02-03", "summary": "Reminder text about trial offer expiring", "direction": "outbound" },
+      { "type": "call", "date": "2026-02-08", "summary": "Called - said will process payment this week", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-01-28", "author": "Ryan Cooper", "text": "Carlos visited once on guest pass. Seemed interested but hasn't committed." },
+      { "date": "2026-02-08", "author": "Ryan Cooper", "text": "Spoke on phone. Says he'll pay by Friday. Following up if not received." }
+    ]
+  },
+  {
+    "id": "task-6",
+    "title": "Update class schedule for next month",
+    "type": "member-followup",
+    "category": "administrative",
+    "status": "open",
+    "priority": "low",
+    "assignedTo": "Alex Turner",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-25",
+    "createdDate": "2026-02-12",
+    "description": "March class schedule needs to be finalized. Coordinate with trainers for availability changes.",
+    "communicationHistory": [],
+    "notes": [
+      { "date": "2026-02-12", "author": "Alex Turner", "text": "Need to check with Maya and David about their March availability before publishing." }
+    ]
+  },
+  {
+    "id": "task-7",
+    "title": "Conduct staff CPR recertification",
+    "type": "member-followup",
+    "category": "training",
+    "status": "in-progress",
+    "priority": "medium",
+    "assignedTo": "Maya Patel",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-28",
+    "createdDate": "2026-02-01",
+    "description": "Annual CPR recertification due for 5 staff members. Training provider confirmed for Feb 28th.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-01", "summary": "Contacted CPR training provider for group rate", "direction": "outbound" },
+      { "type": "email", "date": "2026-02-03", "summary": "Provider confirmed Feb 28 date and group pricing", "direction": "inbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-01", "author": "Maya Patel", "text": "Staff needing recert: Michael, David, Ryan, Alex, and myself." },
+      { "date": "2026-02-03", "author": "Maya Patel", "text": "Training booked for Feb 28, 9am-1pm. $150/person group rate." }
+    ]
+  },
+  {
+    "id": "task-8",
+    "title": "Follow up on cancelled membership",
+    "type": "member-followup",
+    "category": "follow-up",
+    "status": "open",
+    "priority": "medium",
+    "assignedTo": "Michael Torres",
+    "relatedMember": "Diana Chang",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-4",
+    "dueDate": "2026-02-18",
+    "createdDate": "2026-02-06",
+    "description": "Diana was in a remarketing campaign. Reach out to understand objections and offer a win-back promotion.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-06", "summary": "Sent personalized win-back offer with 20% discount", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-06", "author": "Michael Torres", "text": "Diana clicked through remarketing email but didn't convert. Worth a personal call." }
+    ]
+  },
+  {
+    "id": "task-9",
+    "title": "Inspect and replace gym floor mats",
+    "type": "member-followup",
+    "category": "maintenance",
+    "status": "open",
+    "priority": "low",
+    "assignedTo": "David Chen",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-03-01",
+    "createdDate": "2026-02-10",
+    "description": "Floor mats in the free weight area showing wear. Inspect all mats and order replacements as needed.",
+    "communicationHistory": [],
+    "notes": [
+      { "date": "2026-02-10", "author": "David Chen", "text": "At least 4 mats need replacement. Will do full inspection this week." }
+    ]
+  },
+  {
+    "id": "task-10",
+    "title": "Send welcome email to trial members",
+    "type": "lead-followup",
+    "category": "onboarding",
+    "status": "in-progress",
+    "priority": "medium",
+    "assignedTo": "Sarah Mitchell",
+    "relatedMember": "Elena Petrov",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-5",
+    "dueDate": "2026-02-17",
+    "createdDate": "2026-02-09",
+    "description": "Elena was a no-show for her appointment. Send a re-engagement email with a rescheduling link.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-09", "summary": "Sent 'We missed you' email with reschedule link", "direction": "outbound" },
+      { "type": "text", "date": "2026-02-11", "summary": "Sent follow-up text with new time options", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-09", "author": "Sarah Mitchell", "text": "Elena no-showed for intro session. Walked in originally so she's local." },
+      { "date": "2026-02-11", "author": "Sarah Mitchell", "text": "No response to email. Trying text message approach." }
+    ]
+  },
+  {
+    "id": "task-11",
+    "title": "Resolve billing dispute",
+    "type": "revenue",
+    "category": "billing",
+    "status": "open",
+    "priority": "high",
+    "assignedTo": "Jessica Park",
+    "relatedMember": "John Doe",
+    "relatedMemberType": "member",
+    "relatedMemberId": "mem-1",
+    "dueDate": "2026-02-15",
+    "createdDate": "2026-02-07",
+    "description": "Member reported a duplicate charge on their account. Investigate and issue credit if confirmed.",
+    "communicationHistory": [
+      { "type": "call", "date": "2026-02-07", "summary": "Member called about duplicate $49.99 charge", "direction": "inbound" },
+      { "type": "email", "date": "2026-02-07", "summary": "Sent acknowledgment email with ticket number", "direction": "outbound" },
+      { "type": "email", "date": "2026-02-09", "summary": "Confirmed duplicate charge found in system", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-07", "author": "Jessica Park", "text": "John Doe called about a double charge of $49.99. Checking with payment processor." },
+      { "date": "2026-02-09", "author": "Jessica Park", "text": "Confirmed duplicate. Refund submitted, should process in 3-5 business days." }
+    ]
+  },
+  {
+    "id": "task-12",
+    "title": "Prepare monthly attendance report",
+    "type": "member-followup",
+    "category": "administrative",
+    "status": "completed",
+    "priority": "low",
+    "assignedTo": "Alex Turner",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-05",
+    "createdDate": "2026-01-30",
+    "description": "Compile January attendance data for all classes and generate summary report for management.",
+    "communicationHistory": [],
+    "notes": [
+      { "date": "2026-01-30", "author": "Alex Turner", "text": "Starting data pull for January attendance across all class types." },
+      { "date": "2026-02-04", "author": "Alex Turner", "text": "Report complete. Average class attendance up 12% from December." }
+    ]
+  },
+  {
+    "id": "task-13",
+    "title": "Schedule personal training intro session",
+    "type": "lead-followup",
+    "category": "follow-up",
+    "status": "open",
+    "priority": "high",
+    "assignedTo": "Ryan Cooper",
+    "relatedMember": "Fernando Lopez",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-6",
+    "dueDate": "2026-02-16",
+    "createdDate": "2026-02-11",
+    "description": "New lead from Facebook interested in group fitness. Schedule a free intro PT session to convert.",
+    "communicationHistory": [
+      { "type": "text", "date": "2026-02-11", "summary": "Sent intro text with available PT session times", "direction": "outbound" },
+      { "type": "text", "date": "2026-02-13", "summary": "Fernando replied - interested in Saturday morning", "direction": "inbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-11", "author": "Ryan Cooper", "text": "Fernando found us on Facebook. Looking for group classes - PT intro could hook him." },
+      { "date": "2026-02-13", "author": "Ryan Cooper", "text": "He's interested in Sat 10am slot. Need to confirm with trainer Maya." }
+    ]
+  },
+  {
+    "id": "task-14",
+    "title": "Order replacement cables for cable machine",
+    "type": "member-followup",
+    "category": "maintenance",
+    "status": "in-progress",
+    "priority": "medium",
+    "assignedTo": "David Chen",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-22",
+    "createdDate": "2026-02-04",
+    "description": "Cable machine #2 needs cable replacement. Order parts and schedule installation.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-04", "summary": "Ordered replacement cables from supplier", "direction": "outbound" },
+      { "type": "email", "date": "2026-02-06", "summary": "Supplier confirmed order - ships Feb 18", "direction": "inbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-04", "author": "David Chen", "text": "Cable fraying on machine #2. Ordered from usual supplier - Life Fitness." },
+      { "date": "2026-02-06", "author": "David Chen", "text": "Parts ship Feb 18. Will schedule install for Feb 20 or 21." }
+    ]
+  },
+  {
+    "id": "task-15",
+    "title": "Update emergency contact records",
+    "type": "member-followup",
+    "category": "administrative",
+    "status": "open",
+    "priority": "low",
+    "assignedTo": "Maya Patel",
+    "relatedMember": "Michael Brown",
+    "relatedMemberType": "member",
+    "relatedMemberId": "mem-3",
+    "dueDate": "2026-02-28",
+    "createdDate": "2026-02-12",
+    "description": "Member flagged outdated emergency contact info during check-in. Update records in system.",
+    "communicationHistory": [
+      { "type": "push", "date": "2026-02-12", "summary": "Sent push notification to update profile info", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-12", "author": "Maya Patel", "text": "Michael mentioned his emergency contact phone number changed. Sent app notification to update." }
+    ]
+  },
+  {
+    "id": "task-16",
+    "title": "Conduct quarterly safety walkthrough",
+    "type": "member-followup",
+    "category": "training",
+    "status": "open",
+    "priority": "medium",
+    "assignedTo": "Michael Torres",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-21",
+    "createdDate": "2026-02-10",
+    "description": "Q1 safety inspection of all equipment and emergency exits. Complete checklist and file report.",
+    "communicationHistory": [],
+    "notes": [
+      { "date": "2026-02-10", "author": "Michael Torres", "text": "Q1 walkthrough due. Will coordinate with David for equipment portion." }
+    ]
+  },
+  {
+    "id": "task-17",
+    "title": "Follow up on guest pass visit",
+    "type": "lead-followup",
+    "category": "follow-up",
+    "status": "overdue",
+    "priority": "high",
+    "assignedTo": "Sarah Mitchell",
+    "relatedMember": "Grace Kim",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-7",
+    "dueDate": "2026-02-08",
+    "createdDate": "2026-01-30",
+    "description": "Grace's guest pass expired. Follow up to gauge interest and offer a special enrollment rate.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-01-30", "summary": "Sent post-visit follow-up email", "direction": "outbound" },
+      { "type": "call", "date": "2026-02-03", "summary": "Called - interested but wants to think about it", "direction": "outbound" },
+      { "type": "text", "date": "2026-02-06", "summary": "Sent limited-time enrollment offer", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-01-30", "author": "Sarah Mitchell", "text": "Grace visited on guest pass. Enjoyed yoga class. Guest pass now expired." },
+      { "date": "2026-02-03", "author": "Sarah Mitchell", "text": "She's interested but comparing with another gym. Sent our differentiators." },
+      { "date": "2026-02-06", "author": "Sarah Mitchell", "text": "Sent 15% off first 3 months offer. Expires Feb 15." }
+    ]
+  },
+  {
+    "id": "task-18",
+    "title": "Process refund request",
+    "type": "revenue",
+    "category": "billing",
+    "status": "open",
+    "priority": "high",
+    "assignedTo": "Jessica Park",
+    "relatedMember": "David Wilson",
+    "relatedMemberType": "member",
+    "relatedMemberId": "mem-4",
+    "dueDate": "2026-02-17",
+    "createdDate": "2026-02-11",
+    "description": "Member requesting partial refund for classes missed due to facility closure on Jan 28.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-11", "summary": "Member submitted refund request via email", "direction": "inbound" },
+      { "type": "email", "date": "2026-02-12", "summary": "Acknowledged request, investigating closure dates", "direction": "outbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-11", "author": "Jessica Park", "text": "David requesting refund for 2 classes missed during pipe burst closure." },
+      { "date": "2026-02-12", "author": "Jessica Park", "text": "Confirmed closure was Jan 28-29. Calculating prorated credit amount." }
+    ]
+  },
+  {
+    "id": "task-19",
+    "title": "Set up new member key fob access",
+    "type": "lead-followup",
+    "category": "onboarding",
+    "status": "in-progress",
+    "priority": "medium",
+    "assignedTo": "Alex Turner",
+    "relatedMember": "Henry Walsh",
+    "relatedMemberType": "lead",
+    "relatedMemberId": "lead-8",
+    "dueDate": "2026-02-18",
+    "createdDate": "2026-02-13",
+    "description": "New inquiry from website. Set up profile and prepare key fob for when membership is finalized.",
+    "communicationHistory": [
+      { "type": "email", "date": "2026-02-13", "summary": "Sent membership options with pricing tiers", "direction": "outbound" },
+      { "type": "email", "date": "2026-02-14", "summary": "Henry replied interested in off-peak plan", "direction": "inbound" }
+    ],
+    "notes": [
+      { "date": "2026-02-13", "author": "Alex Turner", "text": "Web inquiry - Henry wants off-peak membership. Sent pricing details." },
+      { "date": "2026-02-14", "author": "Alex Turner", "text": "Henry confirmed interest. Prepping key fob #2847 for activation on signup." }
+    ]
+  },
+  {
+    "id": "task-20",
+    "title": "Review and update cleaning schedule",
+    "type": "member-followup",
+    "category": "administrative",
+    "status": "completed",
+    "priority": "low",
+    "assignedTo": "Maya Patel",
+    "relatedMember": null,
+    "relatedMemberType": null,
+    "relatedMemberId": null,
+    "dueDate": "2026-02-10",
+    "createdDate": "2026-02-03",
+    "description": "Update cleaning rotation to reflect new staff availability and peak hours adjustments.",
+    "communicationHistory": [],
+    "notes": [
+      { "date": "2026-02-03", "author": "Maya Patel", "text": "Current schedule doesn't account for new peak hours (5-8pm). Need to add extra cleaning slot." },
+      { "date": "2026-02-09", "author": "Maya Patel", "text": "Updated schedule posted. Added 7pm cleaning rotation for free weight area." }
+    ]
+  }
+]

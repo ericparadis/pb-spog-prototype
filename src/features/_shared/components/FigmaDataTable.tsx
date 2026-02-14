@@ -21,6 +21,7 @@ interface FigmaDataTableProps<TData, TValue> {
   data: TData[]
   className?: string
   enableRowSelection?: boolean
+  onRowClick?: (row: TData) => void
 }
 
 export function FigmaDataTable<TData, TValue>({
@@ -28,6 +29,7 @@ export function FigmaDataTable<TData, TValue>({
   data,
   className,
   enableRowSelection = false,
+  onRowClick,
 }: FigmaDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
@@ -71,7 +73,11 @@ export function FigmaDataTable<TData, TValue>({
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className="h-[68px]">
+              <TableRow
+                key={row.id}
+                className={cn('h-[68px]', onRowClick && 'cursor-pointer')}
+                onClick={() => onRowClick?.(row.original)}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="py-3">
                     {flexRender(
