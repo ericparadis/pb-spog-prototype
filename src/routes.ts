@@ -8,6 +8,7 @@ const Leads = lazy(() => import('@/features/leads/index'))
 const ClassSchedule = lazy(() => import('@/features/class-schedule/index'))
 const CheckIn = lazy(() => import('@/features/check-in/index'))
 const Tasks = lazy(() => import('@/features/tasks/index'))
+const StaffManagement = lazy(() => import('@/features/staff-management/index'))
 
 export interface Route {
   path: string
@@ -55,5 +56,10 @@ export const routes: Route[] = [
     path: '/tasks',
     element: Tasks,
     // All roles can access tasks
+  },
+  {
+    path: '/staff',
+    element: StaffManagement,
+    allowedRoles: ['franchise-owner', 'regional-manager', 'gym-manager'],
   },
 ]
