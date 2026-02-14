@@ -1,12 +1,23 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import type { MemberTableRow } from '../types'
-import {
-  MemberCell,
-  MembershipBadge,
-  TrendCell,
-  AlertPill,
-  SortableHeader,
-} from '@/features/_shared/components/cell-renderers'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { SortableHeader } from '@/features/_shared/components/cell-renderers'
+
+function getInitials(name: string) {
+  return name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+}
+
+const memberTypeStyles: Record<string, string> = {
+  Member: 'bg-blue-100 text-blue-800 border-transparent',
+  'Pay Per Visit': 'bg-amber-100 text-amber-800 border-transparent',
+  Trial: 'bg-purple-100 text-purple-800 border-transparent',
+  Staff: 'bg-gray-100 text-gray-800 border-transparent',
+}
 
 export const memberColumns: ColumnDef<MemberTableRow>[] = [
   {
@@ -36,108 +47,87 @@ export const memberColumns: ColumnDef<MemberTableRow>[] = [
     header: ({ column }) => (
       <SortableHeader column={column} label="Member" />
     ),
-    cell: ({ row }) => (
-      <MemberCell
-        name={row.original.name}
-        memberId={row.original.memberId}
-        photoUrl={row.original.photoUrl}
-      />
-    ),
+    cell: ({ row }) => {
+      const { name } = row.original
+      return (
+        <div className="flex items-center gap-3">
+          <Avatar className="h-9 w-9">
+            <AvatarFallback className="text-xs bg-primary/10 text-primary">
+              {getInitials(name)}
+            </AvatarFallback>
+          </Avatar>
+          <span className="text-sm font-medium text-foreground">{name}</span>
+        </div>
+      )
+    },
   },
   {
-    accessorKey: 'membershipTier',
+    id: 'contact',
+    header: 'Contact',
+    cell: ({ row }) => (
+      <div className="flex flex-col">
+        <span className="text-sm text-foreground">{row.original.email}</span>
+        <span className="text-xs text-muted-foreground">{row.original.phone}</span>
+      </div>
+    ),
+    enableSorting: false,
+  },
+  {
+    accessorKey: 'memberType',
+    header: ({ column }) => (
+      <SortableHeader column={column} label="Member Type" />
+    ),
+    cell: ({ row }) => {
+      const type = row.original.memberType
+      const style = memberTypeStyles[type] || memberTypeStyles['Member']
+      return (
+        <Badge variant="outline" className={`text-xs font-medium px-2.5 py-0.5 ${style}`}>
+          {type}
+        </Badge>
+      )
+    },
+  },
+  {
+    accessorKey: 'membershipName',
     header: ({ column }) => (
       <SortableHeader column={column} label="Membership" />
     ),
     cell: ({ row }) => (
-      <MembershipBadge tier={row.original.membershipTier} />
+      <Badge variant="outline" className="text-xs font-medium px-2.5 py-0.5 bg-gray-100 text-gray-700 border-transparent">
+        {row.original.membershipName}
+      </Badge>
     ),
   },
   {
-    accessorKey: 'joinDate',
+    accessorKey: 'agreementStatus',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Join Date" />
+      <SortableHeader column={column} label="Agreement Status" />
     ),
-  },
-  {
-    id: 'week1',
-    header: 'Week 1',
-    cell: ({ row }) => (
-      <TrendCell
-        value={row.original.week1.value}
-        trend={row.original.week1.trend}
-      />
-    ),
-  },
-  {
-    id: 'week2',
-    header: 'Week 2',
-    cell: ({ row }) => (
-      <TrendCell
-        value={row.original.week2.value}
-        trend={row.original.week2.trend}
-      />
-    ),
-  },
-  {
-    id: 'week3',
-    header: 'Week 3',
-    cell: ({ row }) => (
-      <TrendCell
-        value={row.original.week3.value}
-        trend={row.original.week3.trend}
-      />
-    ),
-  },
-  {
-    id: 'week4',
-    header: 'Week 4',
-    cell: ({ row }) => (
-      <TrendCell
-        value={row.original.week4.value}
-        trend={row.original.week4.trend}
-      />
-    ),
-  },
-  {
-    accessorKey: 'classes',
-    header: ({ column }) => (
-      <SortableHeader column={column} label="Classes" />
-    ),
-    cell: ({ row }) => (
-      <span className="text-sm tabular-nums font-medium">
-        {row.original.classes}
-      </span>
-    ),
+    cell: ({ row }) => {
+      const status = row.original.agreementStatus
+      const isActive = status === 'Active'
+      return (
+        <Badge
+          variant="outline"
+          className={`text-xs font-medium px-2.5 py-0.5 ${
+            isActive
+              ? 'bg-green-100 text-green-800 border-transparent'
+              : 'bg-red-100 text-red-800 border-transparent'
+          }`}
+        >
+          {status}
+        </Badge>
+      )
+    },
   },
   {
     accessorKey: 'lastVisit',
     header: ({ column }) => (
       <SortableHeader column={column} label="Last Visit" />
     ),
-  },
-  {
-    id: 'alerts',
-    header: 'Alerts',
-    cell: ({ row }) =>
-      row.original.alerts.length > 0 ? (
-        <div className="flex flex-wrap gap-1">
-          {row.original.alerts.map((alert, i) => (
-            <AlertPill key={i} type={alert.type} label={alert.label} />
-          ))}
-        </div>
-      ) : (
-        <span className="text-sm text-muted-foreground">-</span>
-      ),
-  },
-  {
-    accessorKey: 'coach',
-    header: ({ column }) => (
-      <SortableHeader column={column} label="Coach" />
-    ),
     cell: ({ row }) => (
-      <span className="text-sm text-foreground">
-        {row.original.coach || '\u2014'}
+      <span className="text-sm text-muted-foreground">
+        {row.original.lastVisit}
       </span>
     ),
   },
