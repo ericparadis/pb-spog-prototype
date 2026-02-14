@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Mail, Phone, MapPin, Calendar, CreditCard, Award } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -24,20 +24,31 @@ function getInitials(name: string) {
 
 export function MemberDrawer({ member, open, onClose }: MemberDrawerProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   useEffect(() => {
+    if (open) {
+      requestAnimationFrame(() => setIsAnimating(true))
+      document.body.style.overflow = 'hidden'
+    } else {
+      setIsAnimating(false)
+    }
     function handleEscape(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') handleClose()
     }
     if (open) {
       document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
     }
     return () => {
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = ''
     }
-  }, [open, onClose])
+  }, [open])
+
+  function handleClose() {
+    setIsAnimating(false)
+    setTimeout(onClose, 300)
+  }
 
   if (!open || !member) return null
 
@@ -48,16 +59,16 @@ export function MemberDrawer({ member, open, onClose }: MemberDrawerProps) {
       {/* Overlay */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-black/50 transition-opacity"
-        onClick={onClose}
+        className={`absolute inset-0 transition-opacity duration-300 ${isAnimating ? 'bg-black/50' : 'bg-black/0'}`}
+        onClick={handleClose}
       />
 
       {/* Drawer panel */}
-      <div className="absolute top-0 right-0 h-full w-[800px] max-w-full bg-background shadow-2xl border-l flex flex-col animate-in slide-in-from-right duration-300">
+      <div className={`absolute top-0 right-0 h-full w-[1000px] max-w-full bg-background shadow-2xl border-l flex flex-col transition-transform duration-300 ease-out ${isAnimating ? 'translate-x-0' : 'translate-x-full'}`}>
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <h2 className="text-lg font-semibold text-foreground">Member Details</h2>
-          <Button variant="ghost" size="sm" onClick={onClose} className="h-8 w-8 p-0">
+          <Button variant="ghost" size="sm" onClick={handleClose} className="h-8 w-8 p-0">
             <X className="h-4 w-4" />
           </Button>
         </div>

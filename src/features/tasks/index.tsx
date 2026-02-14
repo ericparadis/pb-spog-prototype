@@ -8,6 +8,7 @@ import { getTaskTableData } from './data/task-table-data'
 import { TasksToolbar } from './components/TasksToolbar'
 import { TaskDetailDrawer } from './components/TaskDetailDrawer'
 import { TaskFilterPanel } from './components/TaskFilterPanel'
+import { TaskStats } from './components/TaskStats'
 import type { TaskFilters } from './components/TaskFilterPanel'
 import type { TaskType, TaskTableRow } from './types'
 
@@ -64,7 +65,7 @@ export default function Tasks() {
           row.assignedTo.toLowerCase().includes(term) ||
           row.category.toLowerCase().includes(term) ||
           row.status.toLowerCase().includes(term) ||
-          (row.relatedMember && row.relatedMember.toLowerCase().includes(term))
+          row.relatedMember.toLowerCase().includes(term)
       )
     }
 
@@ -82,6 +83,7 @@ export default function Tasks() {
       <PageHeader
         title="Tasks"
       />
+      <TaskStats data={allData} />
       <div className="flex items-center justify-between mb-4">
         <PillFilter
           options={taskFilterOptions}

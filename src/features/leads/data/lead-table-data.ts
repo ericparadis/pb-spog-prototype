@@ -9,7 +9,7 @@ const statuses: LeadStatus[] = [
   'appt-booked',
 ]
 
-const priorities: LeadPriority[] = ['high', 'medium', 'low']
+const priorities: LeadPriority[] = [1, 2, 3, 4, 5]
 
 const sources = [
   'Referral',
@@ -89,9 +89,14 @@ export function getLeadTableData(): LeadTableRow[] {
     const lastActivityDate = new Date()
     lastActivityDate.setDate(lastActivityDate.getDate() - lastActivityDaysAgo)
 
+    const firstName = name.split(' ')[0].toLowerCase()
+    const lastName = name.split(' ')[1].toLowerCase()
+
     return {
       id: `lead-${index + 1}`,
       name,
+      email: `${firstName}.${lastName}@example.com`,
+      phone: `(415) 555-${String(4001 + index).padStart(4, '0')}`,
       status: statuses[seed % statuses.length],
       priority: priorities[seed % priorities.length],
       source: sources[seed % sources.length],
