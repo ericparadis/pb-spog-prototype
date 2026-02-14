@@ -48,7 +48,6 @@ export default function Tasks() {
     <PageContent>
       <PageHeader
         title="Tasks"
-        description="Track and manage team tasks and action items"
       />
       <PillFilter
         options={taskFilterOptions}
