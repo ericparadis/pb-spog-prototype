@@ -124,5 +124,329 @@
       "phone": "(415) 555-3004",
       "relationship": "Mother"
     }
+  },
+  {
+    "id": "mem-8",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "firstName": "Jessica",
+    "lastName": "Martinez",
+    "email": "jessica.martinez@example.com",
+    "phone": "(415) 555-1007",
+    "dateOfBirth": "1985-02-14",
+    "joinDate": "2023-06-20",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Roberto Martinez",
+      "phone": "(415) 555-1008",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-9",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "firstName": "Brandon",
+    "lastName": "Lee",
+    "email": "brandon.lee@example.com",
+    "phone": "(415) 555-1009",
+    "dateOfBirth": "1998-09-03",
+    "joinDate": "2025-01-02",
+    "membershipId": "mbr-fz-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Susan Lee",
+      "phone": "(415) 555-1010",
+      "relationship": "Mother"
+    }
+  },
+  {
+    "id": "mem-10",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-2",
+    "firstName": "Sophia",
+    "lastName": "Nguyen",
+    "email": "sophia.nguyen@example.com",
+    "phone": "(415) 555-1011",
+    "dateOfBirth": "1994-06-28",
+    "joinDate": "2024-03-15",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "expired",
+    "emergencyContact": {
+      "name": "Tran Nguyen",
+      "phone": "(415) 555-1012",
+      "relationship": "Father"
+    }
+  },
+  {
+    "id": "mem-11",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "firstName": "Daniel",
+    "lastName": "Thompson",
+    "email": "daniel.thompson@example.com",
+    "phone": "(415) 555-1013",
+    "dateOfBirth": "1989-11-19",
+    "joinDate": "2024-07-08",
+    "membershipId": "mbr-fz-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Laura Thompson",
+      "phone": "(415) 555-1014",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-12",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-2",
+    "firstName": "Olivia",
+    "lastName": "Patel",
+    "email": "olivia.patel@example.com",
+    "phone": "(415) 555-1015",
+    "dateOfBirth": "1996-01-07",
+    "joinDate": "2024-10-22",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Raj Patel",
+      "phone": "(415) 555-1016",
+      "relationship": "Father"
+    }
+  },
+  {
+    "id": "mem-13",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-1",
+    "firstName": "Kevin",
+    "lastName": "O'Brien",
+    "email": "kevin.obrien@example.com",
+    "phone": "(415) 555-3005",
+    "dateOfBirth": "1986-04-12",
+    "joinDate": "2024-05-01",
+    "membershipId": "mbr-zg-wellness",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Megan O'Brien",
+      "phone": "(415) 555-3006",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-14",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-1",
+    "firstName": "Natalie",
+    "lastName": "Kim",
+    "email": "natalie.kim@example.com",
+    "phone": "(415) 555-3007",
+    "dateOfBirth": "1997-08-30",
+    "joinDate": "2025-02-01",
+    "membershipId": "mbr-zg-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "James Kim",
+      "phone": "(415) 555-3008",
+      "relationship": "Brother"
+    }
+  },
+  {
+    "id": "mem-15",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-2",
+    "firstName": "Tyler",
+    "lastName": "Robinson",
+    "email": "tyler.robinson@example.com",
+    "phone": "(415) 555-3009",
+    "dateOfBirth": "1992-10-16",
+    "joinDate": "2024-08-14",
+    "membershipId": "mbr-zg-wellness",
+    "membershipStatus": "expired",
+    "emergencyContact": {
+      "name": "Andrea Robinson",
+      "phone": "(415) 555-3010",
+      "relationship": "Sister"
+    }
+  },
+  {
+    "id": "mem-16",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "firstName": "Ashley",
+    "lastName": "Chen",
+    "email": "ashley.chen@example.com",
+    "phone": "(415) 555-1017",
+    "dateOfBirth": "1993-07-22",
+    "joinDate": "2024-02-28",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Wei Chen",
+      "phone": "(415) 555-1018",
+      "relationship": "Father"
+    }
+  },
+  {
+    "id": "mem-17",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-2",
+    "firstName": "Marcus",
+    "lastName": "Johnson",
+    "email": "marcus.johnson@example.com",
+    "phone": "(415) 555-1019",
+    "dateOfBirth": "1990-12-03",
+    "joinDate": "2023-09-15",
+    "membershipId": "mbr-fz-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Diane Johnson",
+      "phone": "(415) 555-1020",
+      "relationship": "Mother"
+    }
+  },
+  {
+    "id": "mem-18",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-1",
+    "firstName": "Samantha",
+    "lastName": "Rivera",
+    "email": "samantha.rivera@example.com",
+    "phone": "(510) 555-2005",
+    "dateOfBirth": "1991-03-25",
+    "joinDate": "2024-04-10",
+    "membershipId": "mbr-pl-elite",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Miguel Rivera",
+      "phone": "(510) 555-2006",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-19",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-1",
+    "firstName": "Jason",
+    "lastName": "Wright",
+    "email": "jason.wright@example.com",
+    "phone": "(510) 555-2007",
+    "dateOfBirth": "1988-01-17",
+    "joinDate": "2024-01-05",
+    "membershipId": "mbr-pl-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Patricia Wright",
+      "phone": "(510) 555-2008",
+      "relationship": "Mother"
+    }
+  },
+  {
+    "id": "mem-20",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-2",
+    "firstName": "Lauren",
+    "lastName": "Hall",
+    "email": "lauren.hall@example.com",
+    "phone": "(510) 555-2009",
+    "dateOfBirth": "1995-09-08",
+    "joinDate": "2024-11-20",
+    "membershipId": "mbr-pl-elite",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Robert Hall",
+      "phone": "(510) 555-2010",
+      "relationship": "Father"
+    }
+  },
+  {
+    "id": "mem-21",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-2",
+    "firstName": "Trevor",
+    "lastName": "Scott",
+    "email": "trevor.scott@example.com",
+    "phone": "(510) 555-2011",
+    "dateOfBirth": "1987-05-29",
+    "joinDate": "2023-12-01",
+    "membershipId": "mbr-pl-basic",
+    "membershipStatus": "expired",
+    "emergencyContact": {
+      "name": "Karen Scott",
+      "phone": "(510) 555-2012",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-22",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-1",
+    "firstName": "Monica",
+    "lastName": "Adams",
+    "email": "monica.adams@example.com",
+    "phone": "(510) 555-2013",
+    "dateOfBirth": "1994-02-11",
+    "joinDate": "2024-08-05",
+    "membershipId": "mbr-pl-elite",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Paul Adams",
+      "phone": "(510) 555-2014",
+      "relationship": "Brother"
+    }
+  },
+  {
+    "id": "mem-23",
+    "brandId": "orangetheory",
+    "locationId": "loc-pl-2",
+    "firstName": "Derek",
+    "lastName": "Mitchell",
+    "email": "derek.mitchell@example.com",
+    "phone": "(510) 555-2015",
+    "dateOfBirth": "1993-07-04",
+    "joinDate": "2024-06-18",
+    "membershipId": "mbr-pl-basic",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Nancy Mitchell",
+      "phone": "(510) 555-2016",
+      "relationship": "Mother"
+    }
+  },
+  {
+    "id": "mem-24",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-fz-1",
+    "firstName": "Heather",
+    "lastName": "Morgan",
+    "email": "heather.morgan@example.com",
+    "phone": "(415) 555-1021",
+    "dateOfBirth": "1991-11-08",
+    "joinDate": "2024-04-20",
+    "membershipId": "mbr-fz-basic",
+    "membershipStatus": "expired",
+    "emergencyContact": {
+      "name": "Craig Morgan",
+      "phone": "(415) 555-1022",
+      "relationship": "Spouse"
+    }
+  },
+  {
+    "id": "mem-25",
+    "brandId": "anytime-fitness",
+    "locationId": "loc-zg-2",
+    "firstName": "Ryan",
+    "lastName": "Cooper",
+    "email": "ryan.cooper@example.com",
+    "phone": "(415) 555-3011",
+    "dateOfBirth": "1996-03-19",
+    "joinDate": "2025-01-10",
+    "membershipId": "mbr-zg-premium",
+    "membershipStatus": "active",
+    "emergencyContact": {
+      "name": "Beth Cooper",
+      "phone": "(415) 555-3012",
+      "relationship": "Sister"
+    }
   }
 ]
