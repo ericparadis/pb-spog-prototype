@@ -1,4 +1,4 @@
-import type { TaskTableRow, TaskStatus, TaskPriority, TaskCategory } from '../types'
+import type { TaskTableRow, TaskStatus, TaskPriority, TaskCategory, TaskType } from '../types'
 
 const statuses: TaskStatus[] = ['open', 'in-progress', 'completed', 'overdue']
 const priorities: TaskPriority[] = ['high', 'medium', 'low']
@@ -32,27 +32,27 @@ const memberNames = [
   null,
 ]
 
-const taskTemplates: { title: string; category: TaskCategory }[] = [
-  { title: 'Follow up with new member signup', category: 'follow-up' },
-  { title: 'Process membership renewal', category: 'billing' },
-  { title: 'Schedule equipment maintenance - treadmills', category: 'maintenance' },
-  { title: 'Complete new hire orientation', category: 'onboarding' },
-  { title: 'Review overdue member payments', category: 'billing' },
-  { title: 'Update class schedule for next month', category: 'administrative' },
-  { title: 'Conduct staff CPR recertification', category: 'training' },
-  { title: 'Follow up on cancelled membership', category: 'follow-up' },
-  { title: 'Inspect and replace gym floor mats', category: 'maintenance' },
-  { title: 'Send welcome email to trial members', category: 'onboarding' },
-  { title: 'Resolve billing dispute', category: 'billing' },
-  { title: 'Prepare monthly attendance report', category: 'administrative' },
-  { title: 'Schedule personal training intro session', category: 'follow-up' },
-  { title: 'Order replacement cables for cable machine', category: 'maintenance' },
-  { title: 'Update emergency contact records', category: 'administrative' },
-  { title: 'Conduct quarterly safety walkthrough', category: 'training' },
-  { title: 'Follow up on guest pass visit', category: 'follow-up' },
-  { title: 'Process refund request', category: 'billing' },
-  { title: 'Set up new member key fob access', category: 'onboarding' },
-  { title: 'Review and update cleaning schedule', category: 'administrative' },
+const taskTemplates: { title: string; category: TaskCategory; type: TaskType }[] = [
+  { title: 'Follow up with new member signup', category: 'follow-up', type: 'lead-followup' },
+  { title: 'Process membership renewal', category: 'billing', type: 'revenue' },
+  { title: 'Schedule equipment maintenance - treadmills', category: 'maintenance', type: 'member-followup' },
+  { title: 'Complete new hire orientation', category: 'onboarding', type: 'member-followup' },
+  { title: 'Review overdue member payments', category: 'billing', type: 'revenue' },
+  { title: 'Update class schedule for next month', category: 'administrative', type: 'member-followup' },
+  { title: 'Conduct staff CPR recertification', category: 'training', type: 'member-followup' },
+  { title: 'Follow up on cancelled membership', category: 'follow-up', type: 'member-followup' },
+  { title: 'Inspect and replace gym floor mats', category: 'maintenance', type: 'member-followup' },
+  { title: 'Send welcome email to trial members', category: 'onboarding', type: 'lead-followup' },
+  { title: 'Resolve billing dispute', category: 'billing', type: 'revenue' },
+  { title: 'Prepare monthly attendance report', category: 'administrative', type: 'member-followup' },
+  { title: 'Schedule personal training intro session', category: 'follow-up', type: 'lead-followup' },
+  { title: 'Order replacement cables for cable machine', category: 'maintenance', type: 'member-followup' },
+  { title: 'Update emergency contact records', category: 'administrative', type: 'member-followup' },
+  { title: 'Conduct quarterly safety walkthrough', category: 'training', type: 'member-followup' },
+  { title: 'Follow up on guest pass visit', category: 'follow-up', type: 'lead-followup' },
+  { title: 'Process refund request', category: 'billing', type: 'revenue' },
+  { title: 'Set up new member key fob access', category: 'onboarding', type: 'lead-followup' },
+  { title: 'Review and update cleaning schedule', category: 'administrative', type: 'member-followup' },
 ]
 
 function hashCode(str: string): number {
@@ -98,6 +98,7 @@ export function getTaskTableData(): TaskTableRow[] {
     return {
       id: `task-${index + 1}`,
       title: template.title,
+      type: template.type,
       category: template.category,
       status,
       priority: priorities[seed % priorities.length],
