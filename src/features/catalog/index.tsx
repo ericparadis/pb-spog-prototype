@@ -9,12 +9,15 @@ import { getAdjustmentTableData } from './data/adjustment-table-data'
 import { getPricingTierTableData } from './data/pricing-tier-table-data'
 import { CatalogToolbar } from './components/CatalogToolbar'
 import { CatalogPillTabs, type CatalogTab } from './components/CatalogPillTabs'
+import { ProductDrawer } from './components/ProductDrawer'
 import { useBrand } from '@/lib/contexts/BrandContext'
+import type { ProductTableRow } from './types'
 
 export default function CatalogAdministration() {
   const { currentBrand } = useBrand()
   const [activeTab, setActiveTab] = useState<CatalogTab>('products')
   const [search, setSearch] = useState('')
+  const [selectedProduct, setSelectedProduct] = useState<ProductTableRow | null>(null)
 
   const productData = getProductTableData(currentBrand.id)
   const adjustmentData = getAdjustmentTableData(currentBrand.id)
@@ -88,6 +91,7 @@ export default function CatalogAdministration() {
           columns={productColumns}
           data={filteredProducts}
           enableRowSelection
+          onRowClick={(row) => setSelectedProduct(row)}
         />
       )}
       {activeTab === 'adjustments' && (
@@ -104,6 +108,11 @@ export default function CatalogAdministration() {
           enableRowSelection
         />
       )}
+      <ProductDrawer
+        product={selectedProduct}
+        open={!!selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </PageContent>
   )
 }
