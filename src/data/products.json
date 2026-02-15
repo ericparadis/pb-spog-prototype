@@ -9,7 +9,40 @@
     "retailPrice": 49.99,
     "cogs": 22.50,
     "marginPercent": 55,
-    "status": "Active"
+    "status": "Active",
+    "description": "Premium whey protein isolate, 30 servings per container. Supports muscle recovery and growth.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Whey Protein 2lb Tub",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Monthly",
+        "billingType": "Reoccurring",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "Monthly", "price": 49.99 },
+          { "tierNumber": 2, "frequency": "Monthly", "price": 44.99 },
+          { "tierNumber": 3, "frequency": "Monthly", "price": 39.99 }
+        ]
+      },
+      {
+        "name": "Shaker Bottle Add-on",
+        "optional": true,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 9.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 7.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 3,
+      "renewalSetting": "n-to-n",
+      "renewalAlertMonths": 1
+    }
   },
   {
     "id": "prod-2",
@@ -21,7 +54,28 @@
     "retailPrice": 39.99,
     "cogs": 15.00,
     "marginPercent": 62,
-    "status": "Active"
+    "status": "Active",
+    "description": "High-energy pre-workout blend with caffeine and beta-alanine for enhanced performance.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Pre-Workout 30 Servings",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Monthly",
+        "billingType": "Reoccurring",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "Monthly", "price": 39.99 },
+          { "tierNumber": 2, "frequency": "Monthly", "price": 34.99 },
+          { "tierNumber": 3, "frequency": "Monthly", "price": 29.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 1,
+      "renewalSetting": "n-to-n",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-3",
@@ -33,7 +87,28 @@
     "retailPrice": 29.99,
     "cogs": 10.00,
     "marginPercent": 67,
-    "status": "Active"
+    "status": "Active",
+    "description": "Branched-chain amino acid capsules for muscle recovery and reduced soreness.",
+    "region": "National",
+    "items": [
+      {
+        "name": "BCAA 120 Capsules",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Monthly",
+        "billingType": "Reoccurring",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "Monthly", "price": 29.99 },
+          { "tierNumber": 2, "frequency": "Monthly", "price": 24.99 },
+          { "tierNumber": 3, "frequency": "Monthly", "price": 19.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 1,
+      "renewalSetting": "n-to-n",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-4",
@@ -45,7 +120,28 @@
     "retailPrice": 34.99,
     "cogs": 12.00,
     "marginPercent": 66,
-    "status": "Active"
+    "status": "Active",
+    "description": "Official branded performance t-shirt. Moisture-wicking fabric, available in multiple sizes.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Performance T-Shirt",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 34.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 29.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 24.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-5",
@@ -57,7 +153,28 @@
     "retailPrice": 44.99,
     "cogs": 18.00,
     "marginPercent": 60,
-    "status": "Active"
+    "status": "Active",
+    "description": "Lightweight performance shorts with moisture management and stretch fabric.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Performance Shorts",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 44.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 39.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 34.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-6",
@@ -69,7 +186,28 @@
     "retailPrice": 24.99,
     "cogs": 8.00,
     "marginPercent": 68,
-    "status": "Active"
+    "status": "Active",
+    "description": "Insulated stainless steel water bottle, 32oz capacity with branded logo.",
+    "region": "National",
+    "items": [
+      {
+        "name": "32oz Insulated Bottle",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 24.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 19.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 14.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-7",
@@ -81,7 +219,28 @@
     "retailPrice": 19.99,
     "cogs": 6.50,
     "marginPercent": 67,
-    "status": "Active"
+    "status": "Active",
+    "description": "Quick-dry microfiber gym towel with logo embroidery. Compact and absorbent.",
+    "region": "Local",
+    "items": [
+      {
+        "name": "Microfiber Gym Towel",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 19.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 14.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-8",
@@ -93,7 +252,40 @@
     "retailPrice": 29.99,
     "cogs": 11.00,
     "marginPercent": 63,
-    "status": "Active"
+    "status": "Active",
+    "description": "5-piece resistance band set with varying tension levels. Includes door anchor and carry bag.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Resistance Band Set (5 bands)",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 29.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 24.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 19.99 }
+        ]
+      },
+      {
+        "name": "Exercise Guide Booklet",
+        "optional": true,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 4.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 2.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-9",
@@ -105,7 +297,40 @@
     "retailPrice": 39.99,
     "cogs": 14.00,
     "marginPercent": 65,
-    "status": "Active"
+    "status": "Active",
+    "description": "Premium non-slip yoga mat, 6mm thick. Eco-friendly TPE material with alignment markers.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Yoga Mat 6mm",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 39.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 34.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 29.99 }
+        ]
+      },
+      {
+        "name": "Carry Strap",
+        "optional": true,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 7.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 5.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-10",
@@ -117,7 +342,28 @@
     "retailPrice": 34.99,
     "cogs": 13.00,
     "marginPercent": 63,
-    "status": "Active"
+    "status": "Active",
+    "description": "High-density foam roller for deep tissue massage and muscle recovery. 18-inch length.",
+    "region": "National",
+    "items": [
+      {
+        "name": "High-Density Foam Roller 18\"",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 34.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 29.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 24.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-11",
@@ -129,7 +375,28 @@
     "retailPrice": 14.99,
     "cogs": 4.50,
     "marginPercent": 70,
-    "status": "Active"
+    "status": "Active",
+    "description": "Speed jump rope with ball bearings and adjustable cable length. Anti-slip handles.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Speed Jump Rope",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 14.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 12.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 9.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-12",
@@ -141,7 +408,28 @@
     "retailPrice": 24.99,
     "cogs": 9.00,
     "marginPercent": 64,
-    "status": "Inactive"
+    "status": "Inactive",
+    "description": "Padded lifting gloves with wrist support wraps. Breathable mesh back.",
+    "region": "Regional",
+    "items": [
+      {
+        "name": "Lifting Gloves with Wrist Wrap",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 24.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 19.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 14.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-13",
@@ -153,7 +441,28 @@
     "retailPrice": 14.99,
     "cogs": 5.00,
     "marginPercent": 67,
-    "status": "Active"
+    "status": "Active",
+    "description": "BPA-free shaker bottle with blending ball, 28oz. Leak-proof twist lid.",
+    "region": "National",
+    "items": [
+      {
+        "name": "28oz Shaker Bottle",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 14.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 12.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 0,
+      "renewalSetting": "terminates",
+      "renewalAlertMonths": 0
+    }
   },
   {
     "id": "prod-14",
@@ -165,7 +474,28 @@
     "retailPrice": 27.99,
     "cogs": 10.50,
     "marginPercent": 62,
-    "status": "Active"
+    "status": "Active",
+    "description": "Topical muscle recovery cream with menthol and arnica. Fast-absorbing formula.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Recovery Cream 4oz",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Monthly",
+        "billingType": "Reoccurring",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "Monthly", "price": 27.99 },
+          { "tierNumber": 2, "frequency": "Monthly", "price": 23.99 },
+          { "tierNumber": 3, "frequency": "Monthly", "price": 19.99 }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 3,
+      "renewalSetting": "to-term",
+      "renewalAlertMonths": 1
+    }
   },
   {
     "id": "prod-15",
@@ -177,6 +507,39 @@
     "retailPrice": 35.99,
     "cogs": 18.00,
     "marginPercent": 50,
-    "status": "Active"
+    "status": "Active",
+    "description": "Box of 12 high-protein energy bars, mixed flavors. 20g protein per bar.",
+    "region": "National",
+    "items": [
+      {
+        "name": "Energy Bar Box (12 bars)",
+        "optional": false,
+        "quantity": 1,
+        "replenish": "Monthly",
+        "billingType": "Reoccurring",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "Monthly", "price": 35.99 },
+          { "tierNumber": 2, "frequency": "Monthly", "price": 31.99 },
+          { "tierNumber": 3, "frequency": "Monthly", "price": 27.99 }
+        ]
+      },
+      {
+        "name": "Sample Variety Pack",
+        "optional": true,
+        "quantity": 1,
+        "replenish": "Never",
+        "billingType": "One-Time",
+        "tierPricing": [
+          { "tierNumber": 1, "frequency": "One-Time", "price": 5.99 },
+          { "tierNumber": 2, "frequency": "One-Time", "price": 3.99 },
+          { "tierNumber": 3, "frequency": "One-Time", "price": 0.00, "included": true }
+        ]
+      }
+    ],
+    "billingMechanics": {
+      "initialTermMonths": 6,
+      "renewalSetting": "n-to-n",
+      "renewalAlertMonths": 1
+    }
   }
 ]

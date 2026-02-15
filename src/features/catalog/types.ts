@@ -1,3 +1,25 @@
+export interface ProductTierPrice {
+  tierNumber: number
+  frequency: string
+  price: number
+  included?: boolean
+}
+
+export interface ProductItem {
+  name: string
+  optional: boolean
+  quantity: number
+  replenish: string
+  billingType: string
+  tierPricing: ProductTierPrice[]
+}
+
+export interface BillingMechanics {
+  initialTermMonths: number
+  renewalSetting: 'n-to-n' | 'to-term' | 'terminates'
+  renewalAlertMonths: number
+}
+
 export interface ProductTableRow {
   id: string
   name: string
@@ -9,6 +31,10 @@ export interface ProductTableRow {
   status: 'Active' | 'Inactive'
   location: string
   locationId: string
+  description: string
+  region: string
+  items: ProductItem[]
+  billingMechanics: BillingMechanics
 }
 
 export interface AdjustmentTableRow {
