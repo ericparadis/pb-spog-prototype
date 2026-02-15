@@ -78,12 +78,13 @@ export const adjustmentColumns: ColumnDef<AdjustmentTableRow>[] = [
     },
   },
   {
-    accessorKey: 'items',
+    id: 'items',
+    accessorFn: (row) => row.adjustmentItems.length,
     header: ({ column }) => (
       <SortableHeader column={column} label="Items" />
     ),
     cell: ({ row }) => (
-      <span className="text-sm text-foreground">{row.original.items}</span>
+      <span className="text-sm text-foreground">{row.original.adjustmentItems.length}</span>
     ),
   },
   {

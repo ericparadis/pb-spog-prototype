@@ -37,15 +37,26 @@ export interface ProductTableRow {
   billingMechanics: BillingMechanics
 }
 
+export interface AdjustmentItemDetail {
+  name: string
+  adjustmentType: string
+  periods: number
+  value: string
+}
+
 export interface AdjustmentTableRow {
   id: string
   name: string
   code: string
   scope: 'National' | 'Available-for-Local'
-  items: number
+  category: string
+  howManyUses: number
   activeDateStart: string
   activeDateEnd: string
+  tier: number
+  region: string
   locations: number
+  adjustmentItems: AdjustmentItemDetail[]
 }
 
 export interface PricingTierTableRow {

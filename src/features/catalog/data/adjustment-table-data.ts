@@ -9,9 +9,13 @@ export function getAdjustmentTableData(brandId: string): AdjustmentTableRow[] {
       name: a.name,
       code: a.code,
       scope: a.scope as 'National' | 'Available-for-Local',
-      items: a.items,
+      category: a.category,
+      howManyUses: a.howManyUses,
       activeDateStart: a.activeDateStart,
       activeDateEnd: a.activeDateEnd,
+      tier: a.tier,
+      region: a.region,
       locations: a.locations,
+      adjustmentItems: a.adjustmentItems,
     }))
 }

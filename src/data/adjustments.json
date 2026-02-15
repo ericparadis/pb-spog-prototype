@@ -5,10 +5,17 @@
     "name": "Join for $1",
     "code": "JOIN1",
     "scope": "National",
-    "items": 2,
+    "category": "Membership",
+    "howManyUses": 1,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 142
+    "tier": 1,
+    "region": "United States",
+    "locations": 142,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Set to Value", "periods": 1, "value": "$1" },
+      { "name": "Activation Fee", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   },
   {
     "id": "adj-2",
@@ -16,10 +23,16 @@
     "name": "First Month Free",
     "code": "1STFREE",
     "scope": "National",
-    "items": 1,
+    "category": "Membership",
+    "howManyUses": 1,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-06-30",
-    "locations": 142
+    "tier": 1,
+    "region": "United States",
+    "locations": 142,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   },
   {
     "id": "adj-3",
@@ -27,10 +40,18 @@
     "name": "Student Discount",
     "code": "STUDENT15",
     "scope": "Available-for-Local",
-    "items": 3,
+    "category": "Membership",
+    "howManyUses": 0,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 34
+    "tier": 2,
+    "region": "United States",
+    "locations": 34,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Percentage Off", "periods": 0, "value": "15%" },
+      { "name": "Activation Fee", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" },
+      { "name": "Annual Fee", "adjustmentType": "Percentage Off", "periods": 0, "value": "10%" }
+    ]
   },
   {
     "id": "adj-4",
@@ -38,10 +59,17 @@
     "name": "Veteran Discount",
     "code": "VET10",
     "scope": "Available-for-Local",
-    "items": 2,
+    "category": "Membership",
+    "howManyUses": 0,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 28
+    "tier": 2,
+    "region": "United States",
+    "locations": 28,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Percentage Off", "periods": 0, "value": "10%" },
+      { "name": "Activation Fee", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   },
   {
     "id": "adj-5",
@@ -49,10 +77,16 @@
     "name": "Referral Bonus",
     "code": "REFER25",
     "scope": "National",
-    "items": 1,
+    "category": "Membership",
+    "howManyUses": 1,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 142
+    "tier": 1,
+    "region": "United States",
+    "locations": 142,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Amount Off", "periods": 1, "value": "$25" }
+    ]
   },
   {
     "id": "adj-6",
@@ -60,10 +94,16 @@
     "name": "First Class Free",
     "code": "FREE1ST",
     "scope": "National",
-    "items": 1,
+    "category": "Class",
+    "howManyUses": 1,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 86
+    "tier": 1,
+    "region": "United States",
+    "locations": 86,
+    "adjustmentItems": [
+      { "name": "Class Session", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   },
   {
     "id": "adj-7",
@@ -71,10 +111,16 @@
     "name": "Bring a Friend",
     "code": "BRING1",
     "scope": "National",
-    "items": 1,
+    "category": "Class",
+    "howManyUses": 3,
     "activeDateStart": "2025-03-01",
     "activeDateEnd": "2025-09-30",
-    "locations": 86
+    "tier": 1,
+    "region": "United States",
+    "locations": 86,
+    "adjustmentItems": [
+      { "name": "Guest Pass", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   },
   {
     "id": "adj-8",
@@ -82,9 +128,16 @@
     "name": "Corporate Discount",
     "code": "CORP20",
     "scope": "Available-for-Local",
-    "items": 2,
+    "category": "Membership",
+    "howManyUses": 0,
     "activeDateStart": "2025-01-01",
     "activeDateEnd": "2025-12-31",
-    "locations": 42
+    "tier": 2,
+    "region": "United States",
+    "locations": 42,
+    "adjustmentItems": [
+      { "name": "Membership", "adjustmentType": "Percentage Off", "periods": 0, "value": "20%" },
+      { "name": "Activation Fee", "adjustmentType": "Set to Value", "periods": 1, "value": "$0" }
+    ]
   }
 ]
