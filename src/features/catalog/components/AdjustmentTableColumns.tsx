@@ -3,6 +3,14 @@ import type { AdjustmentTableRow } from '../types'
 import { Badge } from '@/components/ui/badge'
 import { SortableHeader } from '@/features/_shared/components/cell-renderers'
 
+function formatDateRange(start: string, end: string): string {
+  const s = new Date(start)
+  const e = new Date(end)
+  const fmt = (d: Date) =>
+    `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getFullYear()).slice(2)}`
+  return `${fmt(s)} → ${fmt(e)}`
+}
+
 export const adjustmentColumns: ColumnDef<AdjustmentTableRow>[] = [
   {
     id: 'select',
@@ -30,92 +38,73 @@ export const adjustmentColumns: ColumnDef<AdjustmentTableRow>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Adjustment Name" />
+      <SortableHeader column={column} label="Name" />
     ),
     cell: ({ row }) => (
       <span className="text-sm font-medium text-foreground">{row.original.name}</span>
     ),
   },
   {
-    accessorKey: 'type',
+    accessorKey: 'code',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Type" />
+      <SortableHeader column={column} label="Code" />
+    ),
+    cell: ({ row }) => (
+      <code className="text-sm font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+        {row.original.code}
+      </code>
+    ),
+  },
+  {
+    accessorKey: 'scope',
+    header: ({ column }) => (
+      <SortableHeader column={column} label="Scope" />
     ),
     cell: ({ row }) => {
-      const type = row.original.type
-      const colorMap: Record<string, string> = {
-        Discount: 'bg-blue-100 text-blue-800',
-        Surcharge: 'bg-orange-100 text-orange-800',
-        Promotion: 'bg-purple-100 text-purple-800',
-      }
+      const scope = row.original.scope
+      const isNational = scope === 'National'
       return (
         <Badge
           variant="outline"
-          className={`text-xs font-medium px-2.5 py-0.5 border-transparent ${colorMap[type] || ''}`}
+          className={`text-xs font-medium px-2.5 py-0.5 border-transparent ${
+            isNational
+              ? 'bg-blue-100 text-blue-800'
+              : 'bg-amber-100 text-amber-800'
+          }`}
         >
-          {type}
+          {scope}
         </Badge>
       )
     },
   },
   {
-    accessorKey: 'appliesTo',
+    accessorKey: 'items',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Applies To" />
+      <SortableHeader column={column} label="Items" />
     ),
     cell: ({ row }) => (
-      <span className="text-sm text-foreground">{row.original.appliesTo}</span>
+      <span className="text-sm text-foreground">{row.original.items}</span>
     ),
   },
   {
-    accessorKey: 'value',
-    header: 'Value',
-    cell: ({ row }) => (
-      <span className="text-sm font-medium text-foreground">{row.original.value}</span>
-    ),
-  },
-  {
-    accessorKey: 'startDate',
+    id: 'activeDates',
+    accessorKey: 'activeDateStart',
     header: ({ column }) => (
-      <SortableHeader column={column} label="Start Date" />
+      <SortableHeader column={column} label="Active Dates" />
     ),
     cell: ({ row }) => (
       <span className="text-sm text-muted-foreground">
-        {new Date(row.original.startDate).toLocaleDateString()}
+        {formatDateRange(row.original.activeDateStart, row.original.activeDateEnd)}
       </span>
     ),
   },
   {
-    accessorKey: 'endDate',
+    accessorKey: 'locations',
     header: ({ column }) => (
-      <SortableHeader column={column} label="End Date" />
+      <SortableHeader column={column} label="Locations" />
     ),
     cell: ({ row }) => (
-      <span className="text-sm text-muted-foreground">
-        {new Date(row.original.endDate).toLocaleDateString()}
-      </span>
+      <span className="text-sm text-foreground">{row.original.locations}</span>
     ),
-  },
-  {
-    accessorKey: 'status',
-    header: ({ column }) => (
-      <SortableHeader column={column} label="Status" />
-    ),
-    cell: ({ row }) => {
-      const status = row.original.status
-      const colorMap: Record<string, string> = {
-        Active: 'bg-green-100 text-green-800',
-        Scheduled: 'bg-yellow-100 text-yellow-800',
-        Expired: 'bg-gray-100 text-gray-500',
-      }
-      return (
-        <Badge
-          variant="outline"
-          className={`text-xs font-medium px-2.5 py-0.5 border-transparent ${colorMap[status] || ''}`}
-        >
-          {status}
-        </Badge>
-      )
-    },
   },
 ]

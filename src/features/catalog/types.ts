@@ -14,12 +14,12 @@ export interface ProductTableRow {
 export interface AdjustmentTableRow {
   id: string
   name: string
-  type: 'Discount' | 'Surcharge' | 'Promotion'
-  appliesTo: string
-  value: string
-  startDate: string
-  endDate: string
-  status: 'Active' | 'Scheduled' | 'Expired'
+  code: string
+  scope: 'National' | 'Available-for-Local'
+  items: number
+  activeDateStart: string
+  activeDateEnd: string
+  locations: number
 }
 
 export interface PricingTierTableRow {

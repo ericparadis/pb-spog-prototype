@@ -39,9 +39,8 @@ export default function CatalogAdministration() {
     return adjustmentData.filter(
       (row) =>
         row.name.toLowerCase().includes(term) ||
-        row.type.toLowerCase().includes(term) ||
-        row.appliesTo.toLowerCase().includes(term) ||
-        row.status.toLowerCase().includes(term)
+        row.code.toLowerCase().includes(term) ||
+        row.scope.toLowerCase().includes(term)
     )
   }, [adjustmentData, search])
 
