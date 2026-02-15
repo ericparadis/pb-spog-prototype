@@ -1,0 +1,102 @@
+import type { AdjustmentTableRow } from '../types'
+
+const adjustmentsByBrand: Record<string, AdjustmentTableRow[]> = {
+  'anytime-fitness': [
+    {
+      id: 'adj-1',
+      name: 'New Member Discount',
+      type: 'Discount',
+      appliesTo: 'Supplements',
+      value: '15% off',
+      startDate: '2026-01-01',
+      endDate: '2026-03-31',
+      status: 'Active',
+    },
+    {
+      id: 'adj-2',
+      name: 'Spring Apparel Sale',
+      type: 'Promotion',
+      appliesTo: 'Apparel',
+      value: '20% off',
+      startDate: '2026-03-01',
+      endDate: '2026-04-15',
+      status: 'Scheduled',
+    },
+    {
+      id: 'adj-3',
+      name: 'Staff Purchase Discount',
+      type: 'Discount',
+      appliesTo: 'All Products',
+      value: '25% off',
+      startDate: '2025-01-01',
+      endDate: '2026-12-31',
+      status: 'Active',
+    },
+    {
+      id: 'adj-4',
+      name: 'Holiday Bundle Promo',
+      type: 'Promotion',
+      appliesTo: 'Accessories',
+      value: 'Buy 2 Get 1 Free',
+      startDate: '2025-12-01',
+      endDate: '2025-12-31',
+      status: 'Expired',
+    },
+    {
+      id: 'adj-5',
+      name: 'Bulk Supplement Surcharge',
+      type: 'Surcharge',
+      appliesTo: 'Supplements',
+      value: '+$2.00 shipping',
+      startDate: '2026-01-15',
+      endDate: '2026-06-30',
+      status: 'Active',
+    },
+  ],
+  'orangetheory': [
+    {
+      id: 'adj-6',
+      name: 'Member Loyalty Discount',
+      type: 'Discount',
+      appliesTo: 'All Products',
+      value: '10% off',
+      startDate: '2026-01-01',
+      endDate: '2026-12-31',
+      status: 'Active',
+    },
+    {
+      id: 'adj-7',
+      name: 'Equipment Clearance',
+      type: 'Promotion',
+      appliesTo: 'Equipment',
+      value: '30% off',
+      startDate: '2026-02-01',
+      endDate: '2026-02-28',
+      status: 'Active',
+    },
+    {
+      id: 'adj-8',
+      name: 'Weekend Flash Sale',
+      type: 'Promotion',
+      appliesTo: 'Apparel',
+      value: '15% off',
+      startDate: '2026-03-07',
+      endDate: '2026-03-09',
+      status: 'Scheduled',
+    },
+    {
+      id: 'adj-9',
+      name: 'Personal Training Add-on',
+      type: 'Surcharge',
+      appliesTo: 'Supplements',
+      value: '+$5.00 consultation',
+      startDate: '2025-06-01',
+      endDate: '2025-12-31',
+      status: 'Expired',
+    },
+  ],
+}
+
+export function getAdjustmentTableData(brandId: string): AdjustmentTableRow[] {
+  return adjustmentsByBrand[brandId] || []
+}
