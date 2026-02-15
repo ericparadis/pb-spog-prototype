@@ -11,8 +11,9 @@ import { CatalogToolbar } from './components/CatalogToolbar'
 import { CatalogPillTabs, type CatalogTab } from './components/CatalogPillTabs'
 import { ProductDrawer } from './components/ProductDrawer'
 import { AdjustmentDrawer } from './components/AdjustmentDrawer'
+import { PricingTierDrawer } from './components/PricingTierDrawer'
 import { useBrand } from '@/lib/contexts/BrandContext'
-import type { ProductTableRow, AdjustmentTableRow } from './types'
+import type { ProductTableRow, AdjustmentTableRow, PricingTierTableRow } from './types'
 
 export default function CatalogAdministration() {
   const { currentBrand } = useBrand()
@@ -20,6 +21,7 @@ export default function CatalogAdministration() {
   const [search, setSearch] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<ProductTableRow | null>(null)
   const [selectedAdjustment, setSelectedAdjustment] = useState<AdjustmentTableRow | null>(null)
+  const [selectedTier, setSelectedTier] = useState<PricingTierTableRow | null>(null)
 
   const productData = getProductTableData(currentBrand.id)
   const adjustmentData = getAdjustmentTableData(currentBrand.id)
@@ -109,6 +111,7 @@ export default function CatalogAdministration() {
           columns={pricingTierColumns}
           data={filteredPricingTiers}
           enableRowSelection
+          onRowClick={(row) => setSelectedTier(row)}
         />
       )}
       <ProductDrawer
@@ -120,6 +123,11 @@ export default function CatalogAdministration() {
         adjustment={selectedAdjustment}
         open={!!selectedAdjustment}
         onClose={() => setSelectedAdjustment(null)}
+      />
+      <PricingTierDrawer
+        tier={selectedTier}
+        open={!!selectedTier}
+        onClose={() => setSelectedTier(null)}
       />
     </PageContent>
   )
