@@ -50,9 +50,7 @@ export default function CatalogAdministration() {
     return pricingTierData.filter(
       (row) =>
         row.tierName.toLowerCase().includes(term) ||
-        row.description.toLowerCase().includes(term) ||
-        row.eligibility.toLowerCase().includes(term) ||
-        row.status.toLowerCase().includes(term)
+        String(row.tierNumber).includes(term)
     )
   }, [pricingTierData, search])
 

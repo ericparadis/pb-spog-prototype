@@ -24,10 +24,6 @@ export interface AdjustmentTableRow {
 
 export interface PricingTierTableRow {
   id: string
+  tierNumber: number
   tierName: string
-  description: string
-  discountPercent: number
-  eligibility: string
-  productCount: number
-  status: 'Active' | 'Inactive'
 }
