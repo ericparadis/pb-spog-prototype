@@ -1,0 +1,62 @@
+[
+  {
+    "id": "tier-1",
+    "brandId": "anytime-fitness",
+    "tierNumber": 1,
+    "tierName": "Standard"
+  },
+  {
+    "id": "tier-2",
+    "brandId": "anytime-fitness",
+    "tierNumber": 2,
+    "tierName": "Premium"
+  },
+  {
+    "id": "tier-3",
+    "brandId": "anytime-fitness",
+    "tierNumber": 3,
+    "tierName": "Elite"
+  },
+  {
+    "id": "tier-4",
+    "brandId": "anytime-fitness",
+    "tierNumber": 4,
+    "tierName": "VIP"
+  },
+  {
+    "id": "tier-5",
+    "brandId": "anytime-fitness",
+    "tierNumber": 5,
+    "tierName": "Corporate"
+  },
+  {
+    "id": "tier-6",
+    "brandId": "orangetheory",
+    "tierNumber": 1,
+    "tierName": "Standard"
+  },
+  {
+    "id": "tier-7",
+    "brandId": "orangetheory",
+    "tierNumber": 2,
+    "tierName": "Premium"
+  },
+  {
+    "id": "tier-8",
+    "brandId": "orangetheory",
+    "tierNumber": 3,
+    "tierName": "Elite"
+  },
+  {
+    "id": "tier-9",
+    "brandId": "orangetheory",
+    "tierNumber": 4,
+    "tierName": "VIP"
+  },
+  {
+    "id": "tier-10",
+    "brandId": "orangetheory",
+    "tierNumber": 5,
+    "tierName": "Corporate"
+  }
+]
