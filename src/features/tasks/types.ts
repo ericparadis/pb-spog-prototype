@@ -26,6 +26,12 @@ export interface NoteEntry {
   text: string
 }
 
+export interface ActivityEntry {
+  type: string
+  date: string
+  detail: string
+}
+
 export interface TaskTableRow {
   id: string
   title: string
@@ -45,4 +51,5 @@ export interface TaskTableRow {
   description: string
   communicationHistory: CommunicationEntry[]
   notes: NoteEntry[]
+  activity: ActivityEntry[]
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, ChevronDown, ChevronRight, Mail, Phone, MessageSquare, Bell } from 'lucide-react'
+import { X, ChevronDown, ChevronRight, Mail, Phone, MessageSquare, Bell, Globe, MapPin, PlayCircle, Dumbbell, UserCheck } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -23,6 +23,16 @@ const commTypeConfig: Record<CommunicationType, { icon: typeof Mail; label: stri
   text: { icon: MessageSquare, label: 'Text', className: 'text-purple-600 bg-purple-50' },
   push: { icon: Bell, label: 'Push', className: 'text-amber-600 bg-amber-50' },
 }
+
+const activityTypeConfig: Record<string, { icon: typeof Mail; label: string; className: string }> = {
+  'website-viewed': { icon: Globe, label: 'Website Viewed', className: 'text-blue-600 bg-blue-50' },
+  'location-visit': { icon: MapPin, label: 'Location Visit', className: 'text-emerald-600 bg-emerald-50' },
+  'trial-started': { icon: PlayCircle, label: 'Trial Started', className: 'text-violet-600 bg-violet-50' },
+  'class-attended': { icon: Dumbbell, label: 'Class Attended', className: 'text-indigo-600 bg-indigo-50' },
+  'fitness-consultation': { icon: UserCheck, label: 'Consultation', className: 'text-amber-600 bg-amber-50' },
+}
+
+const defaultActivityConfig = { icon: MapPin, label: 'Activity', className: 'text-gray-600 bg-gray-50' }
 
 const sampleScripts: Record<CommunicationType, { subject?: string; message: string }> = {
   email: {
@@ -76,6 +86,7 @@ interface TaskDetailDrawerProps {
 
 export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawerProps) {
   const { currentLocation } = useLocationContext()
+  const [activityOpen, setActivityOpen] = useState(false)
   const [commHistoryOpen, setCommHistoryOpen] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
   const [selectedChannel, setSelectedChannel] = useState<CommunicationType>(task.communicationType)
@@ -218,6 +229,47 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
                                 <span className="text-xs text-muted-foreground ml-auto">{entry.date}</span>
                               </div>
                               <p className="text-sm text-muted-foreground mt-0.5">{entry.summary}</p>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Activity Accordion */}
+            <div className="border-t">
+              <button
+                onClick={() => setActivityOpen(!activityOpen)}
+                className="flex items-center gap-2 w-full px-5 py-3 text-left hover:bg-muted/50 transition-colors"
+              >
+                {activityOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <span className="text-sm font-semibold text-foreground">
+                  Activity ({task.activity.length})
+                </span>
+              </button>
+              {activityOpen && (
+                <div className="px-5 pb-4">
+                  {task.activity.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">No activity recorded yet.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {task.activity.map((entry, idx) => {
+                        const config = activityTypeConfig[entry.type] ?? defaultActivityConfig
+                        const Icon = config.icon
+                        return (
+                          <div key={idx} className="flex items-start gap-3">
+                            <div className={`rounded-full p-1.5 ${config.className}`}>
+                              <Icon className="h-3.5 w-3.5" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-medium text-foreground">{config.label}</span>
+                                <span className="text-xs text-muted-foreground ml-auto">{entry.date}</span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mt-0.5">{entry.detail}</p>
                             </div>
                           </div>
                         )

@@ -15,7 +15,15 @@
       "name": "Jane Doe",
       "phone": "(415) 555-1002",
       "relationship": "Spouse"
-    }
+    },
+    "activity": [
+      { "type": "location-visit", "date": "2026-02-15", "detail": "Check-in at 7:12 AM" },
+      { "type": "class-attended", "date": "2026-02-14", "detail": "HIIT Bootcamp with Coach Mike" },
+      { "type": "location-visit", "date": "2026-02-13", "detail": "Check-in at 6:45 AM" },
+      { "type": "fitness-consultation", "date": "2026-02-10", "detail": "Quarterly fitness assessment — body composition review" },
+      { "type": "class-attended", "date": "2026-02-07", "detail": "Strength Training 101 with Coach Sarah" },
+      { "type": "location-visit", "date": "2026-02-05", "detail": "Check-in at 7:30 AM" }
+    ]
   },
   {
     "id": "mem-2",
@@ -33,7 +41,14 @@
       "name": "Tom Smith",
       "phone": "(415) 555-1004",
       "relationship": "Brother"
-    }
+    },
+    "activity": [
+      { "type": "location-visit", "date": "2026-02-14", "detail": "Check-in at 5:55 PM" },
+      { "type": "class-attended", "date": "2026-02-12", "detail": "Evening Yoga with Instructor Lin" },
+      { "type": "location-visit", "date": "2026-02-10", "detail": "Check-in at 6:10 PM" },
+      { "type": "location-visit", "date": "2026-02-07", "detail": "Check-in at 5:45 PM" },
+      { "type": "fitness-consultation", "date": "2026-01-20", "detail": "Personal training intro session with Coach Alex" }
+    ]
   },
   {
     "id": "mem-3",
@@ -51,7 +66,14 @@
       "name": "Sarah Brown",
       "phone": "(415) 555-1006",
       "relationship": "Mother"
-    }
+    },
+    "activity": [
+      { "type": "class-attended", "date": "2026-02-15", "detail": "Morning Spin Class with Coach Rachel" },
+      { "type": "location-visit", "date": "2026-02-15", "detail": "Check-in at 6:30 AM" },
+      { "type": "location-visit", "date": "2026-02-12", "detail": "Check-in at 7:00 AM" },
+      { "type": "class-attended", "date": "2026-02-10", "detail": "Cardio Kickboxing with Coach Jake" },
+      { "type": "fitness-consultation", "date": "2026-02-01", "detail": "New member onboarding — goal setting session" }
+    ]
   },
   {
     "id": "mem-4",
@@ -69,7 +91,15 @@
       "name": "Lisa Wilson",
       "phone": "(510) 555-2002",
       "relationship": "Sister"
-    }
+    },
+    "activity": [
+      { "type": "location-visit", "date": "2026-02-16", "detail": "Check-in at 6:00 AM" },
+      { "type": "class-attended", "date": "2026-02-14", "detail": "Advanced HIIT with Coach Maria" },
+      { "type": "class-attended", "date": "2026-02-12", "detail": "Strength & Conditioning with Coach Dan" },
+      { "type": "location-visit", "date": "2026-02-10", "detail": "Check-in at 6:15 AM" },
+      { "type": "fitness-consultation", "date": "2026-02-03", "detail": "Progress review — updated training plan" },
+      { "type": "class-attended", "date": "2026-01-30", "detail": "Power Yoga with Instructor Kenji" }
+    ]
   },
   {
     "id": "mem-5",
@@ -87,7 +117,11 @@
       "name": "Carlos Garcia",
       "phone": "(510) 555-2004",
       "relationship": "Father"
-    }
+    },
+    "activity": [
+      { "type": "location-visit", "date": "2026-01-15", "detail": "Check-in at 4:30 PM" },
+      { "type": "location-visit", "date": "2025-12-20", "detail": "Check-in at 5:00 PM — last visit before expiry" }
+    ]
   },
   {
     "id": "mem-6",
@@ -105,7 +139,12 @@
       "name": "Mark Taylor",
       "phone": "(415) 555-3002",
       "relationship": "Spouse"
-    }
+    },
+    "activity": [
+      { "type": "class-attended", "date": "2026-02-14", "detail": "Restorative Yoga with Instructor Mei" },
+      { "type": "location-visit", "date": "2026-02-12", "detail": "Check-in at 9:00 AM" },
+      { "type": "fitness-consultation", "date": "2026-01-28", "detail": "Wellness check-in — nutrition guidance" }
+    ]
   },
   {
     "id": "mem-7",

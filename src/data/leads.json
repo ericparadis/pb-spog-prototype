@@ -11,7 +11,13 @@
     "status": "lead",
     "createdDate": "2025-12-15",
     "lastActivity": "2026-02-10",
-    "notes": "Referred by existing member John Doe. Interested in personal training."
+    "notes": "Referred by existing member John Doe. Interested in personal training.",
+    "activity": [
+      { "type": "website-viewed", "date": "2026-02-10", "detail": "Viewed pricing page (3 min)" },
+      { "type": "location-visit", "date": "2026-02-06", "detail": "Guest tour with Sarah Johnson" },
+      { "type": "website-viewed", "date": "2026-01-28", "detail": "Viewed class schedule page (5 min)" },
+      { "type": "website-viewed", "date": "2025-12-15", "detail": "First visit — landing page via referral link" }
+    ]
   },
   {
     "id": "lead-2",
@@ -25,7 +31,13 @@
     "status": "appt-booked",
     "createdDate": "2026-01-05",
     "lastActivity": "2026-02-12",
-    "notes": "Saw promotion on Instagram. Booked a tour for next week."
+    "notes": "Saw promotion on Instagram. Booked a tour for next week.",
+    "activity": [
+      { "type": "trial-started", "date": "2026-02-12", "detail": "3-day trial pass activated" },
+      { "type": "location-visit", "date": "2026-02-12", "detail": "First visit — front desk check-in" },
+      { "type": "website-viewed", "date": "2026-02-08", "detail": "Viewed membership comparison page (4 min)" },
+      { "type": "website-viewed", "date": "2026-01-05", "detail": "Clicked Instagram ad — viewed landing page" }
+    ]
   },
   {
     "id": "lead-3",
@@ -39,7 +51,12 @@
     "status": "missed-guest",
     "createdDate": "2026-01-10",
     "lastActivity": "2026-02-08",
-    "notes": "Submitted web form. Visited once on guest pass but didn't follow up."
+    "notes": "Submitted web form. Visited once on guest pass but didn't follow up.",
+    "activity": [
+      { "type": "location-visit", "date": "2026-01-22", "detail": "Used guest pass — toured facility" },
+      { "type": "website-viewed", "date": "2026-01-15", "detail": "Viewed personal training page (6 min)" },
+      { "type": "website-viewed", "date": "2026-01-10", "detail": "Submitted web inquiry form" }
+    ]
   },
   {
     "id": "lead-4",
@@ -53,7 +70,12 @@
     "status": "lead-remarketing",
     "createdDate": "2025-11-20",
     "lastActivity": "2026-02-05",
-    "notes": "Clicked Google ad. Opened email campaign but hasn't responded."
+    "notes": "Clicked Google ad. Opened email campaign but hasn't responded.",
+    "activity": [
+      { "type": "website-viewed", "date": "2026-02-05", "detail": "Opened remarketing email — clicked pricing link" },
+      { "type": "website-viewed", "date": "2025-12-10", "detail": "Viewed class schedule page (2 min)" },
+      { "type": "website-viewed", "date": "2025-11-20", "detail": "Clicked Google ad — viewed landing page" }
+    ]
   },
   {
     "id": "lead-5",
@@ -67,7 +89,11 @@
     "status": "appt-no-show",
     "createdDate": "2026-01-20",
     "lastActivity": "2026-02-01",
-    "notes": "Walked in for info. Scheduled intro session but didn't show."
+    "notes": "Walked in for info. Scheduled intro session but didn't show.",
+    "activity": [
+      { "type": "location-visit", "date": "2026-01-20", "detail": "Walk-in visit — spoke with front desk" },
+      { "type": "website-viewed", "date": "2026-01-22", "detail": "Viewed membership plans page (3 min)" }
+    ]
   },
   {
     "id": "lead-6",
@@ -81,7 +107,12 @@
     "status": "lead",
     "createdDate": "2026-02-01",
     "lastActivity": "2026-02-13",
-    "notes": "Responded to Facebook ad. Looking for group fitness classes."
+    "notes": "Responded to Facebook ad. Looking for group fitness classes.",
+    "activity": [
+      { "type": "website-viewed", "date": "2026-02-13", "detail": "Viewed group fitness class schedule (7 min)" },
+      { "type": "website-viewed", "date": "2026-02-05", "detail": "Viewed pricing page (2 min)" },
+      { "type": "website-viewed", "date": "2026-02-01", "detail": "Clicked Facebook ad — viewed landing page" }
+    ]
   },
   {
     "id": "lead-7",
@@ -95,7 +126,13 @@
     "status": "expired-guest",
     "createdDate": "2025-10-15",
     "lastActivity": "2026-01-30",
-    "notes": "Guest pass expired. Was interested in yoga and Pilates classes."
+    "notes": "Guest pass expired. Was interested in yoga and Pilates classes.",
+    "activity": [
+      { "type": "trial-started", "date": "2025-11-01", "detail": "7-day guest pass activated" },
+      { "type": "location-visit", "date": "2025-11-03", "detail": "Attended yoga class as guest" },
+      { "type": "location-visit", "date": "2025-11-01", "detail": "First visit — referral from Grace's friend" },
+      { "type": "website-viewed", "date": "2025-10-15", "detail": "Viewed yoga class schedule (4 min)" }
+    ]
   },
   {
     "id": "lead-8",
@@ -109,7 +146,12 @@
     "status": "lead",
     "createdDate": "2026-02-05",
     "lastActivity": "2026-02-14",
-    "notes": "Filled out online inquiry form. Interested in off-peak membership."
+    "notes": "Filled out online inquiry form. Interested in off-peak membership.",
+    "activity": [
+      { "type": "website-viewed", "date": "2026-02-14", "detail": "Viewed off-peak pricing details (5 min)" },
+      { "type": "website-viewed", "date": "2026-02-10", "detail": "Viewed facility photos gallery (3 min)" },
+      { "type": "website-viewed", "date": "2026-02-05", "detail": "Submitted online inquiry form" }
+    ]
   },
   {
     "id": "lead-9",
@@ -123,7 +165,12 @@
     "status": "appt-booked",
     "createdDate": "2026-01-25",
     "lastActivity": "2026-02-11",
-    "notes": "Engaged with IG stories. Booked intro class for this weekend."
+    "notes": "Engaged with IG stories. Booked intro class for this weekend.",
+    "activity": [
+      { "type": "trial-started", "date": "2026-02-11", "detail": "Intro class pass activated" },
+      { "type": "website-viewed", "date": "2026-02-08", "detail": "Viewed HIIT class details (4 min)" },
+      { "type": "website-viewed", "date": "2026-01-25", "detail": "Clicked Instagram story link — viewed landing page" }
+    ]
   },
   {
     "id": "lead-10",
@@ -137,6 +184,11 @@
     "status": "lead",
     "createdDate": "2026-02-10",
     "lastActivity": "2026-02-14",
-    "notes": "New lead from Google search. Interested in weight training programs."
+    "notes": "New lead from Google search. Interested in weight training programs.",
+    "activity": [
+      { "type": "website-viewed", "date": "2026-02-14", "detail": "Viewed weight training programs page (6 min)" },
+      { "type": "website-viewed", "date": "2026-02-12", "detail": "Viewed facility virtual tour (8 min)" },
+      { "type": "website-viewed", "date": "2026-02-10", "detail": "Clicked Google ad — viewed landing page" }
+    ]
   }
 ]

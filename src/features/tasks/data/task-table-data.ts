@@ -1,24 +1,24 @@
-import type { TaskTableRow, CommunicationType } from '../types'
+import type { TaskTableRow, CommunicationType, ActivityEntry } from '../types'
 import tasksJson from '@/data/tasks.json'
 import leadsJson from '@/data/leads.json'
 import membersJson from '@/data/members.json'
 
 const communicationTypes: CommunicationType[] = ['call', 'email', 'text', 'push']
 
-function getContactInfo(relatedMemberId: string | null, relatedMemberType: string | null): { email: string | null; phone: string | null } {
-  if (!relatedMemberId || !relatedMemberType) return { email: null, phone: null }
+function getContactInfo(relatedMemberId: string | null, relatedMemberType: string | null): { email: string | null; phone: string | null; activity: ActivityEntry[] } {
+  if (!relatedMemberId || !relatedMemberType) return { email: null, phone: null, activity: [] }
 
   if (relatedMemberType === 'lead') {
     const lead = leadsJson.find((l) => l.id === relatedMemberId)
-    return { email: lead?.email ?? null, phone: lead?.phone ?? null }
+    return { email: lead?.email ?? null, phone: lead?.phone ?? null, activity: (lead as Record<string, unknown>)?.activity as ActivityEntry[] ?? [] }
   }
 
   if (relatedMemberType === 'member') {
     const member = membersJson.find((m) => m.id === relatedMemberId)
-    return { email: member?.email ?? null, phone: member?.phone ?? null }
+    return { email: member?.email ?? null, phone: member?.phone ?? null, activity: (member as Record<string, unknown>)?.activity as ActivityEntry[] ?? [] }
   }
 
-  return { email: null, phone: null }
+  return { email: null, phone: null, activity: [] }
 }
 
 export function getTaskTableData(): TaskTableRow[] {
@@ -43,6 +43,7 @@ export function getTaskTableData(): TaskTableRow[] {
       description: task.description,
       communicationHistory: task.communicationHistory as TaskTableRow['communicationHistory'],
       notes: task.notes as TaskTableRow['notes'],
+      activity: contact.activity,
     }
   })
 }
