@@ -37,6 +37,7 @@ export default function Leads() {
       <FigmaDataTable
         columns={leadColumns}
         data={filteredData}
+        className="table-standard"
         enableRowSelection
         onRowClick={(row) => setSelectedLead(row)}
       />
