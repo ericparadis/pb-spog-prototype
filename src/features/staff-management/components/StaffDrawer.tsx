@@ -337,7 +337,7 @@ export function StaffDrawer({ staff, open, onClose }: StaffDrawerProps) {
             <div className="flex-1 overflow-y-auto">
               {/* Profile Tab */}
               <TabsContent value="profile" className="mt-0 p-6">
-                <div className="max-w-2xl space-y-6">
+                <div className="space-y-6">
                   {/* Name Fields */}
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-1.5">
@@ -738,7 +738,7 @@ export function StaffDrawer({ staff, open, onClose }: StaffDrawerProps) {
 
               {/* Audit Log Tab */}
               <TabsContent value="audit-log" className="mt-0 p-6">
-                <div className="max-w-2xl space-y-4">
+                <div className="space-y-4">
                   {auditLogs.map((log) => (
                     <Card key={log.id} className="p-4 flex items-start gap-3">
                       <div className="p-2 rounded-lg bg-primary/10 text-primary shrink-0">
