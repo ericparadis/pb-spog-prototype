@@ -1,7 +1,9 @@
-import type { TaskTableRow } from '../types'
+import type { TaskTableRow, CommunicationType } from '../types'
 import tasksJson from '@/data/tasks.json'
 import leadsJson from '@/data/leads.json'
 import membersJson from '@/data/members.json'
+
+const communicationTypes: CommunicationType[] = ['call', 'email', 'text', 'push']
 
 function getContactInfo(relatedMemberId: string | null, relatedMemberType: string | null): { email: string | null; phone: string | null } {
   if (!relatedMemberId || !relatedMemberType) return { email: null, phone: null }
@@ -20,12 +22,13 @@ function getContactInfo(relatedMemberId: string | null, relatedMemberType: strin
 }
 
 export function getTaskTableData(): TaskTableRow[] {
-  return tasksJson.map((task) => {
+  return tasksJson.map((task, idx) => {
     const contact = getContactInfo(task.relatedMemberId, task.relatedMemberType)
     return {
       id: task.id,
       title: task.title,
       type: task.type as TaskTableRow['type'],
+      communicationType: communicationTypes[idx % communicationTypes.length],
       category: task.category as TaskTableRow['category'],
       status: task.status as TaskTableRow['status'],
       priority: task.priority as TaskTableRow['priority'],

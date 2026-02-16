@@ -17,29 +17,29 @@ export function TaskStats({ data }: TaskStatsProps) {
       label: 'Total Tasks',
       value: total.toLocaleString(),
       icon: ListTodo,
-      iconBg: 'bg-purple-100',
-      iconColor: 'text-purple-600',
+      iconBg: 'bg-indigo-500',
+      iconColor: 'text-white',
     },
     {
       label: 'Open',
       value: open.toLocaleString(),
       icon: Clock,
-      iconBg: 'bg-blue-100',
-      iconColor: 'text-blue-600',
+      iconBg: 'bg-cyan-500',
+      iconColor: 'text-white',
     },
     {
       label: 'In Progress',
       value: inProgress.toLocaleString(),
       icon: Loader2,
-      iconBg: 'bg-amber-100',
-      iconColor: 'text-amber-600',
+      iconBg: 'bg-amber-500',
+      iconColor: 'text-white',
     },
     {
       label: 'Overdue',
       value: overdue.toLocaleString(),
       icon: AlertTriangle,
-      iconBg: 'bg-red-100',
-      iconColor: 'text-red-600',
+      iconBg: 'bg-rose-500',
+      iconColor: 'text-white',
     },
   ]
 
@@ -52,8 +52,8 @@ export function TaskStats({ data }: TaskStatsProps) {
               <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-              <p className="text-2xl font-bold text-foreground">{stat.value}</p>
+              <p className="text-xs text-muted-foreground">{stat.label}</p>
+              <p className="text-xl font-bold text-foreground">{stat.value}</p>
             </div>
           </div>
         </Card>

@@ -4,10 +4,8 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
 import { TaskStatusBadge } from './TaskStatusBadge'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
-import { TaskCategoryBadge } from './TaskCategoryBadge'
 import type { TaskTableRow, CommunicationType } from '../types'
 
 function getInitials(name: string) {
@@ -77,7 +75,8 @@ interface TaskDetailDrawerProps {
 export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawerProps) {
   const [commHistoryOpen, setCommHistoryOpen] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
-  const [selectedChannel, setSelectedChannel] = useState<CommunicationType>('email')
+  const [selectedChannel, setSelectedChannel] = useState<CommunicationType>(task.communicationType)
+  const [showChannelPicker, setShowChannelPicker] = useState(false)
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
   const [isAnimating, setIsAnimating] = useState(false)
@@ -246,73 +245,71 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
             </div>
           </div>
 
-          {/* Task Details */}
-          <div className="px-6 py-5 border-b">
-            <h4 className="text-sm font-semibold text-foreground mb-3">Task Information</h4>
-            <div className="space-y-3">
-              <div>
-                <p className="text-sm font-medium text-foreground">{task.title}</p>
-                <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <span className="text-xs text-muted-foreground">Status</span>
-                  <div className="mt-1"><TaskStatusBadge status={task.status} /></div>
-                </div>
-                <div>
-                  <span className="text-xs text-muted-foreground">Priority</span>
-                  <div className="mt-1"><TaskPriorityBadge priority={task.priority} /></div>
-                </div>
-                <div>
-                  <span className="text-xs text-muted-foreground">Category</span>
-                  <div className="mt-1"><TaskCategoryBadge category={task.category} /></div>
-                </div>
-                <div>
-                  <span className="text-xs text-muted-foreground">Assigned To</span>
-                  <p className="text-sm font-medium text-foreground mt-1">{task.assignedTo}</p>
-                </div>
-                <div>
-                  <span className="text-xs text-muted-foreground">Due Date</span>
-                  <p className="text-sm text-foreground mt-1">{task.dueDate}</p>
-                </div>
-                <div>
-                  <span className="text-xs text-muted-foreground">Created</span>
-                  <p className="text-sm text-foreground mt-1">{task.createdDate}</p>
-                </div>
-              </div>
+          {/* Task Details — condensed */}
+          <div className="px-6 py-4 border-b">
+            <p className="text-sm font-medium text-foreground">{task.title}</p>
+            <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 mt-3 text-xs text-muted-foreground">
+              <span><TaskStatusBadge status={task.status} /></span>
+              <span><TaskPriorityBadge priority={task.priority} /></span>
+              <span className="capitalize">{task.category}</span>
+              <span>{task.assignedTo}</span>
+              <span>Due {task.dueDate}</span>
             </div>
           </div>
 
           {/* Messaging Section */}
           <div className="px-6 py-5">
-            <h4 className="text-sm font-semibold text-foreground mb-3">Send Communication</h4>
-
-            {/* Channel Tabs */}
-            <div className="flex gap-2 mb-4">
-              {(Object.keys(commTypeConfig) as CommunicationType[]).map((channel) => {
-                const config = commTypeConfig[channel]
-                const Icon = config.icon
-                const isActive = selectedChannel === channel
+            <div className="flex items-center gap-2 mb-3">
+              <h4 className="text-sm font-semibold text-foreground">Send Communication</h4>
+              <span className="text-sm text-muted-foreground">—</span>
+              {(() => {
+                const activeConfig = commTypeConfig[selectedChannel]
+                const ActiveIcon = activeConfig.icon
                 return (
-                  <button
-                    key={channel}
-                    onClick={() => {
-                      setSelectedChannel(channel)
-                      setSubject('')
-                      setMessage('')
-                    }}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <Icon className="h-3.5 w-3.5" />
-                    {config.label}
-                  </button>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                    <ActiveIcon className={`h-3.5 w-3.5 ${activeConfig.className.split(' ')[0]}`} />
+                    {activeConfig.label}
+                  </span>
                 )
-              })}
+              })()}
+              <button
+                onClick={() => setShowChannelPicker(!showChannelPicker)}
+                className="text-xs text-primary hover:underline ml-1"
+              >
+                {showChannelPicker ? 'hide' : 'change'}
+              </button>
             </div>
+
+            {/* Channel Tabs — hidden until "change" is clicked */}
+            {showChannelPicker && (
+              <div className="flex gap-2 mb-4">
+                {(Object.keys(commTypeConfig) as CommunicationType[]).map((channel) => {
+                  const config = commTypeConfig[channel]
+                  const Icon = config.icon
+                  const isActive = selectedChannel === channel
+                  return (
+                    <button
+                      key={channel}
+                      onClick={() => {
+                        setSelectedChannel(channel)
+                        setSubject('')
+                        setMessage('')
+                        setShowChannelPicker(false)
+                      }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      {config.label}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
 
             {/* Sample script button */}
             <div className="mb-4">

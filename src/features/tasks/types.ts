@@ -30,6 +30,7 @@ export interface TaskTableRow {
   id: string
   title: string
   type: TaskType
+  communicationType: CommunicationType
   category: TaskCategory
   status: TaskStatus
   priority: TaskPriority

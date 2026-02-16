@@ -1,8 +1,16 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { TaskTableRow } from '../types'
+import type { TaskTableRow, CommunicationType } from '../types'
 import { SortableHeader } from '@/features/_shared/components/cell-renderers'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Mail, Phone, MessageSquare, Bell } from 'lucide-react'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
+
+const commTypeDisplay: Record<CommunicationType, { icon: typeof Mail; label: string; className: string }> = {
+  email: { icon: Mail, label: 'Email', className: 'text-blue-600' },
+  call: { icon: Phone, label: 'Call', className: 'text-green-600' },
+  text: { icon: MessageSquare, label: 'Text', className: 'text-purple-600' },
+  push: { icon: Bell, label: 'Push', className: 'text-amber-600' },
+}
 
 function getInitials(name: string) {
   return name
@@ -64,6 +72,20 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
     cell: ({ row }) => (
       <TaskPriorityBadge priority={row.original.priority} />
     ),
+  },
+  {
+    accessorKey: 'communicationType',
+    header: 'Type',
+    cell: ({ row }) => {
+      const config = commTypeDisplay[row.original.communicationType]
+      const Icon = config.icon
+      return (
+        <div className="flex items-center gap-2">
+          <Icon className={`h-4 w-4 ${config.className}`} />
+          <span className="text-sm text-foreground">{config.label}</span>
+        </div>
+      )
+    },
   },
   {
     accessorKey: 'title',
