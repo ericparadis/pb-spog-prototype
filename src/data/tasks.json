@@ -116,29 +116,6 @@
     ]
   },
   {
-    "id": "task-6",
-    "title": "Staff CPR recertification follow-up",
-    "type": "member-followup",
-    "category": "training",
-    "status": "in-progress",
-    "priority": 3,
-    "assignedTo": "Maya Patel",
-    "relatedMember": "Nathan Brooks",
-    "relatedMemberType": "lead",
-    "relatedMemberId": "lead-14",
-    "dueDate": "2026-02-28",
-    "createdDate": "2026-02-01",
-    "description": "Nathan is a personal trainer lead interested in joining our team. Ensure CPR cert is current for onboarding.",
-    "communicationHistory": [
-      { "type": "email", "date": "2026-02-01", "summary": "Sent trainer onboarding requirements", "direction": "outbound" },
-      { "type": "email", "date": "2026-02-03", "summary": "Nathan confirmed CPR cert is up to date", "direction": "inbound" }
-    ],
-    "notes": [
-      { "date": "2026-02-01", "author": "Maya Patel", "text": "Nathan is applying as a part-time trainer. Strong background in functional fitness." },
-      { "date": "2026-02-03", "author": "Maya Patel", "text": "CPR cert verified. Scheduling interview next week." }
-    ]
-  },
-  {
     "id": "task-7",
     "title": "Follow up on cancelled membership",
     "type": "member-followup",
