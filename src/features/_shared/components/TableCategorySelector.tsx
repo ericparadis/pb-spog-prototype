@@ -23,7 +23,7 @@ export function TableCategorySelector<T extends string = string>({
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-1 rounded-full bg-muted p-1',
+        'inline-flex items-center gap-1 rounded-full bg-white p-1',
         className
       )}
     >
@@ -37,7 +37,7 @@ export function TableCategorySelector<T extends string = string>({
             className={cn(
               'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap',
               isActive
-                ? 'bg-background text-foreground shadow-sm'
+                ? 'bg-[#333333] text-white shadow-sm'
                 : 'text-muted-foreground hover:text-foreground'
             )}
           >
