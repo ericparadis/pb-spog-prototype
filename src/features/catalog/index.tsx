@@ -1,19 +1,28 @@
 import { useState, useMemo } from 'react'
+import { Package, Percent, Tag } from 'lucide-react'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
+import { TableCategorySelector, type TableCategoryOption } from '@/features/_shared/components/TableCategorySelector'
 import { productColumns } from './components/ProductTableColumns'
 import { adjustmentColumns } from './components/AdjustmentTableColumns'
 import { pricingTierColumns } from './components/PricingTierTableColumns'
-import { getProductTableData } from './data/product-table-data'
-import { getAdjustmentTableData } from './data/adjustment-table-data'
-import { getPricingTierTableData } from './data/pricing-tier-table-data'
 import { CatalogToolbar } from './components/CatalogToolbar'
-import { CatalogPillTabs, type CatalogTab } from './components/CatalogPillTabs'
 import { ProductDrawer } from './components/ProductDrawer'
 import { AdjustmentDrawer } from './components/AdjustmentDrawer'
 import { PricingTierDrawer } from './components/PricingTierDrawer'
+import { getProductTableData } from './data/product-table-data'
+import { getAdjustmentTableData } from './data/adjustment-table-data'
+import { getPricingTierTableData } from './data/pricing-tier-table-data'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import type { ProductTableRow, AdjustmentTableRow, PricingTierTableRow } from './types'
+
+export type CatalogTab = 'products' | 'adjustments' | 'pricing-tiers'
+
+const catalogTabOptions: TableCategoryOption<CatalogTab>[] = [
+  { value: 'products', label: 'Products', icon: Package },
+  { value: 'adjustments', label: 'Adjustment Catalog', icon: Percent },
+  { value: 'pricing-tiers', label: 'Pricing Tiers', icon: Tag },
+]
 
 export default function CatalogAdministration() {
   const { currentBrand } = useBrand()
@@ -82,14 +91,20 @@ export default function CatalogAdministration() {
 
   return (
     <PageContent>
-      <CatalogPillTabs activeTab={activeTab} onChange={handleTabChange} />
-      <CatalogToolbar
-        searchValue={search}
-        onSearchChange={setSearch}
-        onAddProduct={() => {}}
-        searchPlaceholder={searchPlaceholder}
-        addLabel={addLabel}
-      />
+      <div className="flex items-center justify-between mb-4">
+        <TableCategorySelector
+          options={catalogTabOptions}
+          value={activeTab}
+          onChange={handleTabChange}
+        />
+        <CatalogToolbar
+          searchValue={search}
+          onSearchChange={setSearch}
+          onAddProduct={() => {}}
+          searchPlaceholder={searchPlaceholder}
+          addLabel={addLabel}
+        />
+      </div>
       {activeTab === 'products' && (
         <FigmaDataTable
           columns={productColumns}
