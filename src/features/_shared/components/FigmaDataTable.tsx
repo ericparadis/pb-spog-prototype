@@ -52,7 +52,7 @@ export function FigmaDataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow
               key={headerGroup.id}
-              className="hover:bg-transparent"
+              className="hover:bg-transparent border-b-0"
             >
               {headerGroup.headers.map((header) => (
                 <TableHead
