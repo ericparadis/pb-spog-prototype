@@ -240,20 +240,28 @@ export function StaffDrawer({ staff, open, onClose }: StaffDrawerProps) {
     setTimeout(() => setCopiedUsername(false), 2000)
   }
 
-  if (!open || !staff) return null
-
-  const auditLogs = generateAuditLog(staff)
+  const auditLogs = staff ? generateAuditLog(staff) : []
   const selectedLocation = brandLocations.find((l) => l.id === selectedLocationId)
   const selectedLocationRoles = selectedLocationId ? roleAssignments[selectedLocationId] || [] : []
 
+  if (!staff) return null
+
   return (
-    <div className="fixed inset-0 z-50">
+    <div
+      className={`fixed inset-0 z-50 transition-opacity duration-300 ${
+        open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}
+    >
       <div
-        className="absolute inset-0 bg-black/50 transition-opacity"
+        className="absolute inset-0 bg-black/50"
         onClick={onClose}
       />
 
-      <div className="absolute top-0 right-0 h-full w-[800px] max-w-full bg-background shadow-2xl border-l flex flex-col animate-in slide-in-from-right duration-300">
+      <div
+        className={`absolute top-0 right-0 h-full w-[1000px] max-w-full bg-background shadow-2xl border-l flex flex-col transition-transform duration-300 ease-in-out ${
+          open ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         {/* Header with avatar, name, status, save */}
         <div className="px-6 py-5 border-b">
           <div className="flex items-start justify-between">

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { Plus } from 'lucide-react'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
@@ -15,7 +15,14 @@ export default function StaffManagement() {
   const allData = getStaffTableData(currentBrand.id)
   const [search, setSearch] = useState('')
   const [selectedStaff, setSelectedStaff] = useState<StaffTableRow | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const lastStaffRef = useRef<StaffTableRow | null>(null)
   const [showAddDialog, setShowAddDialog] = useState(false)
+
+  // Keep a reference to the last selected staff so the drawer can animate out with content
+  if (selectedStaff) {
+    lastStaffRef.current = selectedStaff
+  }
 
   const filteredData = useMemo(() => {
     if (!search.trim()) return allData
@@ -48,13 +55,19 @@ export default function StaffManagement() {
           columns={staffColumns}
           data={filteredData}
           enableRowSelection
-          onRowClick={(row) => setSelectedStaff(row)}
+          onRowClick={(row) => {
+            setSelectedStaff(row)
+            setDrawerOpen(true)
+          }}
         />
       </div>
       <StaffDrawer
-        staff={selectedStaff}
-        open={!!selectedStaff}
-        onClose={() => setSelectedStaff(null)}
+        staff={selectedStaff || lastStaffRef.current}
+        open={drawerOpen}
+        onClose={() => {
+          setDrawerOpen(false)
+          setTimeout(() => setSelectedStaff(null), 300)
+        }}
       />
     </PageContent>
   )
