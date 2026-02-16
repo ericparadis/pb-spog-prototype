@@ -102,6 +102,7 @@ export default function Tasks() {
           data={filteredData}
           enableRowSelection
           onRowClick={(row) => setSelectedTask(row)}
+          initialSorting={[{ id: 'priority', desc: false }]}
         />
       </div>
       {selectedTask && (

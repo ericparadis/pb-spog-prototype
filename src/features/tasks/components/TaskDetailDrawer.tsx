@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { TaskStatusBadge } from './TaskStatusBadge'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
 import type { TaskTableRow, CommunicationType } from '../types'
+import { useLocationContext } from '@/lib/contexts/LocationContext'
 
 function getInitials(name: string) {
   return name
@@ -25,39 +26,40 @@ const commTypeConfig: Record<CommunicationType, { icon: typeof Mail; label: stri
 
 const sampleScripts: Record<CommunicationType, { subject?: string; message: string }> = {
   email: {
-    subject: 'Following up on your gym membership inquiry',
+    subject: 'Following up on your membership inquiry at {location}',
     message: `Hi {name},
 
-Thank you for your interest in joining our gym! I wanted to follow up and see if you have any questions about our membership plans or facilities.
+Thank you for your interest in joining {location}! I wanted to follow up and see if you have any questions about our membership plans or facilities.
 
-We'd love to schedule a tour at your convenience. You can reply to this email or call us directly to set up a time that works for you.
+We're located at {locationAddress} and would love to schedule a tour at your convenience. You can reply to this email or call us at {locationPhone} to set up a time that works for you.
 
 Looking forward to hearing from you!
 
 Best regards,
-{staff}`,
+{staff}
+{location}`,
   },
   text: {
-    message: `Hi {name}! This is {staff} from the gym. Just following up on your recent visit. Would you like to schedule a time to come back in? Let me know if you have any questions!`,
+    message: `Hi {name}! This is {staff} from {location}. Just following up on your recent visit. Would you like to schedule a time to come back in? We're at {locationAddress}. Let me know if you have any questions!`,
   },
   push: {
-    message: `Hey {name}! We noticed you haven't been in recently. We have some great new classes starting this week - come check them out! Reply STOP to opt out.`,
+    message: `Hey {name}! We noticed you haven't been in to {location} recently. We have some great new classes starting this week - come check them out! Reply STOP to opt out.`,
   },
   call: {
     message: `CALL SCRIPT:
 
-1. Greeting: "Hi, this is {staff} calling from [Gym Name]. May I speak with {name}?"
+1. Greeting: "Hi, this is {staff} calling from {location}. May I speak with {name}?"
 
-2. Purpose: "I'm reaching out regarding your recent inquiry about membership / your upcoming renewal / your recent visit."
+2. Purpose: "I'm reaching out regarding your recent inquiry about membership / your upcoming renewal / your recent visit at our {locationAddress} location."
 
 3. Discovery Questions:
    - "What are your main fitness goals right now?"
-   - "Have you had a chance to visit our facility?"
+   - "Have you had a chance to visit our facility at {locationAddress}?"
    - "Is there anything specific you're looking for in a gym?"
 
 4. Value Proposition: "Based on what you've told me, I think our [plan name] would be a great fit because..."
 
-5. Close: "I'd love to set up a time for you to come in. Would [day] or [day] work better for you?"
+5. Close: "I'd love to set up a time for you to come in to {location}. Would [day] or [day] work better for you?"
 
 6. Objection Handling:
    - Price: "I understand budget is important. Let me share our current promotion..."
@@ -73,6 +75,7 @@ interface TaskDetailDrawerProps {
 }
 
 export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawerProps) {
+  const { currentLocation } = useLocationContext()
   const [commHistoryOpen, setCommHistoryOpen] = useState(false)
   const [notesOpen, setNotesOpen] = useState(false)
   const [selectedChannel, setSelectedChannel] = useState<CommunicationType>(task.communicationType)
@@ -104,13 +107,23 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
   const memberName = task.relatedMember
   const staffName = task.assignedTo
 
+  const locationName = currentLocation?.name ?? ''
+  const locationAddress = currentLocation
+    ? `${currentLocation.address}, ${currentLocation.city}, ${currentLocation.state} ${currentLocation.zip}`
+    : ''
+  const locationPhone = currentLocation?.phone ?? ''
+
   function fillSampleCopy() {
-    const filledMessage = script.message
-      .replace(/\{name\}/g, memberName)
-      .replace(/\{staff\}/g, staffName)
-    setMessage(filledMessage)
+    const fill = (text: string) =>
+      text
+        .replace(/\{name\}/g, memberName)
+        .replace(/\{staff\}/g, staffName)
+        .replace(/\{location\}/g, locationName)
+        .replace(/\{locationAddress\}/g, locationAddress)
+        .replace(/\{locationPhone\}/g, locationPhone)
+    setMessage(fill(script.message))
     if (script.subject) {
-      setSubject(script.subject)
+      setSubject(fill(script.subject))
     }
   }
 
@@ -125,11 +138,14 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
         className={`fixed right-0 top-0 z-50 h-full w-[1000px] max-w-full bg-background border-l shadow-xl flex flex-col overflow-hidden transition-transform duration-300 ease-out ${isAnimating ? 'translate-x-0' : 'translate-x-full'}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold">Task Details</h2>
+        <div className="flex items-start justify-between px-6 py-4 border-b">
+          <div className="flex-1 min-w-0 pr-4">
+            <h2 className="text-lg font-semibold text-foreground">{task.title}</h2>
+            <p className="text-sm text-muted-foreground mt-0.5">{task.description}</p>
+          </div>
           <button
             onClick={handleClose}
-            className="rounded-sm opacity-70 hover:opacity-100 transition-opacity"
+            className="rounded-sm opacity-70 hover:opacity-100 transition-opacity mt-1"
           >
             <X className="h-5 w-5" />
           </button>
@@ -247,9 +263,7 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
 
           {/* Task Details — condensed */}
           <div className="px-6 py-4 border-b">
-            <p className="text-sm font-medium text-foreground">{task.title}</p>
-            <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 mt-3 text-xs text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-muted-foreground">
               <span><TaskStatusBadge status={task.status} /></span>
               <span><TaskPriorityBadge priority={task.priority} /></span>
               <span className="capitalize">{task.category}</span>
@@ -338,7 +352,7 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder={selectedChannel === 'call' ? 'Call notes...' : 'Type your message...'}
-                  className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[120px] resize-y"
+                  className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[280px] resize-y"
                 />
               </div>
             </div>

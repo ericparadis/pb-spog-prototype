@@ -10,6 +10,7 @@ export interface Location {
   city: string
   state: string
   zip: string
+  phone: string
 }
 
 interface LocationContextType {

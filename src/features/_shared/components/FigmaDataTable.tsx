@@ -22,6 +22,7 @@ interface FigmaDataTableProps<TData, TValue> {
   className?: string
   enableRowSelection?: boolean
   onRowClick?: (row: TData) => void
+  initialSorting?: SortingState
 }
 
 export function FigmaDataTable<TData, TValue>({
@@ -30,8 +31,9 @@ export function FigmaDataTable<TData, TValue>({
   className,
   enableRowSelection = false,
   onRowClick,
+  initialSorting = [],
 }: FigmaDataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>(initialSorting)
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 
   const table = useReactTable({

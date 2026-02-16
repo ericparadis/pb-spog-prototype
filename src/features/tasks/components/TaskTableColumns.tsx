@@ -6,10 +6,10 @@ import { Mail, Phone, MessageSquare, Bell } from 'lucide-react'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
 
 const commTypeDisplay: Record<CommunicationType, { icon: typeof Mail; label: string; className: string }> = {
-  email: { icon: Mail, label: 'Email', className: 'text-blue-600' },
-  call: { icon: Phone, label: 'Call', className: 'text-green-600' },
-  text: { icon: MessageSquare, label: 'Text', className: 'text-purple-600' },
-  push: { icon: Bell, label: 'Push', className: 'text-amber-600' },
+  email: { icon: Mail, label: 'Email', className: 'text-muted-foreground' },
+  call: { icon: Phone, label: 'Call', className: 'text-muted-foreground' },
+  text: { icon: MessageSquare, label: 'Text', className: 'text-muted-foreground' },
+  push: { icon: Bell, label: 'Push', className: 'text-muted-foreground' },
 }
 
 function getInitials(name: string) {
