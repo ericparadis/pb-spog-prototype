@@ -109,6 +109,7 @@ export default function CatalogAdministration() {
         <FigmaDataTable
           columns={productColumns}
           data={filteredProducts}
+          className="table-standard"
           enableRowSelection
           onRowClick={(row) => setSelectedProduct(row)}
         />
@@ -117,6 +118,7 @@ export default function CatalogAdministration() {
         <FigmaDataTable
           columns={adjustmentColumns}
           data={filteredAdjustments}
+          className="table-standard"
           enableRowSelection
           onRowClick={(row) => setSelectedAdjustment(row)}
         />
@@ -125,6 +127,7 @@ export default function CatalogAdministration() {
         <FigmaDataTable
           columns={pricingTierColumns}
           data={filteredPricingTiers}
+          className="table-standard"
           enableRowSelection
           onRowClick={(row) => setSelectedTier(row)}
         />

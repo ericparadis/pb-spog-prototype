@@ -36,6 +36,7 @@ export default function MemberManagement() {
       <FigmaDataTable
         columns={memberColumns}
         data={filteredData}
+        className="table-standard"
         enableRowSelection
         onRowClick={(row) => setSelectedMember(row)}
       />
