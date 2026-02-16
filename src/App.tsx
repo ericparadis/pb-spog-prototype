@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrandProvider } from '@/lib/contexts/BrandContext'
 import { AuthProvider } from '@/lib/contexts/AuthContext'
+import { LocationProvider } from '@/lib/contexts/LocationContext'
 import { PrototypeControls } from '@/components/PrototypeControls'
 import { AppLayout } from '@/components/AppLayout'
 import { routes } from './routes'
@@ -21,6 +22,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrandProvider>
         <AuthProvider>
+          <LocationProvider>
           <PrototypeControls>
             <BrowserRouter>
               <AppLayout>
@@ -41,6 +43,7 @@ function App() {
               </AppLayout>
             </BrowserRouter>
           </PrototypeControls>
+          </LocationProvider>
         </AuthProvider>
       </BrandProvider>
     </QueryClientProvider>

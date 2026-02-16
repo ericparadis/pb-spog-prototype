@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
+import { useLocationContext } from '@/lib/contexts/LocationContext'
 
 interface AppLayoutProps {
   children: ReactNode
@@ -62,7 +63,9 @@ const routeTitles: Record<string, string> = {
 export function AppLayout({ children }: AppLayoutProps) {
   const { currentBrand } = useBrand()
   const { user } = useAuth()
+  const { currentLocation, locations, switchLocation } = useLocationContext()
   const location = useLocation()
+  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false)
 
   const navSections: NavSection[] = [
     {
@@ -133,6 +136,59 @@ export function AppLayout({ children }: AppLayoutProps) {
             />
           </Link>
         </div>
+
+        {/* Location Selector */}
+        {currentLocation && (
+          <div className="px-4 pt-4 relative">
+            <button
+              onClick={() => setLocationDropdownOpen(!locationDropdownOpen)}
+              className="flex items-center gap-3 w-full rounded-lg border border-border bg-white px-3 py-2.5 text-left hover:bg-muted/50 transition-colors"
+            >
+              <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium text-foreground truncate">
+                  {currentLocation.name.replace(/^(Anytime Fitness|Orangetheory Fitness)\s*/, '')}
+                </div>
+                <div className="text-xs text-muted-foreground truncate">
+                  {currentLocation.city}, {currentLocation.state} {currentLocation.zip}
+                </div>
+              </div>
+              <ChevronDown className={`h-4 w-4 text-muted-foreground flex-shrink-0 transition-transform ${locationDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {locationDropdownOpen && (
+              <>
+                <div className="fixed inset-0 z-30" onClick={() => setLocationDropdownOpen(false)} />
+                <div className="absolute left-4 right-4 top-full mt-1 z-40 rounded-lg border border-border bg-white shadow-lg overflow-hidden">
+                  {locations.map((loc) => {
+                    const isActive = loc.id === currentLocation.id
+                    return (
+                      <button
+                        key={loc.id}
+                        onClick={() => {
+                          switchLocation(loc.id)
+                          setLocationDropdownOpen(false)
+                        }}
+                        className={`flex items-center gap-3 w-full px-3 py-2.5 text-left transition-colors ${
+                          isActive ? 'bg-muted' : 'hover:bg-muted/50'
+                        }`}
+                      >
+                        <MapPin className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-foreground truncate">
+                            {loc.name.replace(/^(Anytime Fitness|Orangetheory Fitness)\s*/, '')}
+                          </div>
+                          <div className="text-xs text-muted-foreground truncate">
+                            {loc.city}, {loc.state} {loc.zip}
+                          </div>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </>
+            )}
+          </div>
+        )}
 
         {/* Navigation - exact Figma specs */}
         <nav className="flex-1 overflow-y-auto py-6">
