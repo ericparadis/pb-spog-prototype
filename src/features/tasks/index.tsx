@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { PageHeader } from '@/components/PageHeader'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
-import { PillFilter } from '@/features/_shared/components/PillFilter'
+import { TableCategorySelector } from '@/features/_shared/components/TableCategorySelector'
 import { taskColumns } from './components/TaskTableColumns'
 import { getTaskTableData } from './data/task-table-data'
 import { TasksToolbar } from './components/TasksToolbar'
@@ -85,7 +85,7 @@ export default function Tasks() {
       />
       <TaskStats data={allData} />
       <div className="flex items-center justify-between mb-4">
-        <PillFilter
+        <TableCategorySelector
           options={taskFilterOptions}
           value={typeFilter}
           onChange={setTypeFilter}
