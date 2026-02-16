@@ -189,6 +189,8 @@ function trainerToStaff(trainer: typeof trainersJson[number]): StaffTableRow {
   return {
     id: trainer.id,
     name: `${trainer.firstName} ${trainer.lastName}`,
+    firstName: trainer.firstName,
+    lastName: trainer.lastName,
     email: trainer.email,
     phone: trainer.phone,
     title: trainer.specialties[0] ? `${trainer.specialties[0]} Trainer` : 'Personal Trainer',
@@ -197,6 +199,7 @@ function trainerToStaff(trainer: typeof trainersJson[number]): StaffTableRow {
     locationIds: trainer.locationIds,
     status: 'Active',
     hireDate: '2022-01-15',
+    birthdate: '1990-06-15',
     certifications: trainer.certifications,
     specialties: trainer.specialties,
     bio: trainer.bio,
@@ -213,6 +216,8 @@ export function getStaffTableData(brandId: string): StaffTableRow[] {
     .map((s) => ({
       id: s.id,
       name: `${s.firstName} ${s.lastName}`,
+      firstName: s.firstName,
+      lastName: s.lastName,
       email: s.email,
       phone: s.phone,
       title: s.title,
@@ -221,6 +226,7 @@ export function getStaffTableData(brandId: string): StaffTableRow[] {
       locationIds: s.locationIds,
       status: s.status,
       hireDate: s.hireDate,
+      birthdate: '',
       certifications: s.certifications,
       specialties: s.specialties,
       bio: s.bio,

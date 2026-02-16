@@ -28,7 +28,10 @@
       "Bash(python3:*)",
       "Bash(code:*)",
       "Bash(npm run lint:*)",
-      "Bash(git fetch:*)"
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git stash:*)",
+      "Bash(git stash pop:*)"
     ]
   }
 }
