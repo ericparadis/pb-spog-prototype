@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
-import { TableCategorySelector } from '@/features/_shared/components/TableCategorySelector'
+import { TableStandardHeader } from '@/features/_shared/components/TableStandardHeader'
 import { taskColumns } from './components/TaskTableColumns'
 import { getTaskTableData } from './data/task-table-data'
-import { TasksToolbar } from './components/TasksToolbar'
 import { TaskDetailDrawer } from './components/TaskDetailDrawer'
 import { TaskFilterPanel } from './components/TaskFilterPanel'
 import { TaskStats } from './components/TaskStats'
@@ -80,33 +79,31 @@ export default function Tasks() {
   return (
     <PageContent>
       <TaskStats data={allData} />
-      <div className="flex items-center justify-between mb-4">
-        <TableCategorySelector
-          options={taskFilterOptions}
-          value={typeFilter}
-          onChange={setTypeFilter}
-        />
-        <TasksToolbar
+      <div className="table-standard">
+        <TableStandardHeader
+          categories={taskFilterOptions}
+          categoryValue={typeFilter}
+          onCategoryChange={setTypeFilter}
           searchValue={search}
           onSearchChange={setSearch}
+          searchPlaceholder="Search tasks..."
           onFiltersClick={() => setShowFilters(!showFilters)}
         />
-      </div>
-      {showFilters && (
-        <TaskFilterPanel
-          filters={filters}
-          onChange={setFilters}
-          onClose={() => setShowFilters(false)}
-          staffNames={staffNames}
+        {showFilters && (
+          <TaskFilterPanel
+            filters={filters}
+            onChange={setFilters}
+            onClose={() => setShowFilters(false)}
+            staffNames={staffNames}
+          />
+        )}
+        <FigmaDataTable
+          columns={taskColumns}
+          data={filteredData}
+          enableRowSelection
+          onRowClick={(row) => setSelectedTask(row)}
         />
-      )}
-      <FigmaDataTable
-        columns={taskColumns}
-        data={filteredData}
-        className="table-standard"
-        enableRowSelection
-        onRowClick={(row) => setSelectedTask(row)}
-      />
+      </div>
       {selectedTask && (
         <TaskDetailDrawer
           task={selectedTask}

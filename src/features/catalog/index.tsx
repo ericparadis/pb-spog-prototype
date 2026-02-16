@@ -1,18 +1,19 @@
 import { useState, useMemo } from 'react'
-import { Package, Percent, Tag } from 'lucide-react'
+import { Package, Percent, Tag, Plus } from 'lucide-react'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
-import { TableCategorySelector, type TableCategoryOption } from '@/features/_shared/components/TableCategorySelector'
+import { TableStandardHeader } from '@/features/_shared/components/TableStandardHeader'
+import type { TableCategoryOption } from '@/features/_shared/components/TableCategorySelector'
 import { productColumns } from './components/ProductTableColumns'
 import { adjustmentColumns } from './components/AdjustmentTableColumns'
 import { pricingTierColumns } from './components/PricingTierTableColumns'
-import { CatalogToolbar } from './components/CatalogToolbar'
 import { ProductDrawer } from './components/ProductDrawer'
 import { AdjustmentDrawer } from './components/AdjustmentDrawer'
 import { PricingTierDrawer } from './components/PricingTierDrawer'
 import { getProductTableData } from './data/product-table-data'
 import { getAdjustmentTableData } from './data/adjustment-table-data'
 import { getPricingTierTableData } from './data/pricing-tier-table-data'
+import { Button } from '@/components/ui/button'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import type { ProductTableRow, AdjustmentTableRow, PricingTierTableRow } from './types'
 
@@ -91,47 +92,46 @@ export default function CatalogAdministration() {
 
   return (
     <PageContent>
-      <div className="flex items-center justify-between mb-4">
-        <TableCategorySelector
-          options={catalogTabOptions}
-          value={activeTab}
-          onChange={handleTabChange}
-        />
-        <CatalogToolbar
+      <div className="table-standard">
+        <TableStandardHeader
+          categories={catalogTabOptions}
+          categoryValue={activeTab}
+          onCategoryChange={handleTabChange}
           searchValue={search}
           onSearchChange={setSearch}
-          onAddProduct={() => {}}
           searchPlaceholder={searchPlaceholder}
-          addLabel={addLabel}
+          actions={
+            <Button size="sm" onClick={() => {}}>
+              <Plus className="h-4 w-4 mr-1.5" />
+              {addLabel}
+            </Button>
+          }
         />
+        {activeTab === 'products' && (
+          <FigmaDataTable
+            columns={productColumns}
+            data={filteredProducts}
+            enableRowSelection
+            onRowClick={(row) => setSelectedProduct(row)}
+          />
+        )}
+        {activeTab === 'adjustments' && (
+          <FigmaDataTable
+            columns={adjustmentColumns}
+            data={filteredAdjustments}
+            enableRowSelection
+            onRowClick={(row) => setSelectedAdjustment(row)}
+          />
+        )}
+        {activeTab === 'pricing-tiers' && (
+          <FigmaDataTable
+            columns={pricingTierColumns}
+            data={filteredPricingTiers}
+            enableRowSelection
+            onRowClick={(row) => setSelectedTier(row)}
+          />
+        )}
       </div>
-      {activeTab === 'products' && (
-        <FigmaDataTable
-          columns={productColumns}
-          data={filteredProducts}
-          className="table-standard"
-          enableRowSelection
-          onRowClick={(row) => setSelectedProduct(row)}
-        />
-      )}
-      {activeTab === 'adjustments' && (
-        <FigmaDataTable
-          columns={adjustmentColumns}
-          data={filteredAdjustments}
-          className="table-standard"
-          enableRowSelection
-          onRowClick={(row) => setSelectedAdjustment(row)}
-        />
-      )}
-      {activeTab === 'pricing-tiers' && (
-        <FigmaDataTable
-          columns={pricingTierColumns}
-          data={filteredPricingTiers}
-          className="table-standard"
-          enableRowSelection
-          onRowClick={(row) => setSelectedTier(row)}
-        />
-      )}
       <ProductDrawer
         product={selectedProduct}
         open={!!selectedProduct}

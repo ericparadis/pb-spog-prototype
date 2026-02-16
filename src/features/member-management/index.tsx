@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react'
 import { PageHeader } from '@/components/PageHeader'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
+import { TableStandardHeader } from '@/features/_shared/components/TableStandardHeader'
 import { memberColumns } from './components/MemberTableColumns'
 import { getMemberTableData } from './data/member-table-data'
-import { MemberToolbar } from './components/MemberToolbar'
 import { MemberStats } from './components/MemberStats'
 import { MemberDrawer } from './components/MemberDrawer'
 import { useBrand } from '@/lib/contexts/BrandContext'
@@ -32,14 +32,18 @@ export default function MemberManagement() {
     <PageContent>
       <PageHeader title="Members" />
       <MemberStats data={allData} />
-      <MemberToolbar searchValue={search} onSearchChange={setSearch} />
-      <FigmaDataTable
-        columns={memberColumns}
-        data={filteredData}
-        className="table-standard"
-        enableRowSelection
-        onRowClick={(row) => setSelectedMember(row)}
-      />
+      <div className="table-standard">
+        <TableStandardHeader
+          searchValue={search}
+          onSearchChange={setSearch}
+        />
+        <FigmaDataTable
+          columns={memberColumns}
+          data={filteredData}
+          enableRowSelection
+          onRowClick={(row) => setSelectedMember(row)}
+        />
+      </div>
       <MemberDrawer
         member={selectedMember}
         open={!!selectedMember}

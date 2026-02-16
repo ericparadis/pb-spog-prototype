@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react'
 import { PageHeader } from '@/components/PageHeader'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
+import { TableStandardHeader } from '@/features/_shared/components/TableStandardHeader'
 import { leadColumns } from './components/LeadTableColumns'
 import { getLeadTableData } from './data/lead-table-data'
-import { LeadsToolbar } from './components/LeadsToolbar'
 import { LeadStats } from './components/LeadStats'
 import { LeadDetailDrawer } from './components/LeadDetailDrawer'
 import type { LeadTableRow } from './types'
@@ -33,14 +33,18 @@ export default function Leads() {
         description="Track and manage prospective members"
       />
       <LeadStats data={allData} />
-      <LeadsToolbar searchValue={search} onSearchChange={setSearch} />
-      <FigmaDataTable
-        columns={leadColumns}
-        data={filteredData}
-        className="table-standard"
-        enableRowSelection
-        onRowClick={(row) => setSelectedLead(row)}
-      />
+      <div className="table-standard">
+        <TableStandardHeader
+          searchValue={search}
+          onSearchChange={setSearch}
+        />
+        <FigmaDataTable
+          columns={leadColumns}
+          data={filteredData}
+          enableRowSelection
+          onRowClick={(row) => setSelectedLead(row)}
+        />
+      </div>
       {selectedLead && (
         <LeadDetailDrawer
           lead={selectedLead}

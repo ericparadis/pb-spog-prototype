@@ -101,6 +101,6 @@
 
 @layer components {
   .table-standard {
-    @apply rounded-lg border border-border overflow-hidden bg-card;
+    @apply rounded-xl border border-border overflow-hidden bg-card;
   }
 }
