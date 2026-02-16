@@ -250,7 +250,7 @@ export function AppLayout({ children }: AppLayoutProps) {
                           to={item.path}
                           className={`flex items-center gap-3 mx-3 px-3 h-[44px] rounded-lg text-[13px] font-medium transition-colors ${
                             isActive
-                              ? 'bg-white border border-border shadow-sm text-foreground'
+                              ? 'bg-white border border-border shadow-sm text-primary'
                               : 'hover:bg-muted'
                           }`}
                           style={{
@@ -282,7 +282,7 @@ export function AppLayout({ children }: AppLayoutProps) {
                                 to={child.path}
                                 className={`flex items-center mx-3 pl-11 pr-3 h-[36px] rounded-lg text-[13px] font-medium transition-colors ${
                                   isChildRouteActive
-                                    ? 'bg-white border border-border shadow-sm text-foreground'
+                                    ? 'bg-white border border-border shadow-sm text-primary'
                                     : 'hover:bg-muted'
                                 }`}
                                 style={{
