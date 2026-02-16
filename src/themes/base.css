@@ -98,3 +98,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .table-standard {
+    @apply rounded-lg border border-border overflow-hidden bg-card;
+  }
+}

@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { PageHeader } from '@/components/PageHeader'
 import { PageContent } from '@/components/PageContent'
 import { FigmaDataTable } from '@/features/_shared/components/FigmaDataTable'
 import { TableCategorySelector } from '@/features/_shared/components/TableCategorySelector'
@@ -80,9 +79,6 @@ export default function Tasks() {
 
   return (
     <PageContent>
-      <PageHeader
-        title="Tasks"
-      />
       <TaskStats data={allData} />
       <div className="flex items-center justify-between mb-4">
         <TableCategorySelector
@@ -107,6 +103,7 @@ export default function Tasks() {
       <FigmaDataTable
         columns={taskColumns}
         data={filteredData}
+        className="table-standard"
         enableRowSelection
         onRowClick={(row) => setSelectedTask(row)}
       />
