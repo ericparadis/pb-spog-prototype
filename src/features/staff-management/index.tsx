@@ -57,7 +57,8 @@ export default function StaffManagement() {
           enableRowSelection
           onRowClick={(row) => {
             setSelectedStaff(row)
-            setDrawerOpen(true)
+            // Defer open by one frame so the drawer mounts in its closed position first
+            requestAnimationFrame(() => setDrawerOpen(true))
           }}
         />
       </div>
