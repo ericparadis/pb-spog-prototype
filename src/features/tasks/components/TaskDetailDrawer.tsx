@@ -75,8 +75,8 @@ interface TaskDetailDrawerProps {
 }
 
 export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawerProps) {
-  const [commHistoryOpen, setCommHistoryOpen] = useState(true)
-  const [notesOpen, setNotesOpen] = useState(true)
+  const [commHistoryOpen, setCommHistoryOpen] = useState(false)
+  const [notesOpen, setNotesOpen] = useState(false)
   const [selectedChannel, setSelectedChannel] = useState<CommunicationType>('email')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
@@ -138,32 +138,111 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto">
-          {/* Profile Card */}
-          <div className="px-6 py-5 border-b bg-muted/30">
-            <div className="flex items-start gap-4">
-              <Avatar className="h-14 w-14">
-                <AvatarFallback className="text-base bg-primary/10 text-primary">
-                  {getInitials(task.relatedMember)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-base font-semibold text-foreground">{task.relatedMember}</h3>
-                  <Badge variant="outline" className={`text-xs capitalize ${
-                    task.relatedMemberType === 'lead'
-                      ? 'bg-amber-50 text-amber-700 border-amber-200'
-                      : 'bg-blue-50 text-blue-700 border-blue-200'
-                  }`}>
-                    {task.relatedMemberType}
-                  </Badge>
+          {/* Profile Card with Communication History & Notes */}
+          <div className="m-4 border rounded-lg bg-muted/30 overflow-hidden">
+            {/* Profile */}
+            <div className="px-5 py-5">
+              <div className="flex items-start gap-4">
+                <Avatar className="h-14 w-14">
+                  <AvatarFallback className="text-base bg-primary/10 text-primary">
+                    {getInitials(task.relatedMember)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base font-semibold text-foreground">{task.relatedMember}</h3>
+                    <Badge variant="outline" className={`text-xs capitalize ${
+                      task.relatedMemberType === 'lead'
+                        ? 'bg-amber-50 text-amber-700 border-amber-200'
+                        : 'bg-blue-50 text-blue-700 border-blue-200'
+                    }`}>
+                      {task.relatedMemberType}
+                    </Badge>
+                  </div>
+                  {task.relatedMemberEmail && (
+                    <p className="text-sm text-muted-foreground mt-0.5">{task.relatedMemberEmail}</p>
+                  )}
+                  {task.relatedMemberPhone && (
+                    <p className="text-sm text-muted-foreground">{task.relatedMemberPhone}</p>
+                  )}
                 </div>
-                {task.relatedMemberEmail && (
-                  <p className="text-sm text-muted-foreground mt-0.5">{task.relatedMemberEmail}</p>
-                )}
-                {task.relatedMemberPhone && (
-                  <p className="text-sm text-muted-foreground">{task.relatedMemberPhone}</p>
-                )}
               </div>
+            </div>
+
+            {/* Communication History Accordion */}
+            <div className="border-t">
+              <button
+                onClick={() => setCommHistoryOpen(!commHistoryOpen)}
+                className="flex items-center gap-2 w-full px-5 py-3 text-left hover:bg-muted/50 transition-colors"
+              >
+                {commHistoryOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <span className="text-sm font-semibold text-foreground">
+                  Communication History ({task.communicationHistory.length})
+                </span>
+              </button>
+              {commHistoryOpen && (
+                <div className="px-5 pb-4">
+                  {task.communicationHistory.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">No communication history yet.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {task.communicationHistory.map((entry, idx) => {
+                        const config = commTypeConfig[entry.type]
+                        const Icon = config.icon
+                        return (
+                          <div key={idx} className="flex items-start gap-3">
+                            <div className={`rounded-full p-1.5 ${config.className}`}>
+                              <Icon className="h-3.5 w-3.5" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-medium text-foreground">{config.label}</span>
+                                <Badge variant="outline" className="text-[10px] px-1.5 py-0">
+                                  {entry.direction}
+                                </Badge>
+                                <span className="text-xs text-muted-foreground ml-auto">{entry.date}</span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mt-0.5">{entry.summary}</p>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Notes Accordion */}
+            <div className="border-t">
+              <button
+                onClick={() => setNotesOpen(!notesOpen)}
+                className="flex items-center gap-2 w-full px-5 py-3 text-left hover:bg-muted/50 transition-colors"
+              >
+                {notesOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <span className="text-sm font-semibold text-foreground">
+                  Notes ({task.notes.length})
+                </span>
+              </button>
+              {notesOpen && (
+                <div className="px-5 pb-4">
+                  {task.notes.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">No notes yet.</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {task.notes.map((note, idx) => (
+                        <div key={idx} className="bg-muted/50 rounded-lg p-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-medium text-foreground">{note.author}</span>
+                            <span className="text-xs text-muted-foreground">{note.date}</span>
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-1">{note.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
@@ -202,82 +281,6 @@ export function TaskDetailDrawer({ task, onClose, onComplete }: TaskDetailDrawer
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Communication History Accordion */}
-          <div className="border-b">
-            <button
-              onClick={() => setCommHistoryOpen(!commHistoryOpen)}
-              className="flex items-center gap-2 w-full px-6 py-4 text-left hover:bg-muted/50 transition-colors"
-            >
-              {commHistoryOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-              <span className="text-sm font-semibold text-foreground">
-                Communication History ({task.communicationHistory.length})
-              </span>
-            </button>
-            {commHistoryOpen && (
-              <div className="px-6 pb-4">
-                {task.communicationHistory.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">No communication history yet.</p>
-                ) : (
-                  <div className="space-y-3">
-                    {task.communicationHistory.map((entry, idx) => {
-                      const config = commTypeConfig[entry.type]
-                      const Icon = config.icon
-                      return (
-                        <div key={idx} className="flex items-start gap-3">
-                          <div className={`rounded-full p-1.5 ${config.className}`}>
-                            <Icon className="h-3.5 w-3.5" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="text-sm font-medium text-foreground">{config.label}</span>
-                              <Badge variant="outline" className="text-[10px] px-1.5 py-0">
-                                {entry.direction}
-                              </Badge>
-                              <span className="text-xs text-muted-foreground ml-auto">{entry.date}</span>
-                            </div>
-                            <p className="text-sm text-muted-foreground mt-0.5">{entry.summary}</p>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Notes Accordion */}
-          <div className="border-b">
-            <button
-              onClick={() => setNotesOpen(!notesOpen)}
-              className="flex items-center gap-2 w-full px-6 py-4 text-left hover:bg-muted/50 transition-colors"
-            >
-              {notesOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-              <span className="text-sm font-semibold text-foreground">
-                Notes ({task.notes.length})
-              </span>
-            </button>
-            {notesOpen && (
-              <div className="px-6 pb-4">
-                {task.notes.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">No notes yet.</p>
-                ) : (
-                  <div className="space-y-3">
-                    {task.notes.map((note, idx) => (
-                      <div key={idx} className="bg-muted/50 rounded-lg p-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-foreground">{note.author}</span>
-                          <span className="text-xs text-muted-foreground">{note.date}</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground mt-1">{note.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
           {/* Messaging Section */}

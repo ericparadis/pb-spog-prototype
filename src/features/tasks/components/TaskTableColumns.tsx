@@ -2,9 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { TaskTableRow } from '../types'
 import { SortableHeader } from '@/features/_shared/components/cell-renderers'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { TaskStatusBadge } from './TaskStatusBadge'
 import { TaskPriorityBadge } from './TaskPriorityBadge'
-import { TaskCategoryBadge } from './TaskCategoryBadge'
 
 function getInitials(name: string) {
   return name
@@ -82,14 +80,18 @@ export const taskColumns: ColumnDef<TaskTableRow>[] = [
     accessorKey: 'category',
     header: 'Category',
     cell: ({ row }) => (
-      <TaskCategoryBadge category={row.original.category} />
+      <span className="text-sm text-foreground">
+        {row.original.category}
+      </span>
     ),
   },
   {
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => (
-      <TaskStatusBadge status={row.original.status} />
+      <span className="text-sm text-foreground">
+        {row.original.status}
+      </span>
     ),
   },
   {
