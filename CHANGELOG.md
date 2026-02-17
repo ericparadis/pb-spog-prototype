@@ -4,6 +4,27 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 17, 2026
+**What changed:** Added Opportunities Pipeline — a CRM-style kanban view showing the customer lifecycle from lead to member
+**Screens affected:** `/opportunities` (new), navigation sidebar (new item)
+**Requested by:** PM
+**Status:** Built
+**To revert:** "Undo the opportunities pipeline change"
+
+**Opportunities Pipeline:**
+- 8-stage pipeline: Lead: Created, Trial Scheduled, Trial Show, Trial Active, Patron: Created, Transactional, PPV, Member
+- Zoho/Pipedrive-inspired card design with opportunity name, customer name, owner, dollar value
+- Deal aging indicator — cards show green/amber/red left border based on days in stage (likelihood to close)
+- Column headers show aggregate dollar value and opportunity count per stage
+- At-risk warning icons on columns with stale opportunities
+- Summary funnel stats: Total Leads, Total Patrons, Total Members, Conversion Rate, At Risk count
+- Click-to-open detail drawer with opportunity info, related tasks, activity timeline, contact info
+- Filters by brand and location; visible to Franchise Owner, Regional Manager, Gym Manager
+- Data relationship: Customer > Opportunity > Tasks
+- Added "Opportunities" nav item with Target icon between Customers and Marketing
+
+---
+
 ### February 13, 2026
 **What changed:** Updated three core UI elements to match Figma design
 **Screens affected:** All screens (navigation/logo), `/customers` (new table)

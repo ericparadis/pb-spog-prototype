@@ -1,4 +1,5 @@
-import { useAuth, UserRole } from '@/lib/contexts/AuthContext'
+import { useAuth } from '@/lib/contexts/AuthContext'
+import type { UserRole } from '@/lib/contexts/AuthContext'
 import {
   Select,
   SelectContent,

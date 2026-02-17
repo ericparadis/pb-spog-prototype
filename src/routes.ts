@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { UserRole } from '@/lib/contexts/AuthContext'
+import type { UserRole } from '@/lib/contexts/AuthContext'
 
 // Lazy load feature pages
 const Dashboard = lazy(() => import('@/features/dashboard/index'))
@@ -11,6 +11,7 @@ const CheckIn = lazy(() => import('@/features/check-in/index'))
 const Tasks = lazy(() => import('@/features/tasks/index'))
 const StaffManagement = lazy(() => import('@/features/staff-management/index'))
 const CatalogAdministration = lazy(() => import('@/features/catalog/index'))
+const Opportunities = lazy(() => import('@/features/opportunities/index'))
 
 export interface Route {
   path: string
@@ -57,6 +58,11 @@ export const routes: Route[] = [
   {
     path: '/catalog',
     element: CatalogAdministration,
+    allowedRoles: ['franchise-owner', 'regional-manager', 'gym-manager'],
+  },
+  {
+    path: '/opportunities',
+    element: Opportunities,
     allowedRoles: ['franchise-owner', 'regional-manager', 'gym-manager'],
   },
 ]
