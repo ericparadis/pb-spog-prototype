@@ -1,8 +1,8 @@
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { User } from 'lucide-react'
+import { User, ClipboardList } from 'lucide-react'
 import type { Opportunity, StageConfig } from '../types'
-import { getAgingStatus, getAgingBorderClass, getAgingTextClass } from '../types'
+import { getAgingStatus, getAgingTextClass } from '../types'
 
 interface OpportunityCardProps {
   opportunity: Opportunity
@@ -12,15 +12,12 @@ interface OpportunityCardProps {
 
 export function OpportunityCard({ opportunity, stageConfig, onClick }: OpportunityCardProps) {
   const aging = getAgingStatus(opportunity.daysInStage, stageConfig)
-  const borderClass = getAgingBorderClass(aging)
   const daysTextClass = getAgingTextClass(aging)
+  const hasTasks = opportunity.taskCount > 0
 
   return (
     <Card
-      className={cn(
-        'p-3 cursor-pointer hover:shadow-md transition-shadow border-l-4',
-        borderClass
-      )}
+      className="p-3 cursor-pointer hover:shadow-md transition-shadow"
       onClick={onClick}
     >
       {/* Opportunity name */}
@@ -44,6 +41,16 @@ export function OpportunityCard({ opportunity, stageConfig, onClick }: Opportuni
           {opportunity.daysInStage}d
         </span>
       </div>
+
+      {/* Task highlight */}
+      {hasTasks && (
+        <div className="mt-2 flex items-center gap-1.5 rounded-md bg-blue-50 border border-blue-200 px-2 py-1.5">
+          <ClipboardList className="h-3.5 w-3.5 text-blue-600 flex-shrink-0" />
+          <span className="text-[11px] font-medium text-blue-700">
+            {opportunity.taskCount} {opportunity.taskCount === 1 ? 'task' : 'tasks'} assigned
+          </span>
+        </div>
+      )}
     </Card>
   )
 }
