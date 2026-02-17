@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { UserRole } from '@/lib/contexts/AuthContext'
+import type { UserRole } from '@/lib/contexts/AuthContext'
 
 // Lazy load feature pages
 const Dashboard = lazy(() => import('@/features/dashboard/index'))
