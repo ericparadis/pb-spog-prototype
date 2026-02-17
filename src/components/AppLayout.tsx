@@ -15,6 +15,7 @@ import {
   BarChart3,
   ChevronRight,
   ChevronDown,
+  Target,
 } from 'lucide-react'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
@@ -58,6 +59,7 @@ const routeTitles: Record<string, string> = {
   '/staff': 'Staff Management',
   '/memberships': 'Memberships & Packages',
   '/catalog': 'Catalog Administration',
+  '/opportunities': 'Opportunities',
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
@@ -75,6 +77,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         { path: '/conversations', label: 'Conversations', icon: MessageSquare, badge: '8' },
         { path: '/schedule', label: 'Schedule', icon: Calendar, hasSubmenu: true },
         { path: '/customers', label: 'Customers', icon: UserCircle, badge: '2' },
+        { path: '/opportunities', label: 'Opportunities', icon: Target },
         { path: '/marketing', label: 'Marketing', icon: Megaphone, hasSubmenu: true },
         { path: '/resources', label: 'Resources', icon: BookOpen, hasSubmenu: true },
         { path: '/reporting', label: 'Reporting', icon: BarChart3, hasSubmenu: true },
