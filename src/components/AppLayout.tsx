@@ -126,7 +126,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const pageTitle = routeTitles[location.pathname] || 'Overview'
 
   return (
-    <div className="flex min-h-screen bg-background font-sans">
+    <div className="flex h-screen overflow-hidden bg-background font-sans">
       {/* Left Sidebar - 280px wide from Figma */}
       <aside className="w-[280px] border-r border-border flex flex-col" style={{ backgroundColor: 'hsl(var(--sidebar-bg))' }}>
         {/* Logo & Brand - 74.23px high from Figma */}
