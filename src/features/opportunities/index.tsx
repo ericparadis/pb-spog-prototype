@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { PageContent } from '@/components/PageContent'
 import { useBrand } from '@/lib/contexts/BrandContext'
 import { useLocationContext } from '@/lib/contexts/LocationContext'
 import { useAuth } from '@/lib/contexts/AuthContext'
@@ -42,22 +41,21 @@ export default function Opportunities() {
   }, [opportunities])
 
   return (
-    <PageContent className="!max-w-none !px-0">
-      {/* Pipeline Board — horizontally scrollable, columns scroll vertically */}
-      <div
-        className="flex gap-0 overflow-x-auto pb-4 px-6"
-        style={{ height: 'calc(100vh - 180px)' }}
-      >
-        {PIPELINE_STAGES.map((stage, index) => (
-          <PipelineColumn
-            key={stage.id}
-            stage={stage}
-            opportunities={groupedByStage.get(stage.id) || []}
-            onCardClick={setSelectedOpportunity}
-            isFirst={index === 0}
-            isLast={index === PIPELINE_STAGES.length - 1}
-          />
-        ))}
+    <div className="flex flex-col h-full overflow-hidden">
+      {/* Pipeline Board — only this area scrolls horizontally */}
+      <div className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden px-6 pb-4 pt-4">
+        <div className="flex gap-0 h-full">
+          {PIPELINE_STAGES.map((stage, index) => (
+            <PipelineColumn
+              key={stage.id}
+              stage={stage}
+              opportunities={groupedByStage.get(stage.id) || []}
+              onCardClick={setSelectedOpportunity}
+              isFirst={index === 0}
+              isLast={index === PIPELINE_STAGES.length - 1}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Detail Drawer */}
@@ -66,6 +64,6 @@ export default function Opportunities() {
         open={!!selectedOpportunity}
         onClose={() => setSelectedOpportunity(null)}
       />
-    </PageContent>
+    </div>
   )
 }
