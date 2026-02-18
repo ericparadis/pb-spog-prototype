@@ -39,7 +39,7 @@ export function PipelineColumn({ stage, opportunities, onCardClick, isFirst, isL
   const stageColor = getStageColor(stage.colorClass)
 
   return (
-    <div className="w-[240px] min-w-[240px] flex-shrink-0 flex flex-col">
+    <div className="w-[240px] min-w-[240px] flex-shrink-0 flex flex-col h-full">
       {/* Arrow-shaped column header */}
       <div className="relative flex items-center" style={{ height: 48 }}>
         {/* Main header background */}
@@ -96,7 +96,7 @@ export function PipelineColumn({ stage, opportunities, onCardClick, isFirst, isL
       </div>
 
       {/* Cards */}
-      <div className="flex-1 overflow-y-auto p-2 space-y-2" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+      <div className="flex-1 overflow-y-auto p-2 space-y-2 min-h-0">
         {opportunities.map((opp) => (
           <OpportunityCard
             key={opp.id}
