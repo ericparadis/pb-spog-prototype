@@ -42,9 +42,9 @@ export default function Opportunities() {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      {/* Pipeline Board — only this area scrolls horizontally */}
-      <div className="flex-1 min-h-0 overflow-x-auto overflow-y-hidden px-6 pb-4 pt-4">
-        <div className="flex gap-0 h-full">
+      {/* Pipeline Board — horizontally scrollable within the available width */}
+      <div className="flex-1 min-h-0 min-w-0 overflow-x-auto overflow-y-hidden px-6 pb-4 pt-4">
+        <div className="flex gap-0 h-full w-max">
           {PIPELINE_STAGES.map((stage, index) => (
             <PipelineColumn
               key={stage.id}
