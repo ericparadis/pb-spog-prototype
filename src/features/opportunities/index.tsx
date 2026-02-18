@@ -43,20 +43,21 @@ export default function Opportunities() {
 
   return (
     <PageContent className="!max-w-none !px-0">
-      {/* Pipeline Board — horizontally scrollable */}
-      <div className="overflow-hidden">
-        <div className="flex gap-0 overflow-x-auto pb-4 px-6">
-          {PIPELINE_STAGES.map((stage, index) => (
-            <PipelineColumn
-              key={stage.id}
-              stage={stage}
-              opportunities={groupedByStage.get(stage.id) || []}
-              onCardClick={setSelectedOpportunity}
-              isFirst={index === 0}
-              isLast={index === PIPELINE_STAGES.length - 1}
-            />
-          ))}
-        </div>
+      {/* Pipeline Board — horizontally scrollable, columns scroll vertically */}
+      <div
+        className="flex gap-0 overflow-x-auto pb-4 px-6"
+        style={{ height: 'calc(100vh - 180px)' }}
+      >
+        {PIPELINE_STAGES.map((stage, index) => (
+          <PipelineColumn
+            key={stage.id}
+            stage={stage}
+            opportunities={groupedByStage.get(stage.id) || []}
+            onCardClick={setSelectedOpportunity}
+            isFirst={index === 0}
+            isLast={index === PIPELINE_STAGES.length - 1}
+          />
+        ))}
       </div>
 
       {/* Detail Drawer */}
