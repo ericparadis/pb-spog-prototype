@@ -4,6 +4,20 @@ All notable changes to the gym franchise SaaS prototype are documented here.
 
 ---
 
+### February 18, 2026
+**What changed:** Fixed Opportunities Pipeline layout and restyled column headers
+**Screens affected:** `/opportunities`
+**Requested by:** PM
+**Status:** Updated
+**To revert:** "Undo the opportunities pipeline styling change"
+
+- Pipeline board now scrolls horizontally within the screen width (no longer overflows the page)
+- Column headers changed from colored chevrons to clean white with a light grey border
+- Column backgrounds are now light grey; opportunity cards remain white
+- Count badges and dollar values use neutral grey tones instead of stage-specific colors
+
+---
+
 ### February 17, 2026
 **What changed:** Added Opportunities Pipeline — a CRM-style kanban view showing the customer lifecycle from lead to member
 **Screens affected:** `/opportunities` (new), navigation sidebar (new item)
