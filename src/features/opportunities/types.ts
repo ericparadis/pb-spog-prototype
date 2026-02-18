@@ -27,6 +27,13 @@ export interface StageConfig {
   agingThresholds: [number, number]
 }
 
+export interface OpportunityTask {
+  id: string
+  title: string
+  status: 'open' | 'in-progress' | 'completed' | 'overdue'
+  dueDate: string
+}
+
 export interface Opportunity {
   id: string
   name: string
@@ -43,6 +50,7 @@ export interface Opportunity {
   daysInStage: number
   stageEnteredDate: string
   taskCount: number
+  recentTask: OpportunityTask | null
   source: string
 }
 

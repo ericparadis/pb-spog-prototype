@@ -6,6 +6,7 @@ import {
   PIPELINE_STAGES,
   getAgingStatus,
   type Opportunity,
+  type OpportunityTask,
   type PipelineStage,
   type PipelineSummaryData,
 } from '../types'
@@ -37,8 +38,31 @@ const membershipNameMap = new Map(
   membershipsJson.map((m) => [m.id, m.name])
 )
 
-function getTaskCount(customerId: string): number {
-  return tasksJson.filter((t) => t.relatedMemberId === customerId).length
+function getTaskInfo(customerId: string): { count: number; recentTask: OpportunityTask | null } {
+  const related = tasksJson.filter((t) => t.relatedMemberId === customerId)
+  if (related.length === 0) return { count: 0, recentTask: null }
+
+  // Pick the most recent task: prefer open/in-progress/overdue, then completed — sorted by due date
+  const sorted = [...related].sort((a, b) => {
+    // Active tasks first (open, in-progress, overdue), then completed
+    const activeStatuses = ['overdue', 'open', 'in-progress']
+    const aActive = activeStatuses.includes(a.status) ? 0 : 1
+    const bActive = activeStatuses.includes(b.status) ? 0 : 1
+    if (aActive !== bActive) return aActive - bActive
+    // Within same group, most recent due date first
+    return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()
+  })
+
+  const top = sorted[0]
+  return {
+    count: related.length,
+    recentTask: {
+      id: top.id,
+      title: top.title,
+      status: top.status as OpportunityTask['status'],
+      dueDate: top.dueDate,
+    },
+  }
 }
 
 function formatDate(date: Date): string {
@@ -135,6 +159,7 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
     const stage = mapLeadToPipelineStage(lead.status)
     const daysInStage = (seed % 25) + 1
 
+    const leadTaskInfo = getTaskInfo(lead.id)
     opportunities.push({
       id: `opp-${lead.id}`,
       name: getOpportunityName(stage, seed),
@@ -150,7 +175,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 30) + 7),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: getTaskCount(lead.id),
+      taskCount: leadTaskInfo.count,
+      recentTask: leadTaskInfo.recentTask,
       source: lead.source,
     })
   }
@@ -171,6 +197,7 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       oppName = `${membershipName} Renewal`
     }
 
+    const memTaskInfo = getTaskInfo(member.id)
     opportunities.push({
       id: `opp-${member.id}`,
       name: oppName,
@@ -186,7 +213,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 60) + 14),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: getTaskCount(member.id),
+      taskCount: memTaskInfo.count,
+      recentTask: memTaskInfo.recentTask,
       source: seed % 2 === 0 ? 'Referral' : 'Direct',
     })
   }
@@ -222,6 +250,17 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
 
     const isLeadStage = synth.stage.startsWith('lead-') || synth.stage === 'patron-created'
 
+    // Synthetic opportunities get generated tasks based on seed
+    const synthTaskCount = seed % 3
+    const synthRecentTask: OpportunityTask | null = synthTaskCount > 0
+      ? {
+          id: `synth-task-${i}`,
+          title: seed % 2 === 0 ? 'Follow up on inquiry' : 'Schedule intro session',
+          status: seed % 4 === 0 ? 'completed' : seed % 3 === 0 ? 'overdue' : 'open',
+          dueDate: seed % 4 === 0 ? daysAgo(seed % 5 + 1) : daysFromNow(seed % 7 + 1),
+        }
+      : null
+
     opportunities.push({
       id: `opp-synth-${brandId}-${i}`,
       name: getOpportunityName(synth.stage, seed),
@@ -237,7 +276,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 30) + 7),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: seed % 3,
+      taskCount: synthTaskCount,
+      recentTask: synthRecentTask,
       source: synth.source,
     })
   }
