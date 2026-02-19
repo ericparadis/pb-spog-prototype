@@ -132,23 +132,23 @@ const stageTaskTemplates: Record<string, { open: string[]; completed: string[] }
     completed: ['Trial date confirmed', 'Pre-visit email sent', 'Waiver form sent', 'Staff notified of visit'],
   },
   'lead-trial-show': {
-    open: ['Follow up after trial', 'Send post-visit survey', 'Schedule follow-up call', 'Share membership options'],
+    open: ['Follow up after trial', 'Send post-visit survey', 'Schedule follow-up call', 'Share pricing options'],
     completed: ['Trial visit completed', 'Tour feedback collected', 'Guest pass logged', 'Follow-up call made'],
   },
   'lead-trial-active': {
-    open: ['Check in on trial experience', 'Present membership options', 'Send special offer', 'Schedule conversion meeting'],
-    completed: ['Mid-trial check-in done', 'Membership brochure sent', 'Trial progress reviewed', 'Offer presented'],
+    open: ['Check in on trial experience', 'Present signup options', 'Send special offer', 'Schedule conversion meeting'],
+    completed: ['Mid-trial check-in done', 'Pricing brochure sent', 'Trial progress reviewed', 'Offer presented'],
   },
   'patron-created': {
-    open: ['Complete onboarding checklist', 'Schedule orientation session', 'Set up member profile', 'Assign trainer intro'],
+    open: ['Complete onboarding checklist', 'Schedule orientation session', 'Set up patron profile', 'Assign trainer intro'],
     completed: ['Onboarding form completed', 'Orientation scheduled', 'Profile created', 'Welcome email sent'],
   },
   'patron-transactional': {
-    open: ['Send re-engagement offer', 'Follow up on last visit', 'Present membership upgrade', 'Invite to group class'],
+    open: ['Send re-engagement offer', 'Follow up on last visit', 'Present upgrade options', 'Invite to group class'],
     completed: ['Last visit reviewed', 'Re-engagement email sent', 'Usage pattern analyzed', 'Discount offer sent'],
   },
   'patron-ppv': {
-    open: ['Offer class pack upgrade', 'Present membership savings', 'Schedule fitness assessment', 'Send loyalty reward'],
+    open: ['Offer class pack upgrade', 'Present plan savings', 'Schedule fitness assessment', 'Send loyalty reward'],
     completed: ['Visit frequency reviewed', 'Savings comparison sent', 'Pack usage tracked', 'Upgrade discussed'],
   },
   'patron-member': {
@@ -212,8 +212,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
     const daysInStage = (seed % 25) + 1
 
     const leadTaskInfo = getTaskInfo(lead.id)
-    // Guarantee every opportunity has a task — use data task or generate stage-relevant one
-    const recentTask = leadTaskInfo.recentTask || getStageTask(stage, seed, daysInStage)
+    // Lead stages always use stage-relevant generated tasks to avoid "member" wording
+    const recentTask = getStageTask(stage, seed, daysInStage)
     opportunities.push({
       id: `opp-${lead.id}`,
       name: getOpportunityName(stage, seed),

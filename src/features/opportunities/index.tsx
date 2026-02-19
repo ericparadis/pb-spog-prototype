@@ -68,6 +68,8 @@ export default function Opportunities() {
                 opportunities={groupedByStage.get(stage.id) || []}
                 isFirst={index === 0}
                 isLast={index === PIPELINE_STAGES.length - 1}
+                stageIndex={index}
+                totalStages={PIPELINE_STAGES.length}
               />
             ))}
           </div>
