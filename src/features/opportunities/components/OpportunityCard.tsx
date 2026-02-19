@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { CheckCircle2, Circle, Clock, AlertCircle } from 'lucide-react'
+import { SquareCheckBig, Square, Clock, AlertCircle } from 'lucide-react'
 import type { Opportunity, StageConfig } from '../types'
 import { getAgingStatus, getAgingTextClass } from '../types'
 
@@ -29,14 +29,14 @@ function formatStageDate(dateStr: string): string {
 function getTaskStatusColor(status: string) {
   switch (status) {
     case 'completed':
-      return { text: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', icon: CheckCircle2 }
+      return { text: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', icon: SquareCheckBig }
     case 'overdue':
       return { text: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', icon: AlertCircle }
     case 'in-progress':
       return { text: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', icon: Clock }
     case 'open':
     default:
-      return { text: 'text-gray-700', bg: 'bg-gray-50', border: 'border-gray-200', icon: Circle }
+      return { text: 'text-gray-700', bg: 'bg-gray-50', border: 'border-gray-200', icon: Square }
   }
 }
 

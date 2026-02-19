@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { X, Mail, Phone, Calendar, DollarSign, Clock, User, CheckSquare, Target } from 'lucide-react'
+import { X, Mail, Phone, Calendar, DollarSign, Clock, User, SquareCheckBig, Square, Target } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -200,16 +200,20 @@ export function OpportunityDetailDrawer({ opportunity, open, onClose }: Opportun
                 {relatedTasks.map((task) => (
                   <Card key={task.id} className="p-3">
                     <div className="flex items-start gap-3">
-                      <CheckSquare
-                        className={cn(
-                          'h-4 w-4 mt-0.5 flex-shrink-0',
-                          task.status === 'completed'
-                            ? 'text-green-500'
-                            : task.status === 'overdue'
+                      {task.status === 'completed' ? (
+                        <SquareCheckBig
+                          className="h-4 w-4 mt-0.5 flex-shrink-0 text-green-500"
+                        />
+                      ) : (
+                        <Square
+                          className={cn(
+                            'h-4 w-4 mt-0.5 flex-shrink-0',
+                            task.status === 'overdue'
                               ? 'text-red-500'
                               : 'text-muted-foreground'
-                        )}
-                      />
+                          )}
+                        />
+                      )}
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-foreground">{task.title}</p>
                         <div className="flex items-center gap-3 mt-1">
