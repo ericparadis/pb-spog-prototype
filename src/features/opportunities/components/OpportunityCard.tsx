@@ -56,11 +56,11 @@ export function OpportunityCard({ opportunity, stageConfig, onClick }: Opportuni
       </div>
 
       {/* Body: date entered stage + days count */}
-      <div className="flex items-center justify-between mt-2">
-        <span className="text-xs text-muted-foreground">
+      <div className="flex items-center justify-between mt-1.5">
+        <span className="text-[10px] text-muted-foreground/60">
           Entered {formatStageDate(opportunity.stageEnteredDate)}
         </span>
-        <span className={cn('text-xs font-semibold', daysTextClass)}>
+        <span className={cn('text-[10px]', daysTextClass)}>
           {opportunity.daysInStage}d
         </span>
       </div>
