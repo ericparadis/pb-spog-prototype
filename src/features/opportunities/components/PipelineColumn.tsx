@@ -12,6 +12,8 @@ interface PipelineHeaderProps {
   opportunities: Opportunity[]
   isFirst?: boolean
   isLast?: boolean
+  stageIndex: number
+  totalStages: number
 }
 
 function getClipPath(isFirst?: boolean, isLast?: boolean) {
@@ -31,25 +33,25 @@ function getClipPath(isFirst?: boolean, isLast?: boolean) {
   return `polygon(${leftIndentTop}, ${leftIndentPoint}, ${leftIndentBottom}, ${rightArrowBottom}, ${rightArrowPoint}, ${rightArrowTop})`
 }
 
-export function PipelineHeader({ stage, opportunities, isFirst, isLast }: PipelineHeaderProps) {
-  const totalValue = opportunities.reduce((sum, opp) => sum + opp.value, 0)
+export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageIndex, totalStages }: PipelineHeaderProps) {
   const staleCount = opportunities.filter(
     (opp) => getAgingStatus(opp.daysInStage, stage) === 'stale'
   ).length
 
   const clipPath = getClipPath(isFirst, isLast)
 
+  // Brand color opacity: 5% for first stage, 40% for last stage
+  const opacity = totalStages > 1
+    ? 0.05 + (stageIndex / (totalStages - 1)) * 0.35
+    : 0.05
+  const bgColor = `hsl(var(--primary) / ${opacity})`
+
   return (
     <div className="w-[240px] min-w-[240px] flex-shrink-0 relative flex items-center" style={{ height: 48 }}>
-      {/* Grey outline shape */}
+      {/* Brand-colored fill with gradient opacity */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: '#e5e7eb', clipPath }}
-      />
-      {/* White fill (inset by 1px to show grey border) */}
-      <div
-        className="absolute"
-        style={{ top: 1, left: 1, right: 1, bottom: 1, backgroundColor: '#ffffff', clipPath }}
+        style={{ backgroundColor: bgColor, clipPath }}
       />
       {/* Header content */}
       <div
@@ -72,9 +74,6 @@ export function PipelineHeader({ stage, opportunities, isFirst, isLast }: Pipeli
             </span>
           </div>
         </div>
-        <span className="text-[11px] font-medium text-gray-500">
-          ${totalValue.toLocaleString('en-US', { minimumFractionDigits: 0 })}
-        </span>
       </div>
     </div>
   )
