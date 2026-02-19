@@ -31,14 +31,8 @@ function getClipPath(isFirst?: boolean, isLast?: boolean) {
   return `polygon(${leftIndentTop}, ${leftIndentPoint}, ${leftIndentBottom}, ${rightArrowBottom}, ${rightArrowPoint}, ${rightArrowTop})`
 }
 
-export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageIndex, totalStages }: PipelineHeaderProps) {
+export function PipelineHeader({ stage, opportunities, isFirst, isLast }: PipelineHeaderProps) {
   const clipPath = getClipPath(isFirst, isLast)
-
-  // Brand color opacity: 5% for first stage, 40% for last stage
-  const opacity = totalStages > 1
-    ? 0.05 + (stageIndex / (totalStages - 1)) * 0.35
-    : 0.05
-  const bgColor = `hsl(var(--primary) / ${opacity})`
 
   return (
     <div className="w-[240px] min-w-[240px] flex-shrink-0 relative flex items-center" style={{ height: 48 }}>
@@ -47,10 +41,10 @@ export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageInd
         className="absolute inset-0"
         style={{ backgroundColor: '#d1d5db', clipPath }}
       />
-      {/* Brand-colored fill (inset by 1px to show grey border) */}
+      {/* White fill (inset by 1px to show grey border) */}
       <div
-        className="absolute"
-        style={{ top: 1, left: 1, right: 1, bottom: 1, backgroundColor: bgColor, clipPath }}
+        className="absolute bg-white"
+        style={{ top: 1, left: 1, right: 1, bottom: 1, clipPath }}
       />
       {/* Header content */}
       <div
