@@ -69,7 +69,7 @@ export const PIPELINE_STAGES: StageConfig[] = [
   { id: 'lead-trial-show', label: 'Lead: Trial Show', group: 'leads', colorClass: 'bg-orange-100', textColorClass: 'text-orange-800', agingThresholds: [7, 14] },
   { id: 'lead-trial-active', label: 'Lead: Trial Active', group: 'leads', colorClass: 'bg-orange-200', textColorClass: 'text-orange-900', agingThresholds: [7, 14] },
   // Patron stages — transitional colors
-  { id: 'patron-created', label: 'Patron: Created', group: 'patrons', colorClass: 'bg-sky-100', textColorClass: 'text-sky-800', agingThresholds: [14, 30] },
+  { id: 'patron-created', label: 'Patron: Member Created', group: 'patrons', colorClass: 'bg-sky-100', textColorClass: 'text-sky-800', agingThresholds: [14, 30] },
   { id: 'patron-transactional', label: 'Patron: Transactional', group: 'patrons', colorClass: 'bg-sky-200', textColorClass: 'text-sky-900', agingThresholds: [14, 30] },
   { id: 'patron-ppv', label: 'Patron: PPV', group: 'patrons', colorClass: 'bg-indigo-100', textColorClass: 'text-indigo-800', agingThresholds: [14, 30] },
   // Member stage — cool color, always fresh (converted)
