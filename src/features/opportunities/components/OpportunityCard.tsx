@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { SquareCheckBig, Square, Clock, AlertCircle } from 'lucide-react'
+import { SquareCheckBig, Square } from 'lucide-react'
 import type { Opportunity, StageConfig } from '../types'
 import { getAgingStatus, getAgingTextClass } from '../types'
 
@@ -26,18 +26,11 @@ function formatStageDate(dateStr: string): string {
   })
 }
 
-function getTaskStatusColor(status: string) {
-  switch (status) {
-    case 'completed':
-      return { text: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', icon: SquareCheckBig }
-    case 'overdue':
-      return { text: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', icon: AlertCircle }
-    case 'in-progress':
-      return { text: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', icon: Clock }
-    case 'open':
-    default:
-      return { text: 'text-gray-700', bg: 'bg-gray-50', border: 'border-gray-200', icon: Square }
+function getTaskStyle(status: string) {
+  if (status === 'completed') {
+    return { text: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', icon: SquareCheckBig }
   }
+  return { text: 'text-primary', bg: 'bg-white', border: 'border-primary', icon: Square }
 }
 
 export function OpportunityCard({ opportunity, stageConfig, onClick }: OpportunityCardProps) {
@@ -77,15 +70,15 @@ export function OpportunityCard({ opportunity, stageConfig, onClick }: Opportuni
         <div
           className={cn(
             'mt-2 flex items-center gap-1.5 rounded-md border px-2 py-1.5',
-            getTaskStatusColor(task.status).bg,
-            getTaskStatusColor(task.status).border
+            getTaskStyle(task.status).bg,
+            getTaskStyle(task.status).border
           )}
         >
           {(() => {
-            const TaskIcon = getTaskStatusColor(task.status).icon
-            return <TaskIcon className={cn('h-3.5 w-3.5 flex-shrink-0', getTaskStatusColor(task.status).text)} />
+            const TaskIcon = getTaskStyle(task.status).icon
+            return <TaskIcon className={cn('h-3.5 w-3.5 flex-shrink-0', getTaskStyle(task.status).text)} />
           })()}
-          <span className={cn('text-[11px] font-medium truncate', getTaskStatusColor(task.status).text)}>
+          <span className={cn('text-[11px] font-medium truncate', getTaskStyle(task.status).text)}>
             {task.title}
           </span>
         </div>
