@@ -34,9 +34,9 @@ function getClipPath(isFirst?: boolean, isLast?: boolean) {
 export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageIndex, totalStages }: PipelineHeaderProps) {
   const clipPath = getClipPath(isFirst, isLast)
 
-  // Brand color opacity: 5% for first stage, 40% for last stage
+  // Brand color opacity: 5% for first stage, 30% for last stage
   const opacity = totalStages > 1
-    ? 0.05 + (stageIndex / (totalStages - 1)) * 0.35
+    ? 0.05 + (stageIndex / (totalStages - 1)) * 0.25
     : 0.05
   const bgColor = `hsl(var(--primary) / ${opacity})`
 
@@ -45,7 +45,7 @@ export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageInd
       {/* Grey border outline */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: '#d1d5db', clipPath }}
+        style={{ backgroundColor: '#e5e7eb', clipPath }}
       />
       {/* Brand-colored fill (inset by 1px to show grey border) */}
       <div
