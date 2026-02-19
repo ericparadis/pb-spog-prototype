@@ -42,24 +42,23 @@ function getTaskInfo(customerId: string): { count: number; recentTask: Opportuni
   const related = tasksJson.filter((t) => t.relatedMemberId === customerId)
   if (related.length === 0) return { count: 0, recentTask: null }
 
-  // Pick the most recent task: prefer open/in-progress/overdue, then completed — sorted by due date
+  // Pick the most recent task: prefer open/active, then completed — sorted by due date
   const sorted = [...related].sort((a, b) => {
-    // Active tasks first (open, in-progress, overdue), then completed
-    const activeStatuses = ['overdue', 'open', 'in-progress']
-    const aActive = activeStatuses.includes(a.status) ? 0 : 1
-    const bActive = activeStatuses.includes(b.status) ? 0 : 1
-    if (aActive !== bActive) return aActive - bActive
-    // Within same group, most recent due date first
+    const aCompleted = a.status === 'completed' ? 1 : 0
+    const bCompleted = b.status === 'completed' ? 1 : 0
+    if (aCompleted !== bCompleted) return aCompleted - bCompleted
     return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()
   })
 
   const top = sorted[0]
+  // Simplify status to just 'open' or 'completed'
+  const simplifiedStatus: OpportunityTask['status'] = top.status === 'completed' ? 'completed' : 'open'
   return {
     count: related.length,
     recentTask: {
       id: top.id,
       title: top.title,
-      status: top.status as OpportunityTask['status'],
+      status: simplifiedStatus,
       dueDate: top.dueDate,
     },
   }
@@ -122,6 +121,59 @@ function getMemberType(seed: number): string {
   return memberTypes[seed % memberTypes.length]
 }
 
+// Stage-relevant task templates — each stage has tasks that make sense for that phase
+const stageTaskTemplates: Record<string, { open: string[]; completed: string[] }> = {
+  'lead-created': {
+    open: ['Send intro email', 'Make first contact call', 'Qualify lead interest', 'Send gym info packet'],
+    completed: ['Logged lead source', 'Added to CRM', 'Verified contact info', 'Sent welcome text'],
+  },
+  'lead-trial-scheduled': {
+    open: ['Confirm trial appointment', 'Send trial prep info', 'Prepare welcome packet', 'Assign tour guide'],
+    completed: ['Trial date confirmed', 'Pre-visit email sent', 'Waiver form sent', 'Staff notified of visit'],
+  },
+  'lead-trial-show': {
+    open: ['Follow up after trial', 'Send post-visit survey', 'Schedule follow-up call', 'Share membership options'],
+    completed: ['Trial visit completed', 'Tour feedback collected', 'Guest pass logged', 'Follow-up call made'],
+  },
+  'lead-trial-active': {
+    open: ['Check in on trial experience', 'Present membership options', 'Send special offer', 'Schedule conversion meeting'],
+    completed: ['Mid-trial check-in done', 'Membership brochure sent', 'Trial progress reviewed', 'Offer presented'],
+  },
+  'patron-created': {
+    open: ['Complete onboarding checklist', 'Schedule orientation session', 'Set up member profile', 'Assign trainer intro'],
+    completed: ['Onboarding form completed', 'Orientation scheduled', 'Profile created', 'Welcome email sent'],
+  },
+  'patron-transactional': {
+    open: ['Send re-engagement offer', 'Follow up on last visit', 'Present membership upgrade', 'Invite to group class'],
+    completed: ['Last visit reviewed', 'Re-engagement email sent', 'Usage pattern analyzed', 'Discount offer sent'],
+  },
+  'patron-ppv': {
+    open: ['Offer class pack upgrade', 'Present membership savings', 'Schedule fitness assessment', 'Send loyalty reward'],
+    completed: ['Visit frequency reviewed', 'Savings comparison sent', 'Pack usage tracked', 'Upgrade discussed'],
+  },
+  'patron-member': {
+    open: ['Schedule renewal check-in', 'Present plan upgrade options', 'Conduct satisfaction survey', 'Review fitness goals'],
+    completed: ['Renewal reminder sent', 'Annual review completed', 'Satisfaction survey done', 'Goals updated'],
+  },
+}
+
+function getStageTask(stage: PipelineStage, seed: number, daysInStage: number): OpportunityTask {
+  const templates = stageTaskTemplates[stage] || stageTaskTemplates['lead-created']
+  // Use seed to deterministically pick completed vs open, and which task title
+  const isCompleted = seed % 3 === 0 // roughly 1/3 of tasks are completed
+  const titles = isCompleted ? templates.completed : templates.open
+  const title = titles[seed % titles.length]
+  const status = isCompleted ? 'completed' as const : 'open' as const
+  const dueDate = isCompleted ? daysAgo(seed % 5 + 1) : daysFromNow(seed % 7 + 1)
+
+  return {
+    id: `stage-task-${stage}-${seed}`,
+    title,
+    status,
+    dueDate,
+  }
+}
+
 // Opportunity name templates for leads
 const leadOpportunityNames: Record<string, string[]> = {
   'lead-created': ['New Lead Inquiry', 'Initial Contact', 'Prospect Outreach', 'Lead Conversion'],
@@ -160,6 +212,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
     const daysInStage = (seed % 25) + 1
 
     const leadTaskInfo = getTaskInfo(lead.id)
+    // Guarantee every opportunity has a task — use data task or generate stage-relevant one
+    const recentTask = leadTaskInfo.recentTask || getStageTask(stage, seed, daysInStage)
     opportunities.push({
       id: `opp-${lead.id}`,
       name: getOpportunityName(stage, seed),
@@ -175,8 +229,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 30) + 7),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: leadTaskInfo.count,
-      recentTask: leadTaskInfo.recentTask,
+      taskCount: Math.max(leadTaskInfo.count, 1),
+      recentTask,
       source: lead.source,
     })
   }
@@ -198,6 +252,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
     }
 
     const memTaskInfo = getTaskInfo(member.id)
+    // Guarantee every opportunity has a task — use data task or generate stage-relevant one
+    const memRecentTask = memTaskInfo.recentTask || getStageTask(stage, seed, daysInStage)
     opportunities.push({
       id: `opp-${member.id}`,
       name: oppName,
@@ -213,8 +269,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 60) + 14),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: memTaskInfo.count,
-      recentTask: memTaskInfo.recentTask,
+      taskCount: Math.max(memTaskInfo.count, 1),
+      recentTask: memRecentTask,
       source: seed % 2 === 0 ? 'Referral' : 'Direct',
     })
   }
@@ -250,16 +306,8 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
 
     const isLeadStage = synth.stage.startsWith('lead-') || synth.stage === 'patron-created'
 
-    // Synthetic opportunities get generated tasks based on seed
-    const synthTaskCount = seed % 3
-    const synthRecentTask: OpportunityTask | null = synthTaskCount > 0
-      ? {
-          id: `synth-task-${i}`,
-          title: seed % 2 === 0 ? 'Follow up on inquiry' : 'Schedule intro session',
-          status: seed % 4 === 0 ? 'completed' : seed % 3 === 0 ? 'overdue' : 'open',
-          dueDate: seed % 4 === 0 ? daysAgo(seed % 5 + 1) : daysFromNow(seed % 7 + 1),
-        }
-      : null
+    // Every synthetic opportunity gets a stage-relevant task
+    const synthRecentTask = getStageTask(synth.stage, seed + i, daysInStage)
 
     opportunities.push({
       id: `opp-synth-${brandId}-${i}`,
@@ -276,7 +324,7 @@ export function getOpportunitiesData(brandId: string): Opportunity[] {
       expectedCloseDate: daysFromNow((seed % 30) + 7),
       daysInStage,
       stageEnteredDate: daysAgo(daysInStage),
-      taskCount: synthTaskCount,
+      taskCount: 1,
       recentTask: synthRecentTask,
       source: synth.source,
     })

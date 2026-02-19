@@ -28,7 +28,7 @@ function formatStageDate(dateStr: string): string {
 
 function getTaskStyle(status: string) {
   if (status === 'completed') {
-    return { text: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', icon: SquareCheckBig }
+    return { text: 'text-muted-foreground', bg: 'bg-muted/50', border: 'border-muted', icon: SquareCheckBig }
   }
   return { text: 'text-primary', bg: 'bg-white', border: 'border-primary', icon: Square }
 }
