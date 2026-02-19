@@ -1,6 +1,4 @@
-import { AlertTriangle } from 'lucide-react'
 import { OpportunityCard } from './OpportunityCard'
-import { getAgingStatus } from '../types'
 import type { Opportunity, StageConfig } from '../types'
 
 const ARROW_WIDTH = 14
@@ -34,10 +32,6 @@ function getClipPath(isFirst?: boolean, isLast?: boolean) {
 }
 
 export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageIndex, totalStages }: PipelineHeaderProps) {
-  const staleCount = opportunities.filter(
-    (opp) => getAgingStatus(opp.daysInStage, stage) === 'stale'
-  ).length
-
   const clipPath = getClipPath(isFirst, isLast)
 
   // Brand color opacity: 5% for first stage, 40% for last stage
@@ -48,10 +42,15 @@ export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageInd
 
   return (
     <div className="w-[240px] min-w-[240px] flex-shrink-0 relative flex items-center" style={{ height: 48 }}>
-      {/* Brand-colored fill with gradient opacity */}
+      {/* Grey border outline */}
       <div
         className="absolute inset-0"
-        style={{ backgroundColor: bgColor, clipPath }}
+        style={{ backgroundColor: '#d1d5db', clipPath }}
+      />
+      {/* Brand-colored fill (inset by 1px to show grey border) */}
+      <div
+        className="absolute"
+        style={{ top: 1, left: 1, right: 1, bottom: 1, backgroundColor: bgColor, clipPath }}
       />
       {/* Header content */}
       <div
@@ -62,17 +61,9 @@ export function PipelineHeader({ stage, opportunities, isFirst, isLast, stageInd
           <span className="text-xs font-semibold truncate text-gray-700">
             {stage.label}
           </span>
-          <div className="flex items-center gap-1 flex-shrink-0" style={{ paddingRight: isLast ? 0 : 8 }}>
-            {staleCount > 0 && (
-              <span className="flex items-center gap-0.5 text-[10px] font-medium text-red-700">
-                <AlertTriangle className="h-3 w-3" />
-                {staleCount}
-              </span>
-            )}
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-600 flex-shrink-0">
-              {opportunities.length}
-            </span>
-          </div>
+          <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/60 text-gray-600 flex-shrink-0" style={{ marginRight: isLast ? 0 : 8 }}>
+            {opportunities.length}
+          </span>
         </div>
       </div>
     </div>
